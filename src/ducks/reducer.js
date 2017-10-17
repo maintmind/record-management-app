@@ -41,6 +41,7 @@ const UPDATE_LOG_SUBMIT_DATE = "UPDATE_LOG_SUBMIT_DATE";
 const UPDATE_LOG_SERVICE_DESC = "UPDATE_LOG_SERVICE_DESC";
 const UPDATE_LOG_IMAGE = "UPDATE_LOG_IMAGE";
 const UPDATE_LOG_NOTES = "UPDATE_LOG_NOTES";
+const UPDATE_LOG_COST = "UPDATE_LOG_COST";
 const UPDATE_REMINDER_ID = "UPDATE_REMINDER_ID";
 const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
 const UPDATE_REMINDER_CREATED = "UPDATE_REMINDER_CREATED";
@@ -152,13 +153,13 @@ export function updateAssetID(asset_id) {
         payload: asset_id
     }
 }
-export function updateAssetName() {
+export function updateAssetName(assetName) {
     return {
         type: UPDATE_ASSET_NAME,
         payload: assetName
     }
 }
-export function updateAssetDescription(){
+export function updateAssetDescription(assetDescription){
     return {
         type: UPDATE_ASSET_DESCRIPTION,
         payload: assetDescription
@@ -248,7 +249,7 @@ export function updateReminderDue(reminderDue) {
         payload: reminderDue
     }
 }
-export function updateReminderNotes() {
+export function updateReminderNotes(reminderNotes) {
     return {
         type: UPDATE_REMINDER_NOTES,
         payload: reminderNotes
