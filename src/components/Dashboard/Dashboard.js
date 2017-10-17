@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import Footer from './../Footer/Footer';
 import './Dashboard.css';
 
 export default class Dashboard extends Component {
@@ -53,7 +53,7 @@ export default class Dashboard extends Component {
 
                 <p>- Category list</p>
                 <p>- Log dropdown</p>
-                <h2>- Footer</h2>
+                <Footer />
             </div>
         );
     }
