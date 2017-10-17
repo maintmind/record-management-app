@@ -8,14 +8,15 @@ class App extends Component {
 
   render() {
     return (
- <div>{ router }
+      <div>
+        {router}
       </div>
     );
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, {testCase})(App);
+export default connect(mapStateToProps, { testCase })(App);
