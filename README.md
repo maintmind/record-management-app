@@ -1,4 +1,4 @@
-# Maintenance Minder #
-## You live your life, we'll take care of the maintenance. ##
+# Maintenance Minder
+## You live your life, we'll take care of the maintenance.
 
-### DM 27 Group Project ###
+### DM 27 Group Project
