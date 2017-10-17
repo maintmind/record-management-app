@@ -19,7 +19,11 @@ let initialState = {
     reminderStatus: null,
     reminderCreated: null,
     reminderDue: null,
-    reminderNotes: ''
+    reminderNotes: '',
+    assetList: [],
+    categoryList: [],
+    logList: [],
+    reminderList: []
 
 }
 
@@ -42,15 +46,6 @@ const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
 const UPDATE_REMINDER_CREATED = "UPDATE_REMINDER_CREATED";
 const UPDATE_REMINDER_DUE = "UPDATE_REMINDER_DUE";
 const UPDATE_REMINDER_NOTES = "UPDATE_REMINDER_NOTES";
-
-// NEW ASSET
-// NEW CATEGORY
-// NEW LOG
-// NEW REMINDER
-// TOGGLE COMPONENT
-// TOGGLE TAB
-// MARK REMINDER COMPLETE
-
 
 
 // REDUCER 
@@ -80,6 +75,8 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logImage: action.payload })
         case UPDATE_LOG_NOTES:
             return Object.assign({}, state, { logNotes: action.payload })
+        case UPDATE_LOG_COST:
+            return Object.assign({}, state, { logCost: action.payload })
         case UPDATE_REMINDER_ID:
             return Object.assign({}, state, { reminderID: action.payload })
         case UPDATE_REMINDER_STATUS:
@@ -90,6 +87,21 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderDue: action.payload })
         case UPDATE_REMINDER_NOTES:
             return Object.assign({}, state, { reminderNotes: action.payload })
+        //AXIOS
+        case GET_ALL_ASSETS + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { assetList: action.payload })
+        case GET_ALL_CATEGORIES + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { categoryList: action.payload })
+        case GET_ALL_LOGS + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { logList: action.payload })
+        case GET_ALL_REMINDERS + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { reminderList: action.payload })
+        
+        
         
         default:
             return state
@@ -97,25 +109,163 @@ export default function dashReducer(state = initialState, action) {
 }
 
 // ACTION CREATORS
-export function getUser(){
-    var userInfo = axios.get('http://localhost:3005/auth/me').then(response => {
-        console.log(response)
-        return response.data
+export function updateAssetID(asset_id) {
+    return {
+        type: UPDATE_ASSET_ID,
+        payload: asset_id
+    }
+}
+export function updateAssetName() {
+    return {
+        type: UPDATE_ASSET_NAME,
+        payload: assetName
+    }
+}
+export function updateAssetDescription(){
+    return {
+        type: UPDATE_ASSET_DESCRIPTION,
+        payload: assetDescription
+    }
+}
+export function updateCatID(cat_id){
+    return {
+        type: UPDATE_CATEGORY_ID,
+        payload: cat_id
+    }
+}
+export function updateCategoryName(categoryName){
+    return {
+        type: UPDATE_CATEGORY_NAME,
+        payload: categoryName
+    }
+}
+export function updateCategoryDescription(categoryDescription){
+    return {
+        type: UPDATE_CATEGORY_DESCRIPTION,
+        payload: categoryDescription
+    }
+}
+export function updateLogID(log_id) {
+    return {
+        type: UPDATE_LOG_ID,
+        payload: log_id
+    }
+}
+export function updateLogComplete(logCompleteDate) {
+    return {
+        type: UPDATE_LOG_COMPLETE_DATE,
+        payload: logCompleteDate
+    }
+}
+export function updateLogSubmit(logSubmitDate) {
+    return {
+        type: UPDATE_LOG_SUBMIT_DATE,
+        payload: logSubmitDate
+    }
+}
+export function updateLogServiceDesc(logServiceDesc) {
+    return {
+        type: UPDATE_LOG_SERVICE_DESC,
+        payload: logServiceDesc
+    }
+}
+export function updateLogImage(logImage) {
+    return {
+        type: UPDATE_LOG_IMAGE,
+        payload: logImage
+    }
+}
+export function updateLogNotes(logNotes) {
+    return {
+        type: UPDATE_LOG_NOTES,
+        payload: logNotes
+    }
+}
+export function updateLogCost(logCost) {
+    return {
+        type: UPDATE_LOG_COST,
+        payload: logCost
+    }
+}
+export function updateReminderID(remind_id) {
+    return {
+        type: UPDATE_REMINDER_ID,
+        payload: remind_id
+    }
+}
+export function updateReminderStatus(reminderStatus) {
+    return {
+        type: UPDATE_REMINDER_STATUS,
+        payload: reminderStatus
+    }
+}
+export function updateReminderCreated(reminderCreated) {
+    return {
+        type: UPDATE_REMINDER_CREATED,
+        payload: reminderCreated
+    }
+}
+export function updateReminderDue(reminderDue) {
+    return {
+        type: UPDATE_REMINDER_DUE,
+        payload: reminderDue
+    }
+}
+export function updateReminderNotes() {
+    return {
+        type: UPDATE_REMINDER_NOTES,
+        payload: reminderNotes
+    }
+}
+
+//AXIOS
+
+// export function getUser(){
+//     var userInfo = axios.get('http://localhost:3005/auth/me').then(response => {
+//         console.log(response)
+//         return response.data
+//         })
+//     return {
+//         type: GET_USER,
+//         payload: userInfo
+//     }
+// }
+export function getAllAssets() {
+    return {
+        type: GET_ALL_ASSETS,
+        payload: axios.get('http://localhost:3030/api/getAllAssets').then(response => {
+            console.log(response)
+            return response.data
         })
-    return {
-        type: GET_USER,
-        payload: userInfo
     }
 }
-export function updateAssetID(num) {
+
+export function getAllCategories() {
     return {
-        type: UPDATE_ASSET_ID,
-        payload: num
+        type: GET_ALL_CATEGORIES,
+        payload: axios.get('http://localhost:3030/api/getAllCategories').then(response => {
+            console.log(response)
+            return response.data
+        })
     }
 }
-export function updateAssetName(num) {
+
+export function getAllLogs() {
     return {
-        type: UPDATE_ASSET_ID,
-        payload: num
+        type: GET_ALL_LOGS,
+        payload: axios.get('http://localhost:3030/api/getAllLogs').then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+
+export function getAllReminders() {
+    return {
+        type: GET_ALL_REMINDERS,
+        payload: axios.get('http://localhost:3030/api/getAllReminders').then(response => {
+            console.log(response)
+            return response.data
+        })
     }
 }
