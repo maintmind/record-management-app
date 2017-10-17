@@ -233,7 +233,7 @@ export function updateReminderNotes() {
 export function getAllAssets() {
     return {
         type: GET_ALL_ASSETS,
-        payload: axios.get('http://localhost:3030/api/getAllAssets').then(response => {
+        payload: axios.get('http://localhost:3005/api/getAllAssets').then(response => {
             console.log(response)
             return response.data
         })
@@ -243,7 +243,7 @@ export function getAllAssets() {
 export function getAllCategories() {
     return {
         type: GET_ALL_CATEGORIES,
-        payload: axios.get('http://localhost:3030/api/getAllCategories').then(response => {
+        payload: axios.get('http://localhost:3005/api/getAllCategories').then(response => {
             console.log(response)
             return response.data
         })
@@ -253,7 +253,7 @@ export function getAllCategories() {
 export function getAllLogs() {
     return {
         type: GET_ALL_LOGS,
-        payload: axios.get('http://localhost:3030/api/getAllLogs').then(response => {
+        payload: axios.get('http://localhost:3005/api/getAllLogs').then(response => {
             console.log(response)
             return response.data
         })
@@ -263,7 +263,7 @@ export function getAllLogs() {
 export function getAllReminders() {
     return {
         type: GET_ALL_REMINDERS,
-        payload: axios.get('http://localhost:3030/api/getAllReminders').then(response => {
+        payload: axios.get('http://localhost:3005/api/getAllReminders').then(response => {
             console.log(response)
             return response.data
         })
