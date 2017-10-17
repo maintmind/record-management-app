@@ -138,9 +138,6 @@ export default function dashReducer(state = initialState, action) {
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
 
-        
-        
-        
         default:
             return state
     }
