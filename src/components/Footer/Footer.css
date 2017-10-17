@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Anton|Berkshire+Swash|Erica+One|Orbitron|Spicy+Rice');
+
+.footer-container{
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #767A6C;    
+    margin: 5px;
+    
+}
+
+.logo h4{
+    padding: 5px;
+    font-size: 20px;
+    font-family: 'Orbitron';
+    text-decoration: none;
+    color:#36453B;
+}
+
+.logo h4 span{
+    color: #E28413;
+}
+
+.category-links ul li{
+    text-decoration: none;
+    list-style:none;
+}
+

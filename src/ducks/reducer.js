@@ -61,7 +61,6 @@ const SET_REMINDER_STATUS_TO_CLOSED = "SET_REMINDER_STATUS_TO_CLOSED";
 const SET_REMINDER_STATUS_TO_OPEN = "SET_REMINDER_STATUS_TO_OPEN";
 
 
-
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
     switch (action.type) {

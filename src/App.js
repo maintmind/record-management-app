@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { testCase } from '../src/ducks/reducer'
 import { connect } from 'react-redux'
@@ -9,14 +8,15 @@ class App extends Component {
 
   render() {
     return (
- <div>{ router }
+      <div>
+        {router}
       </div>
     );
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, {testCase})(App);
+export default connect(mapStateToProps, { testCase })(App);
