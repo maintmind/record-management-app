@@ -46,6 +46,19 @@ const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
 const UPDATE_REMINDER_CREATED = "UPDATE_REMINDER_CREATED";
 const UPDATE_REMINDER_DUE = "UPDATE_REMINDER_DUE";
 const UPDATE_REMINDER_NOTES = "UPDATE_REMINDER_NOTES";
+const GET_ALL_ASSETS = "GET_ALL_ASSETS";
+const ADD_ASSET = "ADD_ASSET";
+const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
+const ADD_CATEGORY = "ADD_CATEGORY";
+const GET_ALL_LOGS = "GET_ALL_LOGS";
+const ADD_LOG = "ADD_LOG";
+const GET_ALL_REMINDERS = "GET_ALL_REMINDERS";
+const ADD_REMINDER = "ADD_REMINDER";
+const GET_REMINDERS_OVERDUE = "REMINDER OVERDUE";
+const GET_REMINDERS_COMING_UP = "GET_REMINDERS_COMING_UP";
+const SET_REMINDER_STATUS_TO_CLOSED = "SET_REMINDER_STATUS_TO_CLOSED";
+const SET_REMINDER_STATUS_TO_OPEN = "SET_REMINDER_STATUS_TO_OPEN";
+
 
 
 // REDUCER 
@@ -87,19 +100,43 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderDue: action.payload })
         case UPDATE_REMINDER_NOTES:
             return Object.assign({}, state, { reminderNotes: action.payload })
-        //AXIOS
         case GET_ALL_ASSETS + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { assetList: action.payload })
+        case ADD_ASSET + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { assetList: action.payload })
         case GET_ALL_CATEGORIES + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { categoryList: action.payload })
+        case ADD_CATEGORY + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { categoryList: action.payload })
         case GET_ALL_LOGS + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { logList: action.payload })
+        case ADD_LOG + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { logList: action.payload })
         case GET_ALL_REMINDERS + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
+        case ADD_REMINDER + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { reminderList: action.payload })
+        case GET_REMINDERS_OVERDUE + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { reminderList: action.payload })
+        case GET_REMINDERS_COMING_UP + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { reminderList: action.payload })
+        case SET_REMINDER_STATUS_TO_CLOSED + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { reminderList: action.payload })
+        case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { reminderList: action.payload })
+
         
         
         
@@ -230,42 +267,127 @@ export function updateReminderNotes() {
 //         payload: userInfo
 //     }
 // }
-export function getAllAssets() {
+
+//ASSETS//
+export function getAllAssets(num) {
     return {
         type: GET_ALL_ASSETS,
-        payload: axios.get('http://localhost:3005/api/getAllAssets').then(response => {
+        payload: axios.get(`/api/assets/get_all/${num}`).then(response => {
             console.log(response)
             return response.data
         })
     }
 }
 
-export function getAllCategories() {
+export function addAsset() {
+    return {
+        type: ADD_ASSET,
+        payload: axios.post(`/api/assets/add`).then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+//CATEGORIES//
+export function getAllCategories(num) {
     return {
         type: GET_ALL_CATEGORIES,
-        payload: axios.get('http://localhost:3005/api/getAllCategories').then(response => {
+        payload: axios.get(`/api/categories/get_all/${num}`).then(response => {
             console.log(response)
             return response.data
         })
     }
 }
 
-export function getAllLogs() {
+export function addCategory() {
+    return {
+        type: ADD_CATEGORY,
+        payload: axios.post(`/api/assets/add`).then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+//LOGS//
+export function getAllLogs(num) {
     return {
         type: GET_ALL_LOGS,
-        payload: axios.get('http://localhost:3005/api/getAllLogs').then(response => {
+        payload: axios.get(`/api/logs/get_all/${num}`).then(response => {
             console.log(response)
             return response.data
         })
     }
 }
 
-export function getAllReminders() {
+export function addLog(num) {
     return {
-        type: GET_ALL_REMINDERS,
-        payload: axios.get('http://localhost:3005/api/getAllReminders').then(response => {
+        type: ADD_LOG,
+        payload: axios.post(`/api/logs/add/${num}`).then(response => {
             console.log(response)
             return response.data
         })
     }
 }
+// REMINDERS//
+
+// export function getAllReminders(num) {
+//     return {
+//         type: GET_ALL_REMINDERS,
+//         payload: axios.get(`/api/reminders/get_all/${num}`).then(response => {
+//             console.log(response)
+//             return response.data
+//         })
+//     }
+// }
+
+export function addReminder(num) {
+    return {
+        type: ADD_REMINDER,
+        payload: axios.post(`/api/reminders/add/${num}`).then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+
+export function getRemindersOverdue(num) {
+    return {
+        type: GET_REMINDERS_OVERDUE,
+        payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+
+export function getRemindersComingUp(num) {
+    return {
+        type: GET_REMINDERS_COMING_UP,
+        payload: axios.get(`/api/reminders/coming-in/${num}`).then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+
+export function setReminderStatusToClosed(num) {
+    return {
+        type: SET_REMINDER_STATUS_TO_CLOSED,
+        payload: axios.put(`/api/reminders/close/${num}`).then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+
+export function setReminderStatusToOpen(num) {
+    return {
+        type: SET_REMINDER_STATUS_TO_OPEN,
+        payload: axios.put(`/api/reminders/open/${num}`).then(response => {
+            console.log(response)
+            return response.data
+        })
+    }
+}
+
+
