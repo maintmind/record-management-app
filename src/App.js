@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { testCase } from '../src/ducks/reducer'
 import { connect } from 'react-redux'
