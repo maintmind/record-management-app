@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let initialState = {
-    user: {},
+    user: {user_id: 1},
     asset_id: 0,
     assetName: '',
     assetDescription: '',
@@ -23,7 +23,8 @@ let initialState = {
     assetList: [],
     categoryList: [],
     logList: [],
-    reminderList: []
+    reminderList: [],
+    modalToggler: null
 
 }
 
@@ -59,6 +60,7 @@ const GET_REMINDERS_OVERDUE = "REMINDER OVERDUE";
 const GET_REMINDERS_COMING_UP = "GET_REMINDERS_COMING_UP";
 const SET_REMINDER_STATUS_TO_CLOSED = "SET_REMINDER_STATUS_TO_CLOSED";
 const SET_REMINDER_STATUS_TO_OPEN = "SET_REMINDER_STATUS_TO_OPEN";
+const TOGGLE_MODAL = "TOGGLE_MODAL";
 
 
 // REDUCER 
@@ -136,6 +138,9 @@ export default function dashReducer(state = initialState, action) {
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
+        case TOGGLE_MODAL + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { modalToggler: action.payload })
 
         default:
             return state
@@ -270,7 +275,6 @@ export function getAllAssets(num) {
     return {
         type: GET_ALL_ASSETS,
         payload: axios.get(`/api/assets/get_all/${num}`).then(response => {
-            console.log(response)
             return response.data
         })
     }
@@ -384,6 +388,13 @@ export function setReminderStatusToOpen(num) {
             console.log(response)
             return response.data
         })
+    }
+}
+
+export function toggleModal(str){
+    return {
+        type: TOGGLE_MODAL,
+        payload: str
     }
 }
 
