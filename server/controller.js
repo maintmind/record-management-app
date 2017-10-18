@@ -2,7 +2,7 @@ module.exports = {
     //ASSETS
     getAllAssets: (req, res) => {
         const dbInstance = req.app.get('db');
-        dbInstance.assets.getAllAssets(req.params.id)
+        dbInstance.assets.getAllAssets(req.params.user_id)
             .then(assets => res.status(200).send(assets))
             .catch(err => res.status(500).send(console.log(err)))
     },
@@ -25,8 +25,8 @@ module.exports = {
 
     addCategory: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { asset_id, title, description } = req.body;
-        dbInstance.categories.addNewCategory(asset_id, title, description)
+        const { asset_id, user_id, title, description } = req.body;
+        dbInstance.categories.addNewCategory(asset_id, user_id, title, description)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
     },
