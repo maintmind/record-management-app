@@ -3,10 +3,11 @@ require('dotenv').config();
 const bodyParser = require('body-parser'),
         cors = require('cors'),
         massive = require('massive'),
-        express = require('express');
+        express = require('express'),
         // passport = require('passport'),
         // Auth0Strategy = require('passport-auth0'),
         // session = require('express-session'),
+        cloudinary = require('cloudinary');
 
 const app = express();
 const controller = require('./controller');
@@ -18,6 +19,11 @@ app.use(cors());
 massive(process.env.CONNECTIONSTRING).then(db => {
         app.set('db', db)
 })
+
+
+//CLOUDINARY CONFIG (FOR PHOTO UPLOADS)
+cloudinary.config(process.env.CLOUDINARY_URL)
+
 
 //AUTHENTICATION (WHEN WE ARE READY)
 //AUTHENTICATION (AUTH0)
@@ -92,6 +98,9 @@ app.get('/api/reminders/coming-in/:user_id', controller.getRemindersComingUp7)
 app.put('/api/reminders/close/:remind_id', controller.setReminderStatusToClosed)
 app.put('/api/reminders/open/:remind_id', controller.setReminderStatusToOpen)
 // app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
+
+//CLOUDINARY ENDPOINTS
+app.post('/api/upload', controller.imageUpload)
 
 // app.post('/api/reminder/add', controller.addReminder)
 // app.get('/api/reminders/overdue', controller.getRemindersOverdue)

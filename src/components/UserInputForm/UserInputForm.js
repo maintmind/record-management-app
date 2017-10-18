@@ -3,6 +3,7 @@ import "./UserInputForm.css";
 import { connect } from 'react-redux';
 import { toggleModal } from './../../ducks/reducer';
 
+import PhotoUploader from '../../components/PhotoUploader/PhotoUploader';
 // import Redux stuff
 
 class UserInputForm extends Component {
@@ -47,7 +48,7 @@ class UserInputForm extends Component {
                     {inputHeader()}
                     <div>Date of Service:</div> <div><input type="date" placeholder="" /></div>
                     <div>Cost:</div> <div><input placeholder="" /></div>
-                    <div><button>Upload Photo</button></div>
+                    <div><PhotoUploader /><button>Upload Photo</button></div>
                     <div>Image Preview Here</div>
                     <div><button>Submit New Log</button></div>
                 </div>
