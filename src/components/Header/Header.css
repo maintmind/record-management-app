@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Anton|Berkshire+Swash|Erica+One|Orbitron|Spicy+Rice|Lato');
 
-.header-container{    
+.header-container{   
+    width: 100%; 
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color:#EAF0CE;
     color: black; 
     border-bottom: 2px solid #DD4B1A;
-       
+    margin-bottom: 15px;
 }
 
 .maintenance-minder{

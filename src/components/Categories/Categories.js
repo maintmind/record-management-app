@@ -13,10 +13,15 @@ class Categories extends Component {
 
     render() {
         const displayCats = this.props.categoryList.map((c, i) => {
-            if(c.asset_id === this.props.assetView){
+            if (c.asset_id === this.props.assetView) {
                 return (
-                    <div key={i} className="cat_row" onClick={() => this.props.catDisp(c.cat_id)}>
-                        {c.title} - {c.description}
+                    <div key={i}>
+                        <div key={i} className="cat_row" onClick={() => this.props.catDisp(c.cat_id)}>
+                            {c.title} - {c.description}
+                        </div>
+                        <div className={c.cat_id === this.props.catView ? "addCat_show" : "addCat_hide"}>
+                            <Logs />
+                        </div>
                     </div>
                 )
             }
@@ -24,11 +29,10 @@ class Categories extends Component {
 
         return (
             <div className="category_viewer">
-                <button onClick={() => {this.props.toggleModal('cat')}} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>ADD CATEGORY</button>
+                <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>ADD CATEGORY</button>
 
                 {displayCats}
 
-                <Logs />
             </div>
         );
     }
