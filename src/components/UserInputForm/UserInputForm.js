@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./UserInputForm.css"
+import "./UserInputForm.css";
 import { connect } from 'react-redux';
 import { toggleModal } from './../../ducks/reducer';
 
@@ -12,11 +12,11 @@ class UserInputForm extends Component {
 
     displayController(props) {
 
-
+        {/* This displays on the top of each form */}
         var inputHeader = () => {
-            {/* This displays on the top of each form */}
             return (
                 <div>
+                    {/* <div><button onClick={()=>toggleModal()}>Close</button></div> */}
                     <div>Title:</div><div><input placeholder="" /></div>
                     <div>Description:</div><div><textarea placeholder="" /></div>
                 </div>
