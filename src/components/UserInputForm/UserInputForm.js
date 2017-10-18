@@ -18,6 +18,7 @@ class UserInputForm extends Component {
             return (
                 <div>
                     {/* <div><button onClick={()=>toggleModal()}>Close</button></div> */}
+                    <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
                     <div>Title:</div><div><input placeholder="" /></div>
                     <div>Description:</div><div><textarea placeholder="" /></div>
                 </div>

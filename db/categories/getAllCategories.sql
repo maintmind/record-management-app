@@ -1,3 +1,3 @@
 SELECT *
 FROM categories
-WHERE asset_id = $1;
+WHERE user_id = $1;

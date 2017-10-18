@@ -4,17 +4,22 @@ import { connect } from 'react-redux';
 import UserInputForm from '../UserInputForm/UserInputForm';
 import Categories from '../Categories/Categories';
 
-import { getAllAssets, assetRotate, toggleModal } from '../../ducks/reducer';
+import { getAllAssets, assetRotate, catDisp, toggleModal } from '../../ducks/reducer';
 
 class Assets extends Component {
     componentDidMount() {
         this.props.getAllAssets(this.props.user.user_id)
     }
 
+    changeAsset(num) {
+        this.props.assetRotate(num)
+        this.props.catDisp(0)
+    }
+
     render() {
         const displayAsset = this.props.assetList.map((c, i) => {
             return (
-                <button key={i} className="asset_tab" onClick={() => this.props.assetRotate(c.asset_id)}>
+                <button key={i} className="asset_tab" onClick={() => this.changeAsset(c.asset_id)}>
                     {c.title}
                 </button>
             )
@@ -29,8 +34,7 @@ class Assets extends Component {
 
                 <UserInputForm />
 
-                <p>- Category list</p>
-                <p>- Log dropdown</p>
+                <Categories />
             </div>
         );
     }
@@ -42,6 +46,7 @@ function mapStateToProps(state) {
 const outputActions = {
     getAllAssets,
     assetRotate,
+    catDisp,
     toggleModal
 }
 
