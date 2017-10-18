@@ -94,7 +94,7 @@ module.exports = {
     },
 
     imageUpload: (req, res) => {
-        cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/7/78/Proboscis_monkey_%28Nasalis_larvatus%29_composite.jpg", function(result) { 
+        cloudinary.uploader.upload(req.body, function(result) { 
             console.log(result) 
           });
             // .then(asset => res.status(200).send(asset))
