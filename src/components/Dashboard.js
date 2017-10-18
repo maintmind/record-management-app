@@ -8,13 +8,14 @@ export default class Dashboard extends Component {
         super();
 
         this.state = {
+            user_id: 1,
             assetsToDisplay: [],
             showAssetAdder: false
         }
     }
 
     componentDidMount() {
-        axios.get(`/api/assets/get_all/1`).then(res => {
+        axios.get(`/api/assets/get_all/${this.state.user_id}`).then(res => {
             console.log(res.data)
             this.setState({
                 assetsToDisplay: res.data
