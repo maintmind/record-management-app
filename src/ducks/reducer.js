@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let initialState = {
-    user: {user_id: 1},
+    user: { user_id: 1 },
     asset_id: 0,
     assetName: '',
     assetDescription: '',
@@ -11,9 +11,9 @@ let initialState = {
     log_id: 0,
     logCompleteDate: null,
     logSubmitDate: null,
-    logServiceDesc: '',
+    logName: '',
+    logDescription: '',
     logImage: null,
-    logNotes: '',
     logCost: null,
     remind_id: 0,
     reminderStatus: null,
@@ -42,9 +42,9 @@ const UPDATE_CATEGORY_DESCRIPTION = "UPDATE_CATEGORY DESCRIPTION";
 const UPDATE_LOG_ID = "UPDATE_LOG_ID";
 const UPDATE_LOG_COMPLETE_DATE = "UPDATE_LOG_COMPLETE_DATE";
 const UPDATE_LOG_SUBMIT_DATE = "UPDATE_LOG_SUBMIT_DATE";
-const UPDATE_LOG_SERVICE_DESC = "UPDATE_LOG_SERVICE_DESC";
+const UPDATE_LOG_NAME = "UPDATE_LOG_NAME";
+const UPDATE_LOG_DESCRIPTION = "UPDATE_LOG_DESCRIPTION";
 const UPDATE_LOG_IMAGE = "UPDATE_LOG_IMAGE";
-const UPDATE_LOG_NOTES = "UPDATE_LOG_NOTES";
 const UPDATE_LOG_COST = "UPDATE_LOG_COST";
 const UPDATE_REMINDER_ID = "UPDATE_REMINDER_ID";
 const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
@@ -88,12 +88,12 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logCompleteDate: action.payload })
         case UPDATE_LOG_SUBMIT_DATE:
             return Object.assign({}, state, { logSubmitDate: action.payload })
-        case UPDATE_LOG_SERVICE_DESC:
-            return Object.assign({}, state, { logServiceDesc: action.payload })
+        case UPDATE_LOG_NAME:
+            return Object.assign({}, state, { logName: action.payload })
+        case UPDATE_LOG_DESCRIPTION:
+            return Object.assign({}, state, { logDescription: action.payload })
         case UPDATE_LOG_IMAGE:
             return Object.assign({}, state, { logImage: action.payload })
-        case UPDATE_LOG_NOTES:
-            return Object.assign({}, state, { logNotes: action.payload })
         case UPDATE_LOG_COST:
             return Object.assign({}, state, { logCost: action.payload })
         case UPDATE_REMINDER_ID:
@@ -142,9 +142,9 @@ export default function dashReducer(state = initialState, action) {
         case TOGGLE_MODAL:
             return Object.assign({}, state, { modalToggler: action.payload })
         case ASSET_ROTATE:
-            return Object.assign({}, state, {assetView: action.payload})
+            return Object.assign({}, state, { assetView: action.payload })
         case CAT_DISP:
-            return Object.assign({}, state, {catView: action.payload})
+            return Object.assign({}, state, { catView: action.payload })
 
         default:
             return state
@@ -153,6 +153,7 @@ export default function dashReducer(state = initialState, action) {
 
 // ACTION CREATORS
 export function updateAssetID(asset_id) {
+    console.log('sdfdsf', asset_id)
     return {
         type: UPDATE_ASSET_ID,
         payload: asset_id
@@ -164,30 +165,31 @@ export function updateAssetName(assetName) {
         payload: assetName
     }
 }
-export function updateAssetDescription(assetDescription){
+export function updateAssetDescription(assetDescription) {
     return {
         type: UPDATE_ASSET_DESCRIPTION,
         payload: assetDescription
     }
 }
-export function updateCatID(cat_id){
+export function updateCatID(cat_id) {
     return {
         type: UPDATE_CATEGORY_ID,
         payload: cat_id
     }
 }
-export function updateCategoryName(categoryName){
+export function updateCategoryName(categoryName) {
     return {
         type: UPDATE_CATEGORY_NAME,
         payload: categoryName
     }
 }
-export function updateCategoryDescription(categoryDescription){
+export function updateCategoryDescription(categoryDescription) {
     return {
         type: UPDATE_CATEGORY_DESCRIPTION,
         payload: categoryDescription
     }
 }
+
 export function updateLogID(log_id) {
     return {
         type: UPDATE_LOG_ID,
@@ -206,10 +208,18 @@ export function updateLogSubmit(logSubmitDate) {
         payload: logSubmitDate
     }
 }
-export function updateLogServiceDesc(logServiceDesc) {
+
+export function updateLogName(logName) {
     return {
-        type: UPDATE_LOG_SERVICE_DESC,
-        payload: logServiceDesc
+        type: UPDATE_LOG_NAME,
+        payload: logName
+    }
+}
+
+export function updateLogDescription(logDescription) {
+    return {
+        type: UPDATE_LOG_DESCRIPTION,
+        payload: logDescription
     }
 }
 export function updateLogImage(logImage) {
@@ -218,12 +228,7 @@ export function updateLogImage(logImage) {
         payload: logImage
     }
 }
-export function updateLogNotes(logNotes) {
-    return {
-        type: UPDATE_LOG_NOTES,
-        payload: logNotes
-    }
-}
+
 export function updateLogCost(logCost) {
     return {
         type: UPDATE_LOG_COST,
@@ -284,15 +289,17 @@ export function getAllAssets(num) {
     }
 }
 
-export function addAsset() {
+export function addAsset(obj) {
+    console.log(obj)
     return {
         type: ADD_ASSET,
-        payload: axios.post(`/api/assets/add`).then(response => {
-            console.log(response)
+        payload: axios.post(`/api/assets/add`, obj).then(response => {
+            console.log('this is the response',response)
             return response.data
         })
     }
 }
+
 //CATEGORIES//
 export function getAllCategories(num) {
     return {
@@ -303,10 +310,10 @@ export function getAllCategories(num) {
     }
 }
 
-export function addCategory() {
+export function addCategory(obj) {
     return {
         type: ADD_CATEGORY,
-        payload: axios.post(`/api/assets/add`).then(response => {
+        payload: axios.post(`/api/categories/add`, obj).then(response => {
             console.log(response)
             return response.data
         })
@@ -394,7 +401,6 @@ export function setReminderStatusToOpen(num) {
 }
 
 //VIEWS
-
 export function assetRotate(num) {
     return {
         type: ASSET_ROTATE,
