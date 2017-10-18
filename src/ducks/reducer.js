@@ -359,7 +359,7 @@ export function getRemindersOverdue(num) {
     return {
         type: GET_REMINDERS_OVERDUE,
         payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
-            console.log(response)
+            console.log("response", response.data)
             return response.data
         })
     }
