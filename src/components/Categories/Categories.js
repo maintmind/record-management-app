@@ -15,11 +15,11 @@ class Categories extends Component {
         const displayCats = this.props.categoryList.map((c, i) => {
             if (c.asset_id === this.props.assetView) {
                 return (
-                    <div>
+                    <div key={i}>
                         <div key={i} className="cat_row" onClick={() => this.props.catDisp(c.cat_id)}>
                             {c.title} - {c.description}
                         </div>
-                        <div key='log' className={c.cat_id === this.props.catView ? "addCat_show" : "addCat_hide"}>
+                        <div className={c.cat_id === this.props.catView ? "addCat_show" : "addCat_hide"}>
                             <Logs />
                         </div>
                     </div>
