@@ -24,7 +24,7 @@ let initialState = {
     categoryList: [],
     logList: [],
     reminderList: [],
-    modalToggler: null
+    modalToggler: 'log'
 
 }
 
