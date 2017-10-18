@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import UserInputForm from '../UserInputForm/UserInputForm';
 import Categories from '../Categories/Categories';
 
-import { getAllAssets, assetRotate, catDisp, toggleModal } from '../../ducks/reducer';
+import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal } from '../../ducks/reducer';
 
 class Assets extends Component {
     componentDidMount() {
@@ -14,6 +14,7 @@ class Assets extends Component {
     changeAsset(num) {
         this.props.assetRotate(num)
         this.props.catDisp(0)
+        this.props.updateAssetID(num)
     }
 
     render() {
@@ -47,6 +48,7 @@ const outputActions = {
     getAllAssets,
     assetRotate,
     catDisp,
+    updateAssetID,
     toggleModal
 }
 
