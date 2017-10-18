@@ -11,8 +11,8 @@ module.exports = {
 
     addAsset: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { user_id, title, description } = req.body;
-        dbInstance.assets.addNewAsset(user_id, title, description)
+        const { user, assetName, assetDescription } = req.body;
+        dbInstance.assets.addNewAsset(user.user_id, assetName, assetDescription)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
     },
@@ -27,9 +27,9 @@ module.exports = {
 
     addCategory: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { asset_id, user_id, title, description } = req.body;
-        dbInstance.categories.addNewCategory(asset_id, user_id, title, description)
-            .then(asset => res.status(200).send(asset))
+        const { assetView, user, categoryName, categoryDescription } = req.body;
+        dbInstance.categories.addNewCategory(assetView, user.user_id, categoryName, categoryDescription)
+            .then(categories => res.status(200).send(categories))
             .catch(err => res.status(500).send(console.log(err)))
     },
 
