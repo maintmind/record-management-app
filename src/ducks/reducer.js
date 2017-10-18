@@ -154,7 +154,6 @@ export default function dashReducer(state = initialState, action) {
 
 // ACTION CREATORS
 export function updateAssetID(asset_id) {
-    console.log('sdfdsf', asset_id)
     return {
         type: UPDATE_ASSET_ID,
         payload: asset_id
