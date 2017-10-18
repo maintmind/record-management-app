@@ -4,5 +4,6 @@ VALUES
 ($1, $2, $3);
 
 SELECT *
-FROM assets;
+FROM assets
+WHERE user_id = $1;
 

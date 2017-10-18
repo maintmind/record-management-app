@@ -4,4 +4,5 @@ VALUES
 ($1, $2, $3, $4);
 
 SELECT *
-FROM categories;
+FROM categories
+WHERE user_id = $2;

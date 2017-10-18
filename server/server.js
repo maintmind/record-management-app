@@ -89,7 +89,7 @@ app.post('/api/categories/add', controller.addCategory)
 
 //LOGS ENDPOINTS
 app.get('/api/logs/get_all/:cat_id', controller.getAllLogs)
-app.post('/api/logs/add/:cat_id', controller.addLog)
+app.post('/api/logs/add', controller.addLog)
 
 //REMINDERS ENDPOINTS
 app.post('/api/reminders/add/:user_id', controller.addReminder)
