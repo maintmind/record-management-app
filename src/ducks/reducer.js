@@ -24,8 +24,7 @@ let initialState = {
     categoryList: [],
     logList: [],
     reminderList: [],
-    modalToggler: null
-
+    modalToggler: "cat"
 }
 
 
@@ -137,11 +136,10 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             console.log(action.payload)
-            return Object.assign({}, state, { reminderList: action.payload })
-        case TOGGLE_MODAL + "_FULFILLED":
-            console.log(action.payload)
+            return Object.assign({}, state, { reminderList: action.payload });
+        case TOGGLE_MODAL:
+            console.log("test", action.payload)
             return Object.assign({}, state, { modalToggler: action.payload })
-
         default:
             return state
     }
@@ -392,6 +390,7 @@ export function setReminderStatusToOpen(num) {
 }
 
 export function toggleModal(str){
+    // console.log(str)
     return {
         type: TOGGLE_MODAL,
         payload: str
