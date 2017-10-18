@@ -1,8 +1,10 @@
+cloudinary = require('cloudinary');
+
 module.exports = {
     //ASSETS
     getAllAssets: (req, res) => {
         const dbInstance = req.app.get('db');
-        dbInstance.assets.getAllAssets(req.params.id)
+        dbInstance.assets.getAllAssets(req.params.user_id)
             .then(assets => res.status(200).send(assets))
             .catch(err => res.status(500).send(console.log(err)))
     },
@@ -25,8 +27,8 @@ module.exports = {
 
     addCategory: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { asset_id, title, description } = req.body;
-        dbInstance.categories.addNewCategory(asset_id, title, description)
+        const { asset_id, user_id, title, description } = req.body;
+        dbInstance.categories.addNewCategory(asset_id, user_id, title, description)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
     },
@@ -89,6 +91,14 @@ module.exports = {
         dbInstance.reminders.setReminderStatusToOpen(req.params.remind_id)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
+    },
+
+    imageUpload: (req, res) => {
+        cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/7/78/Proboscis_monkey_%28Nasalis_larvatus%29_composite.jpg", function(result) { 
+            console.log(result) 
+          });
+            // .then(asset => res.status(200).send(asset))
+            // .catch(err => res.status(500).send(console.log(err)))
     }
 
 }

@@ -17,9 +17,9 @@ export default class PopOverComp extends Component{
 
     }
 
-    // componentDidMount(){
-    //     need to get reminders for the header
-    // }
+    componentDidMount(){
+        
+    }
 
      handleTouchTap = (event) => {
     // This prevents ghost click.
@@ -44,7 +44,7 @@ export default class PopOverComp extends Component{
         let upcomingStyle = {backgroundColor: "orange", height: "40px", width: "40px"} //style for upcoming reminders
 
         return(
-            //if the user has overdue reminders
+             {this.}
             
             <div>
                 <Badge 
