@@ -26,7 +26,7 @@ cloudinary.config(process.env.CLOUDINARY_URL)
 
 
 //ASSETS ENDPOINTS
-app.get('/api/assets/get_all/:id', controller.getAllAssets)
+app.get('/api/assets/get_all/:user_id', controller.getAllAssets)
 app.post('/api/assets/add', controller.addAsset)
 
 //CATEGORY ENDPOINTS
