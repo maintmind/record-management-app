@@ -2,15 +2,15 @@ CREATE TABLE users (
 user_id SERIAL PRIMARY KEY,
 username VARCHAR(180),
 email VARCHAR(180),
-img TEXT,
-auth_id TEXT
+img VARCHAR(200),
+auth_id VARCHAR(200)
 );
 
 CREATE TABLE assets (
 asset_id SERIAL PRIMARY KEY,
 user_id INTEGER REFERENCES users,
 title VARCHAR(180),
-description TEXT
+description VARCHAR(500)
 );
 
 CREATE TABLE categories (
@@ -18,7 +18,7 @@ cat_id SERIAL PRIMARY KEY,
 asset_id INTEGER REFERENCES assets,
 user_id INTEGER REFERENCES users,
 title VARCHAR(180),
-description TEXT
+description VARCHAR(500)
 );
 
 CREATE TABLE logs (
@@ -28,8 +28,8 @@ user_id INTEGER REFERENCES users,
 date_submit DATE,
 date_complete DATE,
 title VARCHAR(180),
-description TEXT,
-img TEXT,
+description VARCHAR(500),
+img VARCHAR(200),
 cost MONEY
 );
 
@@ -41,5 +41,5 @@ status VARCHAR(50),
 date_created DATE,
 date_due DATE,
 title VARCHAR(180),
-description TEXT
+description VARCHAR(500)
 );

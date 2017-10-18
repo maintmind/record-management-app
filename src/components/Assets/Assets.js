@@ -1,27 +1,20 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { getAllAssets, toggleModal } from '../../ducks/reducer';
 
- class Assets extends Component {
-    constructor() {
-        super();
+import UserInputForm from '../UserInputForm/UserInputForm';
+import Categories from '../Categories/Categories';
 
-        this.state = {
-            assetsToDisplay: [],
-            showAssetAdder: false
-        }
-    }
+import { getAllAssets, assetRotate, toggleModal } from '../../ducks/reducer';
 
+class Assets extends Component {
     componentDidMount() {
-     this.props.getAllAssets(this.props.user.user_id)
-        
+        this.props.getAllAssets(this.props.user.user_id)
     }
 
     render() {
         const displayAsset = this.props.assetList.map((c, i) => {
             return (
-                <button key={i} className="asset_tab" onClick={() => this.assetRotate(c.asset_id)}>
+                <button key={i} className="asset_tab" onClick={() => this.props.assetRotate(c.asset_id)}>
                     {c.title}
                 </button>
             )
@@ -31,9 +24,10 @@ import { getAllAssets, toggleModal } from '../../ducks/reducer';
             <div className="assets_viewer">
                 <div className="asset_tabs_container">
                     {displayAsset}
-                    <button onClick={() => { this.props.toggleModal( 'asset') }} className="add_asset_button">ADD ASSET</button>
+                    <button onClick={() => this.props.toggleModal('asset')} className="add_asset_button">ADD ASSET</button>
                 </div>
 
+                <UserInputForm />
 
                 <p>- Category list</p>
                 <p>- Log dropdown</p>
@@ -47,7 +41,8 @@ function mapStateToProps(state) {
 }
 const outputActions = {
     getAllAssets,
+    assetRotate,
     toggleModal
 }
 
-export default connect (mapStateToProps, outputActions) (Assets);
+export default connect(mapStateToProps, outputActions)(Assets);

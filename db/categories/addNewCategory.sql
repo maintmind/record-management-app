@@ -1,5 +1,5 @@
 INSERT INTO categories
-(asset_id, title, description)
+(asset_id, user_id, title, description)
 VALUES
-($1, $2, $3)
+($1, $2, $3, $4)
 RETURNING *;

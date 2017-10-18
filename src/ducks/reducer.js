@@ -24,7 +24,8 @@ let initialState = {
     categoryList: [],
     logList: [],
     reminderList: [],
-    modalToggler: "cat"
+    assetView: 0,
+    modalToggler: 'null'
 }
 
 
@@ -60,6 +61,7 @@ const GET_REMINDERS_COMING_UP = "GET_REMINDERS_COMING_UP";
 const SET_REMINDER_STATUS_TO_CLOSED = "SET_REMINDER_STATUS_TO_CLOSED";
 const SET_REMINDER_STATUS_TO_OPEN = "SET_REMINDER_STATUS_TO_OPEN";
 const TOGGLE_MODAL = "TOGGLE_MODAL";
+const ASSET_ROTATE = "ASSET_ROTATE";
 
 
 // REDUCER 
@@ -102,7 +104,6 @@ export default function dashReducer(state = initialState, action) {
         case UPDATE_REMINDER_NOTES:
             return Object.assign({}, state, { reminderNotes: action.payload })
         case GET_ALL_ASSETS + "_FULFILLED":
-            console.log(action.payload)
             return Object.assign({}, state, { assetList: action.payload })
         case ADD_ASSET + "_FULFILLED":
             console.log(action.payload)
@@ -136,10 +137,15 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             console.log(action.payload)
-            return Object.assign({}, state, { reminderList: action.payload });
+            return Object.assign({}, state, { reminderList: action.payload })
         case TOGGLE_MODAL:
-            console.log("test", action.payload)
+            console.log(action.payload)
             return Object.assign({}, state, { modalToggler: action.payload })
+        case ASSET_ROTATE:
+            console.log(action.payload)
+            return Object.assign({}, state, {assetView: action.payload})
+
+
         default:
             return state
     }
@@ -389,12 +395,18 @@ export function setReminderStatusToOpen(num) {
     }
 }
 
-export function toggleModal(str){
-    // console.log(str)
+//VIEWS
+
+export function assetRotate(num) {
+    return {
+        type: ASSET_ROTATE,
+        payload: num
+    }
+}
+
+export function toggleModal(str) {
     return {
         type: TOGGLE_MODAL,
         payload: str
     }
 }
-
-
