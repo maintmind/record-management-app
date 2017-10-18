@@ -24,13 +24,8 @@ let initialState = {
     categoryList: [],
     logList: [],
     reminderList: [],
-<<<<<<< HEAD
-    
     assetView: 0,
     modalToggler: 'null'
-=======
-    modalToggler: "cat"
->>>>>>> master
 }
 
 
@@ -142,7 +137,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             console.log(action.payload)
-<<<<<<< HEAD
             return Object.assign({}, state, { reminderList: action.payload })
         case TOGGLE_MODAL:
             console.log(action.payload)
@@ -152,12 +146,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, {assetView: action.payload})
 
 
-=======
-            return Object.assign({}, state, { reminderList: action.payload });
-        case TOGGLE_MODAL:
-            console.log("test", action.payload)
-            return Object.assign({}, state, { modalToggler: action.payload })
->>>>>>> master
         default:
             return state
     }
@@ -407,7 +395,6 @@ export function setReminderStatusToOpen(num) {
     }
 }
 
-<<<<<<< HEAD
 //VIEWS
 
 export function assetRotate(num) {
@@ -418,10 +405,6 @@ export function assetRotate(num) {
 }
 
 export function toggleModal(str) {
-=======
-export function toggleModal(str){
-    // console.log(str)
->>>>>>> master
     return {
         type: TOGGLE_MODAL,
         payload: str
