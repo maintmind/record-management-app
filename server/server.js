@@ -24,7 +24,7 @@ app.get('/api/assets/get_all/:user_id', controller.getAllAssets)
 app.post('/api/assets/add', controller.addAsset)
 
 //CATEGORY ENDPOINTS
-app.get('/api/categories/get_all/:id', controller.getAllCategories)
+app.get('/api/categories/get_all/:user_id', controller.getAllCategories)
 app.post('/api/categories/add', controller.addCategory)
 
 //LOGS ENDPOINTS

@@ -18,7 +18,7 @@ module.exports = {
     //CATEGORY
     getAllCategories: (req, res) => {
         const dbInstance = req.app.get('db');
-        dbInstance.categories.getAllCategories(req.params.id)
+        dbInstance.categories.getAllCategories(req.params.user_id)
             .then(cats => res.status(200).send(cats))
             .catch(err => res.status(500).send(console.log(err)))
     },

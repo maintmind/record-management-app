@@ -24,7 +24,10 @@ let initialState = {
     categoryList: [],
     logList: [],
     reminderList: [],
+
+    //VIEWS
     assetView: 0,
+    catView: 0,
     modalToggler: 'null'
 }
 
@@ -62,7 +65,7 @@ const SET_REMINDER_STATUS_TO_CLOSED = "SET_REMINDER_STATUS_TO_CLOSED";
 const SET_REMINDER_STATUS_TO_OPEN = "SET_REMINDER_STATUS_TO_OPEN";
 const TOGGLE_MODAL = "TOGGLE_MODAL";
 const ASSET_ROTATE = "ASSET_ROTATE";
-
+const CAT_DISP = "CAT_DISP";
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -109,13 +112,11 @@ export default function dashReducer(state = initialState, action) {
             console.log(action.payload)
             return Object.assign({}, state, { assetList: action.payload })
         case GET_ALL_CATEGORIES + "_FULFILLED":
-            console.log(action.payload)
             return Object.assign({}, state, { categoryList: action.payload })
         case ADD_CATEGORY + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { categoryList: action.payload })
         case GET_ALL_LOGS + "_FULFILLED":
-            console.log(action.payload)
             return Object.assign({}, state, { logList: action.payload })
         case ADD_LOG + "_FULFILLED":
             console.log(action.payload)
@@ -139,12 +140,11 @@ export default function dashReducer(state = initialState, action) {
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
         case TOGGLE_MODAL:
-            console.log(action.payload)
             return Object.assign({}, state, { modalToggler: action.payload })
         case ASSET_ROTATE:
-            console.log(action.payload)
             return Object.assign({}, state, {assetView: action.payload})
-
+        case CAT_DISP:
+            return Object.assign({}, state, {catView: action.payload})
 
         default:
             return state
@@ -298,7 +298,6 @@ export function getAllCategories(num) {
     return {
         type: GET_ALL_CATEGORIES,
         payload: axios.get(`/api/categories/get_all/${num}`).then(response => {
-            console.log(response)
             return response.data
         })
     }
@@ -318,7 +317,6 @@ export function getAllLogs(num) {
     return {
         type: GET_ALL_LOGS,
         payload: axios.get(`/api/logs/get_all/${num}`).then(response => {
-            console.log(response)
             return response.data
         })
     }
@@ -400,6 +398,13 @@ export function setReminderStatusToOpen(num) {
 export function assetRotate(num) {
     return {
         type: ASSET_ROTATE,
+        payload: num
+    }
+}
+
+export function catDisp(num) {
+    return {
+        type: CAT_DISP,
         payload: num
     }
 }
