@@ -24,7 +24,8 @@ let initialState = {
     categoryList: [],
     logList: [],
     reminderList: [],
-
+    reminderListOverdue: [],
+    reminderListUpcoming: [],
     //VIEWS
     assetView: 0,
     catView: 0,
@@ -129,10 +130,10 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
         case GET_REMINDERS_OVERDUE + "_FULFILLED":
             console.log(action.payload)
-            return Object.assign({}, state, { reminderList: action.payload })
+            return Object.assign({}, state, { reminderListOverdue: action.payload })
         case GET_REMINDERS_COMING_UP + "_FULFILLED":
             console.log(action.payload)
-            return Object.assign({}, state, { reminderList: action.payload })
+            return Object.assign({}, state, { reminderListUpcoming: action.payload })
         case SET_REMINDER_STATUS_TO_CLOSED + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
@@ -363,7 +364,7 @@ export function getRemindersOverdue(num) {
     return {
         type: GET_REMINDERS_OVERDUE,
         payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
-            console.log(response)
+            console.log("response", response.data)
             return response.data
         })
     }
@@ -373,7 +374,7 @@ export function getRemindersComingUp(num) {
     return {
         type: GET_REMINDERS_COMING_UP,
         payload: axios.get(`/api/reminders/coming-in/${num}`).then(response => {
-            console.log(response)
+            console.log(response.data)
             return response.data
         })
     }
