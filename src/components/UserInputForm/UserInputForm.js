@@ -16,22 +16,14 @@ class UserInputForm extends Component {
 
     displayController(props) {
 
-        {/* This displays on the top of each form */}
-        var inputHeader = () => {
-            return (
-                <div>
-                    <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
-                </div>
-            )
-        }
-
         if (this.props.modalToggler === null) {
             return (<div></div>)
 
         } else if (this.props.modalToggler === "asset") {
             return (
                 <div>
-                    {inputHeader()}
+                    <div>ADD ASSET</div>
+                    <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
                     <div>Title:</div><div><input onChange={ (e) => this.props.updateAssetName(e.target.value) } placeholder="asset" /></div>
                     <div>Description:</div><div><textarea onChange={ (e) => this.props.updateAssetDescription(e.target.value) } placeholder="asset" /></div>
                     <div className="userinputform"><button onClick={ () => this.props.addAsset(this.props) } >Submit New Asset</button></div>
@@ -40,7 +32,8 @@ class UserInputForm extends Component {
         } else if (this.props.modalToggler === "cat") {
             return (
                 <div>
-                    {inputHeader()}
+                    <div>ADD CATEGORY</div>
+                    <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
                     <div>Title:</div><div><input onChange={ (e) => this.props.updateCategoryName(e.target.value) } placeholder="cat" /></div>
                     <div>Description:</div><div><textarea onChange={ (e) => this.props.updateCategoryDescription(e.target.value) }  placeholder="cat" /></div>
                     <div className="userinputform"><button onClick={ () => this.props.addCategory(this.props) } >Submit New Category</button></div>
@@ -49,7 +42,8 @@ class UserInputForm extends Component {
         } else if (this.props.modalToggler === "log") {
             return (
                 <div>
-                    {inputHeader()}
+                    <div>ADD LOG</div>
+                    <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
                     <div>Title:</div><div><input onChange={ (e) => this.props.updateLogName(e.target.value) } placeholder="cat" /></div>
                     <div>Description:</div><div><textarea onChange={ (e) => this.props.updateLogDescription(e.target.value) }  placeholder="cat" /></div>
                     <div>Date of Service:</div> <div><input onChange={ (e) => this.props.updateLogComplete(e.target.value) } type="date" placeholder="" /></div>
@@ -62,7 +56,8 @@ class UserInputForm extends Component {
         } else if (this.props.modalToggler === "reminder") {
             return (
                 <div>
-                    {inputHeader()}
+                    <div>ADD REMINDER</div>
+                    <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
                     <div>Title:</div><div><input placeholder="reminder" /></div>
                     <div>Description:</div><div><textarea placeholder="reminder" /></div>
                     <div>Date Due:</div> <div><input type="date" placeholder="" /></div>

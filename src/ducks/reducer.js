@@ -154,7 +154,6 @@ export default function dashReducer(state = initialState, action) {
 
 // ACTION CREATORS
 export function updateAssetID(asset_id) {
-    console.log('sdfdsf', asset_id)
     return {
         type: UPDATE_ASSET_ID,
         payload: asset_id
@@ -330,10 +329,11 @@ export function getAllLogs(num) {
     }
 }
 
-export function addLog(num) {
+export function addLog(obj) {
+    console.log('log object', obj)
     return {
         type: ADD_LOG,
-        payload: axios.post(`/api/logs/add/${num}`).then(response => {
+        payload: axios.post(`/api/logs/add`, obj).then(response => {
             console.log(response)
             return response.data
         })
