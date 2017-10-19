@@ -29,7 +29,7 @@ class Categories extends Component {
 
         return (
             <div className="category_viewer">
-                <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>ADD CATEGORY</button>
+                <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>ADD CATEGORY</button>
 
                 {displayCats}
 

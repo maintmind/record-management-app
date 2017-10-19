@@ -10,13 +10,8 @@ import PhotoUploader from '../../components/PhotoUploader/PhotoUploader';
 // import Redux stuff
 
 class UserInputForm extends Component {
-    constructor() {
-        super();
-    }
 
     displayController(props) {
-
-        {/* This displays on the top of each form */}
         var inputHeader = () => {
             return (
                 <div>

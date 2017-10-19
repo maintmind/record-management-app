@@ -75,7 +75,7 @@ module.exports = {
     getRemindersComingUp7: (req, res) => {
         const dbInstance = req.app.get('db');
         dbInstance.reminders.getRemindersComingUp7(req.params.user_id)
-            .then(asset => res.status(200).send(asset))
+            .then(reminders => res.status(200).send(reminders))
             .catch(err => res.status(500).send(console.log(err)))
     },
 

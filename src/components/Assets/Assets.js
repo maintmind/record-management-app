@@ -22,7 +22,7 @@ class Assets extends Component {
     render() {
         const displayAsset = this.props.assetList.map((c, i) => {
             return (
-                <button key={i} className="asset_tab" disabled={this.props.assetView === c.asset_id ? true : false} onClick={() => this.changeAsset(c.asset_id)}>
+                <button key={i} className={this.props.assetView === c.asset_id? "asset_tab disabled" : "asset_tab"} disabled={this.props.assetView === c.asset_id ? true : false} onClick={() => this.changeAsset(c.asset_id)}>
                     {c.title}
                 </button>
             )

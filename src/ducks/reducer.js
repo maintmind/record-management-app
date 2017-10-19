@@ -374,7 +374,7 @@ export function getRemindersComingUp(num) {
     return {
         type: GET_REMINDERS_COMING_UP,
         payload: axios.get(`/api/reminders/coming-in/${num}`).then(response => {
-            console.log(response.data)
+            console.log('is it working?', response.data)
             return response.data
         })
     }
