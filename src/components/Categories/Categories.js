@@ -11,18 +11,11 @@ class Categories extends Component {
         this.props.getAllCategories(this.props.user.user_id)
     }
 
-    toggleCatDisp(num) {
-        if (this.props.catView === 0) {
-            this.props.catDisp(num)
-        } else {
-            this.props.catDisp(0)
-        }
-    }
-
     render() {
         const displayCats = this.props.categoryList.map((c, i) => {
+            let result;
             if (c.asset_id === this.props.assetView) {
-                return (
+                return result = (
                     <div key={i}>
                         <div key={i} className="cat_row" onClick={() => this.props.catDisp(c.cat_id)}>
                             {c.title} - {c.description}
@@ -33,6 +26,7 @@ class Categories extends Component {
                     </div>
                 )
             }
+            return result
         })
 
         return (
