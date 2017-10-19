@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import UserInputForm from '../UserInputForm/UserInputForm';
 import Categories from '../Categories/Categories';
-import Reminders from '../Reminders/Reminders';
+
 
 import './Assets.css';
 
@@ -37,7 +37,7 @@ class Assets extends Component {
                     <button onClick={() => this.props.toggleModal('asset')} className="add_asset_button">ADD ASSET</button>
                 </div>
 
-                <UserInputForm />
+                
                 <Categories />
             </div>
         );

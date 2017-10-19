@@ -130,7 +130,7 @@ export default function dashReducer(state = initialState, action) {
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
         case ADD_REMINDER + "_FULFILLED":
-            console.log(action.payload)
+            console.log('reminders',action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
         case GET_REMINDERS_OVERDUE + "_FULFILLED":
             console.log(action.payload)
@@ -362,11 +362,9 @@ export function getAllReminders(num) {
 }
 
 export function addReminder(obj) {
-    console.log('reminder obj', obj)
     return {
         type: ADD_REMINDER,
-        payload: axios.post(`/api/reminders/add`).then(response => {
-            console.log(response.data)
+        payload: axios.post(`/api/reminders/add`, obj).then(response => {
             return response.data
         })
     }
