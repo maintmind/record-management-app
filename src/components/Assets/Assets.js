@@ -35,7 +35,7 @@ class Assets extends Component {
                     <button onClick={() => this.props.toggleModal('asset')} className="add_asset_button">ADD ASSET</button>
                 </div>
 
-                <UserInputForm />
+                {/* <UserInputForm /> */}
 
                 <Categories />
             </div>

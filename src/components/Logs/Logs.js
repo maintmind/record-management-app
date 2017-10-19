@@ -12,13 +12,15 @@ class Logs extends Component {
     render() {
         const displayLogs = this.props.logList.map((c, i) => {
             const completionDate = (c.date_complete).substring(0, (c.date_complete).indexOf('T'));
+            let result;
             if (c.cat_id === this.props.catView) {
-                return (
+                return result = (
                     <div key={i} className="log_row">
                         {c.title} - {c.description} - {completionDate} - {c.cost}
                     </div>
                 )
             }
+            return result;
         })
 
         return (
