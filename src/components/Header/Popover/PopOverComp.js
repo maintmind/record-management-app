@@ -61,7 +61,7 @@ class PopOverComp extends Component {
         popOverDisplayControl.push(overdueReminders)
 
         const upcomingReminders =
-            this.props.reminderListOverdue.map((reminder, i) => {
+            this.props.reminderListUpcoming.map((reminder, i) => {
                 return (
                     <div>
                         <MenuItem key={i} primaryText={reminder.title + " " + reminder.description}>
