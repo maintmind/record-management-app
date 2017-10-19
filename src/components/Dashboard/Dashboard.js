@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Header from '../Header/Header';
+import UserInputForm from '../UserInputForm/UserInputForm';
 import Assets from './../Assets/Assets';
 import Footer from './../Footer/Footer';
 
@@ -8,8 +11,11 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div className="dash_main_container">
-                <h2>- Header</h2>
-                <Assets />
+                <Header />
+                <section className="dash_body">
+                    <UserInputForm />
+                    <Assets />
+                </section>
                 <Footer />
             </div>
         );

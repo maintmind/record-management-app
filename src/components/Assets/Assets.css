@@ -1,0 +1,36 @@
+.assets_viewer {
+    background-color: #E4E4E4; 
+    width: 95%;
+    height: 85%;
+}
+
+.asset_tabs_container {
+    background: white;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.asset_tab {
+    width: 125px;
+    height: 100%;
+    background: lightgray;
+    border-style: solid;
+    font-size: 16px;
+}
+
+.asset_tab.disabled {
+    opacity: 0.65; 
+    border-bottom: none;
+}
+
+.add_asset_button {
+    width: 75px;
+    height: 85%;
+    margin-left: 10px;
+}
+
+button:focus {
+    outline: none;
+}
