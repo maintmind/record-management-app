@@ -1,7 +1,8 @@
 INSERT INTO reminders
 (user_id, cat_id, status, date_created, date_due, title, description)
 VALUES
-($1, $2, $3, $4, $5, $6, $7);
+($1, $2, 'open', $3, CURRENT_DATE, $4, $5);
 
 SELECT *
-FROM reminders;
+FROM reminders
+WHERE user_id = $1;

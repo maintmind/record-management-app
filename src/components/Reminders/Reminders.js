@@ -1,20 +1,42 @@
 import React, { Component } from 'react';
-// import Redux stuff
+import { connect } from 'react-redux';
+import { getAllReminders, addReminder, updateReminderStatus, updateReminderName,
+        updateReminderDescription, updateReminderDue } from '../../ducks/reducer';
 
-export default class Reminders extends Component {
+import './Reminders.css';
+
+
+ class Reminders extends Component {
+    
+    componentDidMount(){
+        // this.props.getAllReminders(this.props.user.user.id)
+    }
     render () {
         return (
-            <div>Here is the Reminders component. { /* display loading until reminders are fetched */ }</div>
+            <div>
+                <div>ADD REMINDER</div>
+                <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
+                <div>Title:</div><div><input onChange={ (e) => this.props.updateReminderName(e.target.value) } placeholder="reminder" /></div>
+                <div>Description:</div><div><textarea onChange={ (e) => this.props.updateReminderDescription(e.target.value) } placeholder="reminder" /></div>
+                <div>Date Due:</div><div><input onChange={ (e) => this.props.updateReminderDue(e.target.value) } type="date" placeholder="" /></div>
+                <div className="reminderform"><button onClick={ () => this.props.addReminder(this.props) } >Submit New Reminder</button></div>
+            </div>
         );
     }
 
-    componentDidMount(){
-        // get all reminders for user
-        // put imported Redux function here
-    }
 }
 
-mapStateToProps(){
-    
+function mapStateToProps(state) {
+    return state
 }
-// connect to Redux
+
+const outputActions = {
+    getAllReminders,
+    addReminder,
+    updateReminderStatus,
+    updateReminderName,
+    updateReminderDescription,
+    updateReminderDue
+}
+
+export default connect(mapStateToProps, outputActions) (Reminders);

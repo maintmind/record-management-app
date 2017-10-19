@@ -59,8 +59,8 @@ module.exports = {
 
     addReminder: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { cat_id, status, date_created, date_due, title, description } = req.body;
-        dbInstance.reminders.addNewReminder(req.params.user_id, cat_id, status, date_created, date_due, title, description)
+        const { cat_id, status, date_due, title, description } = req.body;
+        dbInstance.reminders.addNewReminder(req.params.user_id, cat_id, status, date_due, title, description)
             .then(reminder => res.status(200).send(reminder))
             .catch(err => res.status(500).send(console.log(err)))
     },
