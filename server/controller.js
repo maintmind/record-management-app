@@ -1,4 +1,4 @@
-cloudinary = require('cloudinary');
+let cloudinary = require('cloudinary');
 
 module.exports = {
     //ASSETS
@@ -91,14 +91,5 @@ module.exports = {
         dbInstance.reminders.setReminderStatusToOpen(req.params.remind_id)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
-    },
-
-    imageUpload: (req, res) => {
-        cloudinary.uploader.upload(req.body, function(result) { 
-            console.log(result) 
-          });
-            // .then(asset => res.status(200).send(asset))
-            // .catch(err => res.status(500).send(console.log(err)))
     }
-
 }

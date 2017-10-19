@@ -1,63 +1,86 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import request from 'superagent';
+import Dropzone from 'react-dropzone';
+
+
+const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+const CLOUDINARY_UPLOAD_URL = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
+
 
 export default class PhotoUploader extends Component {
     constructor(props) {
         super(props);
-        this.state = { file: '', imagePreviewUrl: '' };
-    }
+        this.state = {
+            uploadedFileCLoudinaryUrl: '',
+        };
 
-    _handleSubmit(e) {
-        e.preventDefault();
-        // TODO: do something with -> this.state.file
-        console.log('handle uploading-', this.state.file)
-        axios.post('/api/upload').then(res => console.log(res.data))
-    }
-
-    _handleImageChange(e) {
-        e.preventDefault();
-
-        let reader = new FileReader();
-        let file = e.target.files[0];
-
-        reader.onloadend = () => {
-            this.setState({
-                file: file,
-                imagePreviewUrl: reader.result
-            });
+        var onDrop = function (acceptedFiles, rejectedFiles) {
+            // console.log('Accepted files: ', acceptedFiles[0].name);
+            var filesToBeSent = this.state.filesToBeSent;
+            filesToBeSent.push(acceptedFiles);
+            this.setState({ filesToBeSent });
         }
 
-        reader.readAsDataURL(file)
+
     }
 
+    onImageDrop(files) {
+        console.log(files)
+        this.setState({
+            uploadedFile: files
+        });
+
+        this.handleImageUpload(files)
+    }
+
+    handleImageUpload(file) {
+        let upload = request.post(CLOUDINARY_UPLOAD_URL)
+            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+            .field('file', file);
+
+        upload.end((err, response) => {
+            if (err) {
+                console.error(err);
+            }
+            if (response.body.secure_url !== '') {
+                this.setState({
+                    uploadedFileCLoudinaryUrl: response.body.secure_url
+                });
+                // TODO: send url to the database
+            }
+        });
+    }
+
+   
     render() {
-        let { imagePreviewUrl } = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} />);
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
-        return (
-
-            <div>This is the photo uploader.
-            <div className="previewComponent">
-                    <form onSubmit={(e) => this._handleSubmit(e)}>
-                        <input className="fileInput"
-                            type="file"
-                            onChange={(e) => this._handleImageChange(e)} />
-                        <button className="submitButton"
-                            type="submit"
-                            onClick={(e) => this._handleSubmit(e)}>Upload Image</button>
-                    </form>
-                    <div className="imgPreview">
-                        {$imagePreview}
-                    </div>
+        let imagePreview = () => {
+            if (this.state.uploadedFileCloudinaryUrl === null) {
+                return <div></div>
+            } else {
+                return (<div>
+                    {/* <p>{this.state.uploadedFile.name}</p> */}
+                    <img src={this.state.uploadedFileCloudinaryUrl} />
                 </div>
-            </div>
-        );
-    }
-}
+                )
+            }
+        }
+        
+        const dropzoneStyle = {
+            width: "100%",
+            border: "3px dashed #cdcdcd",
+            height: "7vh",
+        };
 
-// class ImageUpload extends React.Component {
-// ReactDOM.render(<ImageUpload />, document.getElementById("mainApp"));
+        return (
+            <div>
+                <Dropzone multiple={false} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
+                          style={dropzoneStyle}>
+                    <div>Try dropping some files here, or click to select files to upload.</div>
+                </Dropzone>
+                <img src={this.state.uploadedFileCLoudinaryUrl} alt="Your image will appear as soon as it's uploaded." />
+            </div>
+        )
+
+    }
+
+}
