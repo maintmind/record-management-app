@@ -43,8 +43,8 @@ module.exports = {
 
     addLog: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { catView, user, logCompleteDate, logName, logDescription, logImage, logCost } = req.body;
-        dbInstance.logs.addNewLog( catView, user.user_id, logCompleteDate, logName, logDescription, logImage, logCost )
+        const { catView, user, logCompleteDate, logName, logDescription, cloudinaryUrl, logCost } = req.body;
+        dbInstance.logs.addNewLog( catView, user.user_id, logCompleteDate, logName, logDescription, cloudinaryUrl, logCost )
             .then(logs => res.status(200).send(logs))
             .catch(err => res.status(500).send(console.log(err)))
     },

@@ -17,7 +17,11 @@ class Logs extends Component {
             if (c.cat_id === this.props.catView) {
                 return result = (
                     <div key={i} className="log_row">
-                        {c.title} - {c.description} - {completionDate} - {c.cost}
+                        <div>{c.title}</div>
+                        <div><i>{c.description}</i></div>
+                        <div>{completionDate}</div>
+                        <div>{c.cost}</div>
+                        <a href={c.img} className="log_row" target="blank"><img src={c.img} /></a>
                     </div>
                 )
             }
@@ -31,10 +35,15 @@ class Logs extends Component {
                     <button onClick={() => { this.props.toggleModal('log') }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD LOG</button>
                     <button onClick={() => { this.props.toggleModal('reminder') }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD REMINDER</button>
                 </div>
-
-               
+                <div className="log_header">
+                    <div>TITLE</div>
+                    <div>DESCRIPTION</div>
+                    <div>DATE COMPLETE</div>
+                    <div>COST</div>
+                    <div><small>click image to enlarge</small></div>
+                </div>
                 {displayLogs}
-            </div>
+            </div >
         );
     }
 }

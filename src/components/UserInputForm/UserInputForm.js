@@ -64,8 +64,7 @@ class UserInputForm extends Component {
                     <div>Description:</div><div><textarea onChange={(e) => this.props.updateLogDescription(e.target.value)} placeholder="cat" /></div>
                     <div>Date of Service:</div> <div><input onChange={(e) => this.props.updateLogComplete(e.target.value)} type="date" placeholder="" /></div>
                     <div>Cost:</div> <div><input onChange={(e) => this.props.updateLogCost(e.target.value)} placeholder="" /></div>
-                    <div><PhotoUploader /><button>Upload Photo</button></div>
-                    <div>Image Preview Here</div>
+                    <div><PhotoUploader /></div>
                     <div><button onClick={() => this.props.addLog(this.props)} >Submit New Log</button></div>
                 </div>
             )
