@@ -59,9 +59,9 @@ module.exports = {
 
     addReminder: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { cat_id, status, date_created, date_due, title, description } = req.body;
-        dbInstance.reminders.addNewReminder(req.params.user_id, cat_id, status, date_created, date_due, title, description)
-            .then(reminder => res.status(200).send(reminder))
+        const {user, catView, reminderDue, reminderName, reminderDescription } = req.body;
+        dbInstance.reminders.addNewReminder(user.user_id, catView, reminderDue, reminderName, reminderDescription)
+            .then(reminders => res.status(200).send(reminders))
             .catch(err => res.status(500).send(console.log(err)))
     },
 
@@ -75,7 +75,7 @@ module.exports = {
     getRemindersComingUp7: (req, res) => {
         const dbInstance = req.app.get('db');
         dbInstance.reminders.getRemindersComingUp7(req.params.user_id)
-            .then(asset => res.status(200).send(asset))
+            .then(reminders => res.status(200).send(reminders))
             .catch(err => res.status(500).send(console.log(err)))
     },
 

@@ -93,7 +93,7 @@ app.get('/api/logs/get_all/:cat_id', controller.getAllLogs)
 app.post('/api/logs/add', controller.addLog)
 
 //REMINDERS ENDPOINTS
-app.post('/api/reminders/add/:user_id', controller.addReminder)
+app.post('/api/reminders/add', controller.addReminder)
 app.get('/api/reminders/overdue/:user_id', controller.getRemindersOverdue)
 app.get('/api/reminders/coming-in/:user_id', controller.getRemindersComingUp7)
 app.put('/api/reminders/close/:remind_id', controller.setReminderStatusToClosed)

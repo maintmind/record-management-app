@@ -1,5 +1,5 @@
 .assets_viewer {
-    background-color: #E6E7E1; 
+    background-color: #E4E4E4; 
     width: 95%;
     height: 85%;
 }
@@ -22,6 +22,7 @@
 
 .asset_tab.disabled {
     opacity: 0.65; 
+    border-bottom: none;
 }
 
 .add_asset_button {

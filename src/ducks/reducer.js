@@ -19,7 +19,8 @@ let initialState = {
     reminderStatus: null,
     reminderCreated: null,
     reminderDue: null,
-    reminderNotes: '',
+    reminderName: '',
+    reminderDescription: '',
     assetList: [],
     categoryList: [],
     logList: [],
@@ -29,7 +30,7 @@ let initialState = {
     //VIEWS
     assetView: 0,
     catView: 0,
-    modalToggler: 'null'
+    modalToggler: null
 }
 
 
@@ -51,7 +52,8 @@ const UPDATE_REMINDER_ID = "UPDATE_REMINDER_ID";
 const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
 const UPDATE_REMINDER_CREATED = "UPDATE_REMINDER_CREATED";
 const UPDATE_REMINDER_DUE = "UPDATE_REMINDER_DUE";
-const UPDATE_REMINDER_NOTES = "UPDATE_REMINDER_NOTES";
+const UPDATE_REMINDER_NAME = "UPDATE_REMINDER NAME"
+const UPDATE_REMINDER_DESCRIPTION = "UPDATE_REMINDER_DESCRIPTION";
 const GET_ALL_ASSETS = "GET_ALL_ASSETS";
 const ADD_ASSET = "ADD_ASSET";
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
@@ -105,8 +107,10 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderCreated: action.payload })
         case UPDATE_REMINDER_DUE:
             return Object.assign({}, state, { reminderDue: action.payload })
-        case UPDATE_REMINDER_NOTES:
-            return Object.assign({}, state, { reminderNotes: action.payload })
+        case UPDATE_REMINDER_NAME:
+            return Object.assign({}, state, { reminderName: action.payload })
+        case UPDATE_REMINDER_DESCRIPTION:
+            return Object.assign({}, state, { reminderDescription: action.payload })
         case GET_ALL_ASSETS + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
         case ADD_ASSET + "_FULFILLED":
@@ -126,7 +130,7 @@ export default function dashReducer(state = initialState, action) {
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
         case ADD_REMINDER + "_FULFILLED":
-            console.log(action.payload)
+            console.log('reminders',action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
         case GET_REMINDERS_OVERDUE + "_FULFILLED":
             console.log(action.payload)
@@ -259,10 +263,18 @@ export function updateReminderDue(reminderDue) {
         payload: reminderDue
     }
 }
-export function updateReminderNotes(reminderNotes) {
+
+export function updateReminderName(reminderName) {
     return {
-        type: UPDATE_REMINDER_NOTES,
-        payload: reminderNotes
+        type: UPDATE_REMINDER_NAME,
+        payload: reminderName
+    }
+}
+
+export function updateReminderDescription(reminderDescription) {
+    return {
+        type: UPDATE_REMINDER_DESCRIPTION,
+        payload: reminderDescription
     }
 }
 
@@ -330,32 +342,29 @@ export function getAllLogs(num) {
 }
 
 export function addLog(obj) {
-    console.log('log object', obj)
     return {
         type: ADD_LOG,
         payload: axios.post(`/api/logs/add`, obj).then(response => {
-            console.log(response)
             return response.data
         })
     }
 }
 // REMINDERS//
 
-// export function getAllReminders(num) {
-//     return {
-//         type: GET_ALL_REMINDERS,
-//         payload: axios.get(`/api/reminders/get_all/${num}`).then(response => {
-//             console.log(response)
-//             return response.data
-//         })
-//     }
-// }
+export function getAllReminders(num) {
+    return {
+        type: GET_ALL_REMINDERS,
+        payload: axios.get(`/api/reminders/get_all/${num}`).then(response => {
+            console.log(response.data)
+            return response.data
+        })
+    }
+}
 
-export function addReminder(num) {
+export function addReminder(obj) {
     return {
         type: ADD_REMINDER,
-        payload: axios.post(`/api/reminders/add/${num}`).then(response => {
-            console.log(response)
+        payload: axios.post(`/api/reminders/add`, obj).then(response => {
             return response.data
         })
     }
@@ -375,7 +384,7 @@ export function getRemindersComingUp(num) {
     return {
         type: GET_REMINDERS_COMING_UP,
         payload: axios.get(`/api/reminders/coming-in/${num}`).then(response => {
-            console.log(response.data)
+            console.log('RESPONSE COMING UP',response.data)
             return response.data
         })
     }
