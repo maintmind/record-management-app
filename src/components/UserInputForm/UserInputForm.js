@@ -12,16 +12,6 @@ import PhotoUploader from '../../components/PhotoUploader/PhotoUploader';
 class UserInputForm extends Component {
 
     displayController(props) {
-<<<<<<< HEAD
-        var inputHeader = () => {
-            return (
-                <div>
-                    <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
-                </div>
-            )
-        }
-=======
->>>>>>> master
 
         if (this.props.modalToggler === null) {
             return (<div></div>)
