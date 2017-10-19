@@ -5,7 +5,8 @@ import {
     toggleModal, updateAssetName, updateAssetDescription,
     addAsset, updateCategoryName, updateCategoryDescription,
     addCategory, updateLogName, updateLogDescription, addLog,
-    updateLogComplete, updateLogCost
+    updateLogComplete, updateLogCost, getAllAssets, updateReminderName,
+    updateReminderDescription, updateReminderDue, addReminder
 } from './../../ducks/reducer';
 
 import PhotoUploader from '../../components/PhotoUploader/PhotoUploader';
@@ -13,7 +14,23 @@ import PhotoUploader from '../../components/PhotoUploader/PhotoUploader';
 
 class UserInputForm extends Component {
 
+    componentDidMount() {
+        this.props.getAllAssets(this.props.user.user_id)
+    }
+
     displayController(props) {
+        const assetTitle = this.props.assetList.map(obj => {
+            if (obj.asset_id === this.props.assetView) {
+                return this.props.assetList[this.props.assetList.indexOf(obj)].title
+            }
+        })
+
+        const categoryTitle = this.props.categoryList.map(obj => {
+            if (obj.cat_id === this.props.catView) {
+                return this.props.categoryList[this.props.categoryList.indexOf(obj)].title
+            }
+        })
+
 
         if (this.props.modalToggler === null) {
             return (<div></div>)
@@ -57,10 +74,12 @@ class UserInputForm extends Component {
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>ADD REMINDER</h2>
-                    <div>Title:</div><div><input placeholder="reminder" /></div>
-                    <div>Description:</div><div><textarea placeholder="reminder" /></div>
-                    <div>Date Due:</div> <div><input type="date" placeholder="" /></div>
-                    <div><button>Submit New Reminder</button></div>
+                    <div>Asset:</div><div>{assetTitle}</div>
+                    <div>Category:</div><div>{categoryTitle}</div>
+                    <div>Title:</div><div><input onChange={(e) => {this.props.updateReminderName (e.target.value)}} placeholder="reminder" /></div>
+                    <div>Description:</div><div><textarea onChange={(e) => {this.props.updateReminderDescription (e.target.value)}} placeholder="reminder" /></div>
+                    <div>Date Due:</div> <div><input onChange={(e) => {this.props.updateReminderDue (e.target.value)}} type="date" placeholder="" /></div>
+                    <button onClick={() => {this.props.addReminder (this.props)}}>Submit New Reminder</button>
                 </div>
             )
         }
@@ -93,7 +112,12 @@ const outputActions = {
     updateLogDescription,
     addLog,
     updateLogComplete,
-    updateLogCost
+    updateLogCost,
+    getAllAssets,
+    updateReminderName,
+    updateReminderDescription,
+    updateReminderDue,
+    addReminder
 
 }
 
