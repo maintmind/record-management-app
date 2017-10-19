@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllLogs, toggleModal, catDisp } from '../../ducks/reducer';
 
+
 import './Logs.css';
 
 class Logs extends Component {
@@ -31,6 +32,7 @@ class Logs extends Component {
                     <button onClick={() => { this.props.toggleModal('reminder') }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD REMINDER</button>
                 </div>
 
+               
                 {displayLogs}
             </div>
         );
