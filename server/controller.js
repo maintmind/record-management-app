@@ -1,4 +1,4 @@
-cloudinary = require('cloudinary');
+let cloudinary = require('cloudinary');
 
 module.exports = {
     //ASSETS
@@ -91,14 +91,5 @@ module.exports = {
         dbInstance.reminders.setReminderStatusToOpen(req.params.remind_id)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
-    },
-
-    imageUpload: (req, res) => {
-        cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/7/78/Proboscis_monkey_%28Nasalis_larvatus%29_composite.jpg", function(result) { 
-            console.log(result) 
-          });
-            // .then(asset => res.status(200).send(asset))
-            // .catch(err => res.status(500).send(console.log(err)))
     }
-
 }

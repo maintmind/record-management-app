@@ -15,6 +15,7 @@ const controller = require('./controller');
 app.use(bodyParser.json());
 app.use(cors());
 
+
 //DATABASE CONNECTION
 massive(process.env.CONNECTIONSTRING).then(db => {
         app.set('db', db)
@@ -99,8 +100,8 @@ app.put('/api/reminders/close/:remind_id', controller.setReminderStatusToClosed)
 app.put('/api/reminders/open/:remind_id', controller.setReminderStatusToOpen)
 // app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
 
-//CLOUDINARY ENDPOINTS
-app.post('/api/upload', controller.imageUpload)
+
+// controller.imageUpload)
 
 // app.post('/api/reminder/add', controller.addReminder)
 // app.get('/api/reminders/overdue', controller.getRemindersOverdue)
