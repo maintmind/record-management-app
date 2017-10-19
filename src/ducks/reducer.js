@@ -30,7 +30,7 @@ let initialState = {
     //VIEWS
     assetView: 0,
     catView: 0,
-    modalToggler: 'null'
+    modalToggler: null
 }
 
 
