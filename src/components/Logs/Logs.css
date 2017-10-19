@@ -1,14 +1,32 @@
 .log_viewer {
-    background: darkgray;
-    width: 100%;
+    background: #A9A9A9;
+    margin: -10px 0px 10px 20px;
+    padding-bottom: 5px;
+    border-style: solid;
+    border-color: #DD4B1A;
+    border-width: 0px 0px 2px 2px;
 }
 
 .log_row {
-    background: blueviolet;
-    width: 100%;
+    background: #E7E7E7;
+    /* width: 100%; */
     height: 20px;
-    margin-bottom: 5px; /* PROBABLY REMOVE THIS LATER PLEASE */
+    margin: 5px 10px 5px 10px;
+    padding-left: 15px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.close_cat_button {
+    width: 50px;
+    margin-left: 10px;
+}
+
+.addLog_button {
+    width: 200px;
+    height: 20px;
+    margin: 5px 0px 0px 10px;
 }
 
 .addLog_hide {

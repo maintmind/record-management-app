@@ -16,10 +16,7 @@ class PopOverComp extends Component {
 
         this.state = {
             open: false,
-
-
         };
-
     }
 
     componentDidMount() {
@@ -30,7 +27,6 @@ class PopOverComp extends Component {
     handleTouchTap = (event) => {
         // This prevents ghost click.
         event.preventDefault();
-
         this.setState({
             open: true,
             anchorEl: event.currentTarget,
@@ -43,16 +39,13 @@ class PopOverComp extends Component {
         });
     };
 
-
-
     render() {
-
-        const noOverdueRemindersMessage = <MenuItem primaryText="You have no overdue reminders." className="hide" />
-        const noUpcomingRemindersMessage = <MenuItem primaryText="You have no upcoming reminders." className="hide" />
+        // const noOverdueRemindersMessage = <MenuItem primaryText="You have no overdue reminders." className="hide" />
+        // const noUpcomingRemindersMessage = <MenuItem primaryText="You have no upcoming reminders." className="hide" />
         const noRemindersMessage = <MenuItem primaryText="You have no reminders." className="hide" />
 
         const popOverDisplayControl = [];
-        popOverDisplayControl.push(<MenuItem primaryText="Overdue Reminders:" disabled="true"/>)
+        popOverDisplayControl.push(<MenuItem primaryText="Overdue Reminders:" />)
 
         const overdueReminders =
             this.props.reminderListOverdue.map((reminder, i) => {
@@ -61,12 +54,10 @@ class PopOverComp extends Component {
                         <MenuItem key={i} primaryText={reminder.title + " " + reminder.description}>
                             <button>Mark Complete</button>
                         </MenuItem>
-
                     </div>
                 )
-
-
             })
+
         popOverDisplayControl.push(overdueReminders)
 
         const upcomingReminders =
@@ -80,8 +71,9 @@ class PopOverComp extends Component {
                     </div>
                 )
             })
-        popOverDisplayControl.push(<Divider />)    
-        popOverDisplayControl.push(<MenuItem primaryText="Upcoming:" disabled="true"/>)
+
+        popOverDisplayControl.push(<Divider />)
+        popOverDisplayControl.push(<MenuItem primaryText="Upcoming:" />)
         popOverDisplayControl.push(upcomingReminders)
 
         let overdueStyle = { backgroundColor: "red", height: "25px", width: "25px" } //style for overdue reminders
@@ -114,24 +106,15 @@ class PopOverComp extends Component {
                     anchorEl={this.state.anchorEl}
                     anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
                     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    onRequestClose={this.handleRequestClose}
-                >
+                    onRequestClose={this.handleRequestClose}>
                     <Menu>
                         {this.props.reminderListOverdue.length === 0 ?
                             noRemindersMessage :
                             popOverDisplayControl
                         }
-                        
-
-
-
                     </Menu>
                 </Popover>
             </div>
-
-
-
-
         )
     }
 }
