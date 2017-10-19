@@ -11,6 +11,14 @@ class Categories extends Component {
         this.props.getAllCategories(this.props.user.user_id)
     }
 
+    toggleCatDisp(num) {
+        if (this.props.catView === 0) {
+            this.props.catDisp(num)
+        } else {
+            this.props.catDisp(0)
+        }
+    }
+
     render() {
         const displayCats = this.props.categoryList.map((c, i) => {
             if (c.asset_id === this.props.assetView) {
@@ -29,7 +37,9 @@ class Categories extends Component {
 
         return (
             <div className="category_viewer">
-                <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>ADD CATEGORY</button>
+                <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
+                    ADD CATEGORY
+                </button>
 
                 {displayCats}
 

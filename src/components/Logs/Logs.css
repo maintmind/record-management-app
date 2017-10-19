@@ -18,6 +18,11 @@
     align-items: center;
 }
 
+.close_cat_button {
+    width: 50px;
+    margin-left: 10px;
+}
+
 .addLog_button {
     width: 200px;
     height: 20px;
