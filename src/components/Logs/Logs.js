@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllLogs, toggleModal, catDisp } from '../../ducks/reducer';
 
 
+
 import './Logs.css';
 
 class Logs extends Component {
@@ -17,6 +18,10 @@ class Logs extends Component {
             if (c.cat_id === this.props.catView) {
                 return result = (
                     <div key={i} className="log_row">
+                        <div className="log_buttons">
+                        <button className="edit button" onClick >Edit</button>
+                        <button className="delete button" onClick >Delete</button>
+                        </div>
                         <div>{c.title}</div>
                         <div><i>{c.description}</i></div>
                         <div>{completionDate}</div>
@@ -41,6 +46,9 @@ class Logs extends Component {
                     <div>DATE COMPLETE</div>
                     <div>COST</div>
                     <div><small>click image to enlarge</small></div>
+                </div>
+                <div>
+                
                 </div>
                 {displayLogs}
             </div >
