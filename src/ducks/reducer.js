@@ -392,12 +392,11 @@ export function getRemindersComingUp(num) {
     }
 }
 
-export function setReminderStatusToClosed(num, type) {
+export function setReminderStatusToClosed(num) {
     return {
         type: SET_REMINDER_STATUS_TO_CLOSED,
         payload: axios.put(`/api/reminders/close/${num}`).then(response => {
             console.log(response)
-            response.data.list = type
             return response.data
         })
     }
