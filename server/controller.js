@@ -44,7 +44,7 @@ module.exports = {
     addLog: (req, res) => {
         const dbInstance = req.app.get('db');
         const { catView, user, logCompleteDate, logName, logDescription, cloudinaryUrl, logCost } = req.body;
-        dbInstance.logs.addNewLog( catView, user.user_id, logCompleteDate, logName, logDescription, cloudinaryUrl, logCost )
+        dbInstance.logs.addNewLog(catView, user.user_id, logCompleteDate, logName, logDescription, cloudinaryUrl, logCost)
             .then(logs => res.status(200).send(logs))
             .catch(err => res.status(500).send(console.log(err)))
     },
@@ -59,7 +59,7 @@ module.exports = {
 
     addReminder: (req, res) => {
         const dbInstance = req.app.get('db');
-        const {user, catView, reminderDue, reminderName, reminderDescription } = req.body;
+        const { user, catView, reminderDue, reminderName, reminderDescription } = req.body;
         dbInstance.reminders.addNewReminder(user.user_id, catView, reminderDue, reminderName, reminderDescription)
             .then(reminders => res.status(200).send(reminders))
             .catch(err => res.status(500).send(console.log(err)))
@@ -79,11 +79,28 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
-    setReminderStatusToClosed: (req, res) => {
+    setReminderStatusToClosed: (req, resp) => {
         const dbInstance = req.app.get('db');
-        dbInstance.reminders.setReminderStatusToClosed(req.params.remind_id)
-            .then(asset => res.status(200).send(asset))
-            .catch(err => res.status(500).send(console.log(err)))
+        var reminders = {
+            overdue: [],
+            upcoming: []
+        }
+
+        dbInstance.reminders.setReminderStatusToClosed(req.params.remind_id).then(res => {
+            
+            dbInstance.reminders.getRemindersOverdue(1).then(res => {
+                console.log("all is", res)
+                reminders.overdue = res
+                dbInstance.reminders.getRemindersComingUp7(1).then(res => {
+                    reminders.upcoming = res;
+                    console.log("fsdfsd", reminders)
+                    
+                    resp.status(200).send(reminders)
+                })
+
+            })
+        })
+        
     },
 
     setReminderStatusToOpen: (req, res) => {
