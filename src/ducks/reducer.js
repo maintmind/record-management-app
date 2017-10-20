@@ -13,7 +13,6 @@ let initialState = {
     logSubmitDate: null,
     logName: '',
     logDescription: '',
-    logImage: null,
     logCost: null,
     remind_id: 0,
     reminderStatus: null,
@@ -30,7 +29,8 @@ let initialState = {
     //VIEWS
     assetView: 0,
     catView: 0,
-    modalToggler: null
+    modalToggler: null,
+    cloudinaryUrl: null
 }
 
 
@@ -46,7 +46,6 @@ const UPDATE_LOG_COMPLETE_DATE = "UPDATE_LOG_COMPLETE_DATE";
 const UPDATE_LOG_SUBMIT_DATE = "UPDATE_LOG_SUBMIT_DATE";
 const UPDATE_LOG_NAME = "UPDATE_LOG_NAME";
 const UPDATE_LOG_DESCRIPTION = "UPDATE_LOG_DESCRIPTION";
-const UPDATE_LOG_IMAGE = "UPDATE_LOG_IMAGE";
 const UPDATE_LOG_COST = "UPDATE_LOG_COST";
 const UPDATE_REMINDER_ID = "UPDATE_REMINDER_ID";
 const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
@@ -69,6 +68,7 @@ const SET_REMINDER_STATUS_TO_OPEN = "SET_REMINDER_STATUS_TO_OPEN";
 const TOGGLE_MODAL = "TOGGLE_MODAL";
 const ASSET_ROTATE = "ASSET_ROTATE";
 const CAT_DISP = "CAT_DISP";
+const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -95,8 +95,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logName: action.payload })
         case UPDATE_LOG_DESCRIPTION:
             return Object.assign({}, state, { logDescription: action.payload })
-        case UPDATE_LOG_IMAGE:
-            return Object.assign({}, state, { logImage: action.payload })
         case UPDATE_LOG_COST:
             return Object.assign({}, state, { logCost: action.payload })
         case UPDATE_REMINDER_ID:
@@ -150,6 +148,8 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { assetView: action.payload })
         case CAT_DISP:
             return Object.assign({}, state, { catView: action.payload })
+        case NEW_CLOUDINARY_URL:
+            return Object.assign({}, state, { cloudinaryUrl: action.payload })
 
         default:
             return state
@@ -224,12 +224,6 @@ export function updateLogDescription(logDescription) {
     return {
         type: UPDATE_LOG_DESCRIPTION,
         payload: logDescription
-    }
-}
-export function updateLogImage(logImage) {
-    return {
-        type: UPDATE_LOG_IMAGE,
-        payload: logImage
     }
 }
 
@@ -349,6 +343,14 @@ export function addLog(obj) {
         })
     }
 }
+
+export function newCloudinaryUrl(str) {
+    return {
+        type: NEW_CLOUDINARY_URL,
+        payload: str
+    }
+}
+
 // REMINDERS//
 
 export function getAllReminders(num) {

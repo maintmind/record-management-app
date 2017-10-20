@@ -64,8 +64,11 @@ class UserInputForm extends Component {
                     <div>Description:</div><div><textarea onChange={(e) => this.props.updateLogDescription(e.target.value)} placeholder="cat" /></div>
                     <div>Date of Service:</div> <div><input onChange={(e) => this.props.updateLogComplete(e.target.value)} type="date" placeholder="" /></div>
                     <div>Cost:</div> <div><input onChange={(e) => this.props.updateLogCost(e.target.value)} placeholder="" /></div>
-                    <div><PhotoUploader /><button>Upload Photo</button></div>
-                    <div>Image Preview Here</div>
+                    <div><PhotoUploader /></div>
+                    <div className="imagePreview">{this.props.cloudinaryUrl ? 
+                      <img src={this.props.cloudinaryUrl} alt="" />   
+                    : "Your upload will display here."}
+                    </div>
                     <div><button onClick={() => this.props.addLog(this.props)} >Submit New Log</button></div>
                 </div>
             )
@@ -76,10 +79,10 @@ class UserInputForm extends Component {
                     <h2>ADD REMINDER</h2>
                     <div>Asset:</div><div>{assetTitle}</div>
                     <div>Category:</div><div>{categoryTitle}</div>
-                    <div>Title:</div><div><input onChange={(e) => {this.props.updateReminderName (e.target.value)}} placeholder="reminder" /></div>
-                    <div>Description:</div><div><textarea onChange={(e) => {this.props.updateReminderDescription (e.target.value)}} placeholder="reminder" /></div>
-                    <div>Date Due:</div> <div><input onChange={(e) => {this.props.updateReminderDue (e.target.value)}} type="date" placeholder="" /></div>
-                    <button onClick={() => {this.props.addReminder (this.props)}}>Submit New Reminder</button>
+                    <div>Title:</div><div><input onChange={(e) => { this.props.updateReminderName(e.target.value) }} placeholder="reminder" /></div>
+                    <div>Description:</div><div><textarea onChange={(e) => { this.props.updateReminderDescription(e.target.value) }} placeholder="reminder" /></div>
+                    <div>Date Due:</div> <div><input onChange={(e) => { this.props.updateReminderDue(e.target.value) }} type="date" placeholder="" /></div>
+                    <button onClick={() => { this.props.addReminder(this.props) }}>Submit New Reminder</button>
                 </div>
             )
         }
