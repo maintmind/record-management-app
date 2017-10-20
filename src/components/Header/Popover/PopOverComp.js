@@ -19,9 +19,9 @@ class PopOverComp extends Component {
             open: false,
         };
 
-       
-     this.overdueStyle = { backgroundColor: "red", height: "25px", width: "25px" } //style for overdue reminders
-     this.upcomingStyle = { backgroundColor: "orange", height: "25px", width: "25px" }
+
+        this.overdueStyle = { backgroundColor: "red", height: "25px", width: "25px" } //style for overdue reminders
+        this.upcomingStyle = { backgroundColor: "orange", height: "25px", width: "25px" }
 
     }
 
@@ -29,25 +29,25 @@ class PopOverComp extends Component {
         this.props.getRemindersOverdue(1);
         this.props.getRemindersComingUp(1);
 
-         // const noOverdueRemindersMessage = <MenuItem primaryText="You have no overdue reminders." className="hide" />
+        // const noOverdueRemindersMessage = <MenuItem primaryText="You have no overdue reminders." className="hide" />
         // const noUpcomingRemindersMessage = <MenuItem primaryText="You have no upcoming reminders." className="hide" />
     }
 
-        //style for upcoming reminders
-    componentWillReceiveProps(props){    
-         this.noRemindersMessage = <MenuItem primaryText="You have no reminders." className="hide" />
+    //style for upcoming reminders
+    componentWillReceiveProps(props) {
+        this.noRemindersMessage = <MenuItem primaryText="You have no reminders." className="hide" />
         this.popOverDisplayControl = [];
 
 
-       this.popOverDisplayControl.push(<MenuItem primaryText="Overdue Reminders:" />)
+        this.popOverDisplayControl.push(<MenuItem primaryText="Overdue Reminders:" />)
 
         var overdueReminders =
-            
+
             this.props.reminderListOverdue.map((reminder, i) => {
                 return (
                     <div>
                         <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status}>
-                             <button onClick={() =>this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue") }>Mark Complete</button>  
+                            <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}>Mark Complete</button>
                         </MenuItem>
                     </div>
                 )
@@ -58,12 +58,12 @@ class PopOverComp extends Component {
         var upcomingReminders =
             this.props.reminderListUpcoming.map((reminder, j) => {
 
-                
+
                 return (
                     <div>
                         <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status}>
-                            <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")}>Mark Complete</button>  
-                            
+                            <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")}>Mark Complete</button>
+
                         </MenuItem>
 
                     </div>
@@ -73,7 +73,7 @@ class PopOverComp extends Component {
         this.popOverDisplayControl.push(<Divider />)
         this.popOverDisplayControl.push(<MenuItem primaryText="Upcoming:" />)
         this.popOverDisplayControl.push(upcomingReminders)
-        
+
     }
 
 
@@ -93,11 +93,11 @@ class PopOverComp extends Component {
     };
 
 
-    
-  
+
+
     render() {
-        
-         
+
+
         return (
 
 

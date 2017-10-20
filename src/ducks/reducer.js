@@ -112,23 +112,19 @@ export default function dashReducer(state = initialState, action) {
         case GET_ALL_ASSETS + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
         case ADD_ASSET + "_FULFILLED":
-            console.log(action.payload)
             return Object.assign({}, state, { assetList: action.payload })
         case GET_ALL_CATEGORIES + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
         case ADD_CATEGORY + "_FULFILLED":
-            console.log(action.payload)
             return Object.assign({}, state, { categoryList: action.payload })
         case GET_ALL_LOGS + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case ADD_LOG + "_FULFILLED":
-            console.log(action.payload)
             return Object.assign({}, state, { logList: action.payload })
         case GET_ALL_REMINDERS + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
         case ADD_REMINDER + "_FULFILLED":
-            console.log('reminders',action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
         case GET_REMINDERS_OVERDUE + "_FULFILLED":
             console.log(action.payload)
@@ -296,11 +292,9 @@ export function getAllAssets(num) {
 }
 
 export function addAsset(obj) {
-    console.log(obj)
     return {
         type: ADD_ASSET,
         payload: axios.post(`/api/assets/add`, obj).then(response => {
-            console.log('this is the response',response)
             return response.data
         })
     }
@@ -320,7 +314,6 @@ export function addCategory(obj) {
     return {
         type: ADD_CATEGORY,
         payload: axios.post(`/api/categories/add`, obj).then(response => {
-            console.log(response)
             return response.data
         })
     }

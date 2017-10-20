@@ -21,7 +21,7 @@ class Logs extends Component {
                         <div><i>{c.description}</i></div>
                         <div>{completionDate}</div>
                         <div>{c.cost}</div>
-                        <a href={c.img} className="log_row" target="blank"><img src={c.img} /></a>
+                        <a href={c.img} className="log_row" target="blank"><img src={c.img} alt="preview" /></a>
                     </div>
                 )
             }
