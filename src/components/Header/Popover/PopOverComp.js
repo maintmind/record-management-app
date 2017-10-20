@@ -46,7 +46,7 @@ class PopOverComp extends Component {
             this.props.reminderListOverdue.map((reminder, i) => {
                 return (
                     <div>
-                        <MenuItem key={i} primaryText={reminder.title + " " + reminder.description}>
+                        <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status}>
                              <button onClick={() =>this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue") }>Mark Complete</button>  
                         </MenuItem>
                     </div>
@@ -61,7 +61,7 @@ class PopOverComp extends Component {
                 
                 return (
                     <div>
-                        <MenuItem key={j} primaryText={reminder.title + " " + reminder.description + " " + reminder.remind_id}>
+                        <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status}>
                             <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")}>Mark Complete</button>  
                             
                         </MenuItem>
