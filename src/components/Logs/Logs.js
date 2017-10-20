@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllLogs, toggleModal, catDisp } from '../../ducks/reducer';
 
 
+
 import './Logs.css';
 
 class Logs extends Component {
