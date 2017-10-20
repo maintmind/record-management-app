@@ -138,7 +138,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderListUpcoming: action.payload })
         case SET_REMINDER_STATUS_TO_CLOSED + "_FULFILLED":
             console.log(action.payload)
-            return Object.assign({}, state, { reminderList: action.payload })
+            return Object.assign({}, state, { [action.payload.type]:action.payload })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             console.log(action.payload)
             return Object.assign({}, state, { reminderList: action.payload })
@@ -392,11 +392,12 @@ export function getRemindersComingUp(num) {
     }
 }
 
-export function setReminderStatusToClosed(num) {
+export function setReminderStatusToClosed(num, type) {
     return {
         type: SET_REMINDER_STATUS_TO_CLOSED,
         payload: axios.put(`/api/reminders/close/${num}`).then(response => {
             console.log(response)
+            response.data.list = type
             return response.data
         })
     }
