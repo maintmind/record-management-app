@@ -14,15 +14,6 @@ class PhotoUploader extends Component {
         this.state = {
             uploadedFileCLoudinaryUrl: '',
         };
-
-        var onDrop = function (acceptedFiles, rejectedFiles) {
-            // console.log('Accepted files: ', acceptedFiles[0].name);
-            var filesToBeSent = this.state.filesToBeSent;
-            filesToBeSent.push(acceptedFiles);
-            this.setState({ filesToBeSent });
-        }
-
-
     }
 
     onImageDrop(files) {
@@ -30,7 +21,6 @@ class PhotoUploader extends Component {
         this.setState({
             uploadedFile: files
         });
-
         this.handleImageUpload(files)
     }
 
@@ -44,10 +34,6 @@ class PhotoUploader extends Component {
                 console.error(err);
             }
             if (response.body.secure_url !== '') {
-                // this.setState({
-                //     uploadedFileCLoudinaryUrl: response.body.secure_url
-                // });
-                // TODO: send url to the database
                 this.props.newCloudinaryUrl(response.body.secure_url)
             }
         });
@@ -55,31 +41,21 @@ class PhotoUploader extends Component {
 
 
     render() {
-        let imagePreview = () => {
-            if (this.state.uploadedFileCloudinaryUrl === null) {
-                return <div></div>
-            } else {
-                return (<div>
-                    {/* <p>{this.state.uploadedFile.name}</p> */}
-                    <img src={this.state.uploadedFileCloudinaryUrl} />
-                </div>
-                )
-            }
-        }
-
         const dropzoneStyle = {
-            width: "100%",
+            width: "50%",
             border: "3px dashed #cdcdcd",
-            height: "7vh",
+            align: "center",
+            margin: "1vw auto",
+            padding: "1vw",
+            borderRadius: "1vw"
         };
 
         return (
-            <div>
+            <div className="imagePreview">
                 <Dropzone multiple={false} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
                     style={dropzoneStyle}>
-                    <div>Try dropping some files here, or click to select files to upload.</div>
+                    <div>To upload, click here, or drag an drop an image.</div>
                 </Dropzone>
-                <img src={this.props.cloudinaryUrl} alt="Your image will appear as soon as it's uploaded." />
             </div>
         )
 
