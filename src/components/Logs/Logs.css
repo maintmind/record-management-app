@@ -52,3 +52,9 @@
 .addLog_show {
     visibility: visible;
 }
+
+.log_buttons {
+min-width: 10px;
+
+
+}
