@@ -80,7 +80,7 @@ cloudinary.config(process.env.CLOUDINARY_URL)
 //       })
 
 
-//ASSETS ENDPOINTS
+//ASSET ENDPOINTS
 app.get('/api/assets/get_all/:user_id', controller.getAllAssets)
 app.post('/api/assets/add', controller.addAsset)
 
@@ -88,16 +88,18 @@ app.post('/api/assets/add', controller.addAsset)
 app.get('/api/categories/get_all/:user_id', controller.getAllCategories)
 app.post('/api/categories/add', controller.addCategory)
 
-//LOGS ENDPOINTS
+//LOG ENDPOINTS
 app.get('/api/logs/get_all/:cat_id', controller.getAllLogs)
 app.post('/api/logs/add', controller.addLog)
+app.delete('/api/logs/delete/:log_id/:user_id', controller.deleteLog)
 
-//REMINDERS ENDPOINTS
+//REMINDER ENDPOINTS
 app.post('/api/reminders/add', controller.addReminder)
 app.get('/api/reminders/overdue/:user_id', controller.getRemindersOverdue)
 app.get('/api/reminders/coming-in/:user_id', controller.getRemindersComingUp7)
 app.put('/api/reminders/close/:remind_id', controller.setReminderStatusToClosed)
 app.put('/api/reminders/open/:remind_id', controller.setReminderStatusToOpen)
+app.delete('/api/reminders/delete/:remind_id/:user_id', controller.deleteReminder)
 // app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
 
 

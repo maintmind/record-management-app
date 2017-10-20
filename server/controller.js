@@ -49,6 +49,13 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
+    deleteLog: (req, res) => {
+        const dbInstance = req.app.get('db');
+        dbInstance.logs.deleteLog(req.params.log_id, req.params.user_id)
+            .then(logs => res.status(200).send(logs))
+            .catch(err => res.status(500).send(console.log(err)))
+    },
+
     //REMINDERS
     getAllRemindersForUser: (req, res) => {
         const dbInstance = req.app.get('db');
@@ -63,6 +70,23 @@ module.exports = {
         dbInstance.reminders.addNewReminder(user.user_id, catView, reminderDue, reminderName, reminderDescription)
             .then(reminders => res.status(200).send(reminders))
             .catch(err => res.status(500).send(console.log(err)))
+    },
+
+    deleteReminder: (req, resp) => {
+        var newReminders = {
+            upcoming: [],
+            past: []
+        }
+        const dbInstance = req.app.get('db');
+        dbInstance.reminders.deleteReminder(req.params.remind_id, req.params.user_id).then(reminders => {
+            dbInstance.reminders.getRemindersComingUp7(req.params.user_id).then(res => {
+                newReminders.upcoming = res
+                dbInstance.reminders.getRemindersOverdue(req.params.user_id).then(res => {
+                    newReminders.past = res
+                    resp.status(200).send(newReminders)
+                })
+            })
+        })
     },
 
     getRemindersOverdue: (req, res) => {
