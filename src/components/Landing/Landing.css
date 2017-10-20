@@ -1,66 +1,230 @@
+@import url('https://fonts.googleapis.com/css?family=Anton|Berkshire+Swash|Erica+One|Orbitron|Spicy+Rice|Lato');
+ 
  * {
    margin: 0;
    padding: 0;
  }
 
-.main-container {
-   background-color: #494986;
-   background-image: url('./luxury-home.jpg');
-   background-blend-mode: soft-light;
+.landing-container {   
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+ }
+
+/*----HEADER----*/
+
+ .logo {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .landing-header-container {
+    padding: 0px 15px 0px 15px;
+    width: 100%; 
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color:#E4E4E4;
+    color: black; 
+    border-bottom: 2px solid #DD4B1A;
+}
+
+.landing-header-container h4{
+    align-items: center;
+    font-size: 25px;
+    font-family: 'Orbitron';
+    text-decoration: none;
+    color: #36453B;
+    font-weight: bold;
+}
+
+.landing-header-container img{
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-header-container h4 span{
+    color: #E28413;
+}
+
+.start-free-button {
+    display: block;
+    width: 150px;
+    height: 45px;
+    border: 3px solid #E28413;
+    background-color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+/*---HERO SECTION----*/
+
+.hero-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #41403E;
+    background-image: url('./luxury-home.jpg');
+    background-blend-mode: soft-light;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 90%;
+    border-bottom: 2px solid #DD4B1A;
+    box-shadow: 10px 10px 40px -6px #999; 
+    opacity: .85;
+}
+
+ .banner {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-direction: column;
    width: 100%;
-   height: 100vh;
- }
-
- .header {
-
- }
-
- .heading {
-   width: 600px;
    height: 300px;
-   margin: auto;
-   position: absolute;
-   top: 0px; 
-   bottom: 0px; 
-   right: 0px; 
-   left: 0px;
+   background-color: rgba(20, 20, 20, 0.65);
+ }
+
+ .banner-logo {
+     margin-top: 5%;
  }
 
  .title1 {
    display: block;
    text-align: center;
-   color: white;
-   font-size: 50pt;
+   color: #E4E4E4;
+   font-size: 45pt;
    font-family: Orbitron;
+ }
+
+ .minder-title {
+    color: #E28413;
  }
 
  .title2 {
   display: block;
-  margin-top: 15px;
   text-align: center;
-  color: white;
-  font-size: 15pt;
-  font-family: serif;
+  color: #A7A3A3;
+  font-size: 16pt;
+  font-family: 'Lato', sans-serif;
+  font: bold;
+  /* color: black; */
  }
 
- .register {
-   margin: 50px auto;
-   display: block;
-   width: 180px;
-   height: 50px;
-   border: 3px solid #2540D6;
-   background-color: rgba(255, 255, 255, 0);
-   font-family: sans-serif;
-   font-weight: bold;
-   border-radius: 5px;
-   transition: background-color 1000ms, color 1000ms;
-   cursor: pointer;
-   opacity: 0.9;
+ .title2 span {
+     color: #E28413;
  }
 
- .register {
-   background-color: rgba(255, 255, 255, 1);
-   color: #222;
-   cursor: pointer;
+ .register-button {
+    display: block;
+    width: 180px;
+    height: 50px;
+    margin-bottom: 3%;
+    border: 3px solid #E28413;
+    background-color: #E4E4E4;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
  }
+
+ /*---ABOUT SECTION---*/
+
+ .about-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 15pt;
+    padding-top: 40px;
+    background-color: rgba(218, 145, 61, 0.8);
+    width: 100%;
+    height: 70vh;
+    border-bottom: 2px solid #DD4B1A;
+    box-shadow: 10px 10px 40px -6px #999; 
+ }
+
+ .about-font {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-family: 'Lato', sans-serif;
+ }
+
+ .car-container {
+     display: flex;
+     justify-content: space-around;
+ }
+
+ .about-text {
+     padding-left: 40px;
+     padding-top: 140px;
+     align-items: center;
+     font-family: 'Lato', sans-serif;
+ }
+
+ .car-pic {
+    background: url('./car.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 560px;
+    height: 350px;
+    margin-top: 30px;
+    border-radius: 10px;
+    border: 2px solid #DD4B1A;
+    box-shadow: 8px 8px 30px -6px #999; 
+ }
+
+ .start-free-button2 {
+    display: block;
+    width: 150px;
+    height: 45px;
+    border: 3px solid #DD4B1A;
+    background-color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 8px 8px 30px -6px #999; 
+  }
+
+  /*---PHONE SECTION---*/
+
+ .phone-app-section {
+    background-image: url('./livingRoom.jpg');
+    background-blend-mode: soft-light;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 60vh;
+    border-bottom: 2px solid #DD4B1A;
+    box-shadow: 6px 6px 40px -6px #999; 
+ }
+
+ .phone-app-bgcolor {
+    background: rgba(233, 229, 217, 0.85);
+    width: 100%;
+    height: 100%;
+ }
+
+ .about-header {
+     color: white;
+     font-family: sans-serif;
+ }
+
+ 
+
+
+
+
+ 
+
+
+
+
+
 
