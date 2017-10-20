@@ -47,7 +47,8 @@ class PhotoUploader extends Component {
             align: "center",
             margin: "1vw auto",
             padding: "1vw",
-            borderRadius: "1vw"
+            borderRadius: "1vw",
+            cursor: "pointer"
         };
 
         return (
