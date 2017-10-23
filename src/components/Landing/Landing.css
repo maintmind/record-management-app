@@ -236,26 +236,26 @@
     justify-content: center;
     align-items: center;
     font-family: 'Orbitron', sans-serif;
+    padding-top: 40px;
 }
 
 .phone-container {
     display: flex;
     justify-content: space-around;
+    height: 80%;
 }
 
 .phone-text {
-    padding-left: 40px;
-    padding-top: 140px;
-    padding-bottom: 20px;
-    align-items: center;
+    padding-top: 100px;
     font-family: 'Lato', sans-serif;
 }
 
  .phone-pic {
     background: url('./iphone-pic.png');
     width: 200px;
-    height: 325px;
-    margin-top: 30px;
+    height: 360px;
+    margin-top: 10px;
+    margin-bottom: 40px;
  }
 
 

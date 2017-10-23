@@ -29,7 +29,6 @@ export default class Landing extends Component {
                 </div>
 
                 <section className="about-section">
-
                     <div className="about-header">
                         <h3 className="about-font">MANAGE ALL YOUR ASSETS</h3>
 
@@ -39,31 +38,30 @@ export default class Landing extends Component {
                                 <p>Easy to use smart application to manage</p>
                                 <p>all your assets data for maintenance, insurance,</p>
                                 <p>and remodeling to save money improving value</p>
-                                <p>and getting organized.</p>
+                                <p>and getting organized.  Now is the time to start</p>
+                                <p>managing all your assets!</p>
                                 <button className="start-free-button2" href={process.env.REACT_APP_LOGIN}>START FREE NOW</button>
                             </div>
                         </div>
-
                     </div>
                 </section>
 
 
                 <section className="phone-app-section">
                     <div className="phone-app-bgcolor">
-                    <h3 className="phone-font">SAVE MONEY. &nbsp; IMPROVE VALUE. &nbsp; GET ORGANIZED.</h3>
+                        <h3 className="phone-font">SAVE MONEY. &nbsp; IMPROVE VALUE. &nbsp; GET ORGANIZED.</h3>
 
-                    <div className="phone-container">
-                            
+                        <div className="phone-container">
                             <div className="phone-text">
-                                <p>Easy to use smart application to manage</p>
-                                <p>all your assets data for maintenance, insurance,</p>
-                                <p>and remodeling to save money improving value</p>
-                                <p>and getting organized.</p>
+                                <p>Improve the value of your assets by avoiding</p>
+                                <p>early replacement costs, and keep organized</p>
+                                <p>by staying in control of the maintenance of</p>
+                                <p>your property.  You live your life, we will</p>
+                                <p>mind the maintenance.</p>
                                 <button className="start-free-button2" href={process.env.REACT_APP_LOGIN}>START FREE NOW</button>
                             </div>
                             <div className="phone-pic"></div>
                         </div>
-
                     </div>
                 </section>
 
