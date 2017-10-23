@@ -8,10 +8,13 @@
     background: #C7C7C7;
     height: 30px;
     margin-bottom: 10px; /* PROBABLY REMOVE THIS LATER PLEASE */
-    cursor: pointer;
     display: flex;
     align-items: center;
     padding-left: 15px;
+}
+
+.cat_title {
+    cursor: pointer;    
 }
 
 .addCat_button {
