@@ -20,7 +20,7 @@ class Categories extends Component {
           confirmLabel: 'Confirm',                           
           cancelLabel: 'Cancel',                             
           onConfirm: () => this.props.deleteCategory(cat_id, user_id),    
-          onCancel: () => alert('Category Canceled'), 
+          onCancel: () => {}, 
         })
       };
 
@@ -31,7 +31,7 @@ class Categories extends Component {
           confirmLabel: 'Confirm',                           
           cancelLabel: 'Cancel',                             
           onConfirm: () => this.props.deleteAsset(asset_id, user_id),    
-          onCancel: () => alert('Category Canceled'), 
+          onCancel: () => {}, 
         })
       };
 

@@ -18,7 +18,7 @@ class Logs extends Component {
           confirmLabel: 'Confirm',                           
           cancelLabel: 'Cancel',                             
           onConfirm: () => this.props.deleteLog(log_id, user_id),    
-          onCancel: () => alert('Category Canceled'), 
+          onCancel: () => {}, 
         })
       };
 
