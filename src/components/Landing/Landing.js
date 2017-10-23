@@ -17,46 +17,51 @@ export default class Landing extends Component {
                         <button className="start-free-button" href={process.env.REACT_APP_LOGIN}>START FREE NOW</button>
                     </section>
 
-
                     <section className="hero-container">
                         <div className="banner">
                             <div className="banner-logo">
                                 <span className="title1">Maintenance<span className="minder-title">Minder</span></span>
                                 <span className="title2"><span>YOU LIVE YOUR LIFE.</span>  &nbsp; <u>WE WILL MIND THE MAINTENANCE.</u></span>
                             </div>
-                            <button className="register-button" href={process.env.REACT_APP_LOGIN} >LOGIN</button>
+                            <button className="register-button" href={process.env.REACT_APP_LOGIN} >LOG IN</button>
                         </div>
                     </section>
                 </div>
 
-
                 <section className="about-section">
-                    <div className="about-title">
+                    <div className="about-header">
+                        <h3 className="about-font">MANAGE ALL YOUR ASSETS</h3>
 
-                        <div className="about-header">
-                            <h3 className="about-font">MANAGE ALL YOUR ASSETS</h3>
-
-                            <div className="car-container">
-
-                                <div className="car-pic"></div>
-                                <div className="about-text">
-                                    <p>Smart Application to manage data regarding your assets</p>
-                                    <p>for insurance and maintenance to save money</p>
-                                    <p>and improve value and to get organized</p>
-                                    <button className="start-free-button2" href={process.env.REACT_APP_LOGIN}>START FREE NOW</button>
-                                </div>
-
+                        <div className="car-container">
+                            <div className="car-pic"></div>
+                            <div className="about-text">
+                                <p>Easy to use smart application to manage</p>
+                                <p>all your assets data for maintenance, insurance,</p>
+                                <p>and remodeling to save money improving value</p>
+                                <p>and getting organized.  Now is the time to start</p>
+                                <p>managing all your assets!</p>
+                                <button className="start-free-button2" href={process.env.REACT_APP_LOGIN}>START FREE NOW</button>
                             </div>
                         </div>
-
                     </div>
                 </section>
 
 
                 <section className="phone-app-section">
                     <div className="phone-app-bgcolor">
+                        <h3 className="phone-font">SAVE MONEY. &nbsp; IMPROVE VALUE. &nbsp; GET ORGANIZED.</h3>
 
-                    
+                        <div className="phone-container">
+                            <div className="phone-text">
+                                <p>Improve the value of your assets by avoiding</p>
+                                <p>early replacement costs, and keep organized</p>
+                                <p>by staying in control of the maintenance of</p>
+                                <p>your property.  You live your life, we will</p>
+                                <p>mind the maintenance.</p>
+                                <button className="start-free-button2" href={process.env.REACT_APP_LOGIN}>START FREE NOW</button>
+                            </div>
+                            <div className="phone-pic"></div>
+                        </div>
                     </div>
                 </section>
 
