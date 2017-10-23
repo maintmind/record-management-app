@@ -197,6 +197,7 @@ export function updateLogID(log_id) {
     }
 }
 export function updateLogComplete(logCompleteDate) {
+    console.log(logCompleteDate)
     return {
         type: UPDATE_LOG_COMPLETE_DATE,
         payload: logCompleteDate
@@ -329,9 +330,11 @@ export function getAllLogs(num) {
 }
 
 export function addLog(obj) {
+    let newObj = Object.assign({}, obj.props, {logCompleteDate: obj.date})
+    
     return {
         type: ADD_LOG,
-        payload: axios.post(`/api/logs/add`, obj).then(response => {
+        payload: axios.post(`/api/logs/add`, newObj).then(response => {
             return response.data
         })
     }
@@ -357,9 +360,10 @@ export function getAllReminders(num) {
 }
 
 export function addReminder(obj) {
+    let newObj = Object.assign({}, obj.props, {reminderDue: obj.date})
     return {
         type: ADD_REMINDER,
-        payload: axios.post(`/api/reminders/add`, obj).then(response => {
+        payload: axios.post(`/api/reminders/add`, newObj).then(response => {
             return response.data
         })
     }

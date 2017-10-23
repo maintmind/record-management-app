@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllCategories, toggleModal, catDisp } from '../../ducks/reducer';
 
+
 import Logs from '../Logs/Logs';
 
 import './Categories.css';
