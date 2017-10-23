@@ -47,7 +47,6 @@ class Logs extends Component {
         return (
             <div className="log_viewer">
                 <div>
-                    <button className="close_cat_button" onClick={() => this.props.catDisp(0)}>^</button>
                     <button onClick={() => { this.props.toggleModal('log') }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD LOG</button>
                     <button onClick={() => { this.props.toggleModal('reminder') }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD REMINDER</button>
                 </div>

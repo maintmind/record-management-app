@@ -13,27 +13,37 @@ class Categories extends Component {
         this.props.getAllCategories(this.props.user.user_id)
     };
 
+    showHideCat(cat_id) {
+        if (this.props.catView === 0) {
+            this.props.catDisp(cat_id)
+        } else if (this.props.catView === cat_id) {
+            this.props.catDisp(0)
+        } else {
+            this.props.catDisp(cat_id)
+        }
+    }
+
     confirmModal(cat_id, user_id) {
         confirmAlert({
-          title: 'Are you sure?',                      
-          message: 'Deleting this category will delete all logs and reminders associated with it!',              
-          confirmLabel: 'Confirm',                           
-          cancelLabel: 'Cancel',                             
-          onConfirm: () => this.props.deleteCategory(cat_id, user_id),    
-          onCancel: () => {}, 
+            title: 'Are you sure?',
+            message: 'Deleting this category will delete all logs and reminders associated with it!',
+            confirmLabel: 'Confirm',
+            cancelLabel: 'Cancel',
+            onConfirm: () => this.props.deleteCategory(cat_id, user_id),
+            onCancel: () => { },
         })
-      };
+    };
 
-      deleteAssetConfirm(asset_id, user_id) {
+    deleteAssetConfirm(asset_id, user_id) {
         confirmAlert({
-          title: 'Are you sure?',                      
-          message: 'Deleting this asset will delete all categories, logs, and reminders associated with it!',              
-          confirmLabel: 'Confirm',                           
-          cancelLabel: 'Cancel',                             
-          onConfirm: () => this.props.deleteAsset(asset_id, user_id),    
-          onCancel: () => {}, 
+            title: 'Are you sure?',
+            message: 'Deleting this asset will delete all categories, logs, and reminders associated with it!',
+            confirmLabel: 'Confirm',
+            cancelLabel: 'Cancel',
+            onConfirm: () => this.props.deleteAsset(asset_id, user_id),
+            onCancel: () => { },
         })
-      };
+    };
 
 
     render() {
@@ -43,8 +53,8 @@ class Categories extends Component {
                 return result = (
                     <div key={i}>
                         <div key={i} className="cat_row">
-                        <button onClick={() => {this.confirmModal(c.cat_id, this.props.user.user_id)}}>Delete</button>
-                            <div className="cat_title" onClick={() => this.props.catDisp(c.cat_id)}>{c.title} - {c.description}</div>
+                            <button onClick={() => { this.confirmModal(c.cat_id, this.props.user.user_id) }}>Delete</button>
+                            <div className="cat_title" onClick={() => this.showHideCat(c.cat_id)}>{c.title} - {c.description}</div>
                         </div>
                         <div className={c.cat_id === this.props.catView ? "addCat_show" : "addCat_hide"}>
                             <Logs />
@@ -56,7 +66,7 @@ class Categories extends Component {
         })
         const assetTitle = this.props.assetList.map(asset => {
             let assetDescription
-            if(asset.asset_id === this.props.assetView){
+            if (asset.asset_id === this.props.assetView) {
                 assetDescription = asset.description
             }
             return assetDescription
