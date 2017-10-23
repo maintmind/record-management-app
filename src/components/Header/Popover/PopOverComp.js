@@ -41,13 +41,15 @@ class PopOverComp extends Component {
 
         this.popOverDisplayControl.push(<MenuItem primaryText="Overdue Reminders:" />)
 
+        const inlineStyle = {justifyContent: 'flex'}
+
         var overdueReminders =
 
             this.props.reminderListOverdue.map((reminder, i) => {
                 return (
-                    <div>
-                        <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status}>
-                            <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}>Mark Complete</button>
+                    <div style={inlineStyle}>
+                        <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status} >
+                             <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}>Mark Complete</button> 
                         </MenuItem>
                     </div>
                 )
