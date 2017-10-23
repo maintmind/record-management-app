@@ -1,4 +1,6 @@
 import axios from 'axios';
+import fns from '../utilities/jamesTesting';
+console.log(fns);
 
 let initialState = {
     user: { user_id: 1 },
@@ -210,10 +212,7 @@ export function updateLogSubmit(logSubmitDate) {
 }
 
 export function updateLogName(logName) {
-    return {
-        type: UPDATE_LOG_NAME,
-        payload: logName
-    }
+    return fns.updateLogName(logName)
 }
 
 export function updateLogDescription(logDescription) {
