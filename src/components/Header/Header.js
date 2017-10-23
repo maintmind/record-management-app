@@ -16,16 +16,14 @@ export default class Header extends Component {
                     <h4>Maintenance<span>Minder</span></h4>
                 </div>
 
-
                 <div className="popover-with-badge-ternary">
-
-
                     <div className="popover-badge">
                         <PopOverComp />
                     </div>
+                </div>
 
-
-
+                <div className="logout-container">
+                  <a href={process.env.REACT_APP_LOGOUT}><button className="logout-button">Logout</button></a>
                 </div>
 
             </div>
