@@ -234,17 +234,11 @@ export function updateLogName(logName) {
 }
 
 export function updateLogDescription(logDescription) {
-    return {
-        type: UPDATE_LOG_DESCRIPTION,
-        payload: logDescription
-    }
+    return fns.updateLogDescription(logDescription)
 }
 
 export function updateLogCost(logCost) {
-    return {
-        type: UPDATE_LOG_COST,
-        payload: logCost
-    }
+    return fns.updateLogCost(logCost)
 }
 export function updateReminderID(remind_id) {
     return {
@@ -472,8 +466,5 @@ export function catDisp(num) {
 }
 
 export function toggleModal(str) {
-    return {
-        type: TOGGLE_MODAL,
-        payload: str
-    }
+    return fns.toggleModal(str)
 }
