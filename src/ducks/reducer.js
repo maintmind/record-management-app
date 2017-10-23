@@ -55,6 +55,7 @@ const UPDATE_REMINDER_NAME = "UPDATE_REMINDER NAME"
 const UPDATE_REMINDER_DESCRIPTION = "UPDATE_REMINDER_DESCRIPTION";
 const GET_ALL_ASSETS = "GET_ALL_ASSETS";
 const ADD_ASSET = "ADD_ASSET";
+const DELETE_ASSET = "DELETE_ASSET";
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 const ADD_CATEGORY = "ADD_CATEGORY";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
@@ -84,7 +85,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { assetDescription: action.payload })
 
         case UPDATE_CATEGORY_ID:
-            return Object.assign({}, state, { categoryID: action.payload })
+            return Object.assign({}, state, { cat_id: action.payload })
         case UPDATE_CATEGORY_NAME:
             return Object.assign({}, state, { categoryName: action.payload })
         case UPDATE_CATEGORY_DESCRIPTION:
@@ -119,6 +120,8 @@ export default function dashReducer(state = initialState, action) {
         case GET_ALL_ASSETS + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
         case ADD_ASSET + "_FULFILLED":
+            return Object.assign({}, state, { assetList: action.payload })
+        case DELETE_ASSET + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
 
         case GET_ALL_CATEGORIES + "_FULFILLED":
@@ -311,6 +314,15 @@ export function addAsset(obj) {
     return {
         type: ADD_ASSET,
         payload: axios.post(`/api/assets/add`, obj).then(response => {
+            return response.data
+        })
+    }
+}
+
+export function deleteAsset(asset_id, user_id) {
+    return {
+        type: DELETE_ASSET,
+        payload: axios.delete(`/api/assets/delete/${asset_id}/${user_id}`).then(response => {
             return response.data
         })
     }

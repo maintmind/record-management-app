@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllLogs, toggleModal, catDisp, deleteLog } from '../../ducks/reducer';
-
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import './Logs.css';
 
@@ -10,6 +10,17 @@ class Logs extends Component {
     componentDidMount() {
         this.props.getAllLogs(this.props.user.user_id)
     }
+
+    confirmModal(log_id, user_id) {
+        confirmAlert({
+          title: 'Are you sure?',                      
+          message: 'Deleting this log will delete all information and images associated with it!',              
+          confirmLabel: 'Confirm',                           
+          cancelLabel: 'Cancel',                             
+          onConfirm: () => this.props.deleteLog(log_id, user_id),    
+          onCancel: () => alert('Category Canceled'), 
+        })
+      };
 
     render() {
         const displayLogs = this.props.logList.map((c, i) => {
@@ -20,7 +31,7 @@ class Logs extends Component {
                     <div key={i} className="log_row">
                         <div className="log_buttons">
                         <button className="edit button" >Edit</button>
-                        <button className="delete button" onClick={() => this.props.deleteLog(c.log_id, this.props.user.user_id)} >Delete</button>
+                        <button className="delete button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)} >Delete</button>
                         </div>
                         <div>{c.title}</div>
                         <div><i>{c.description}</i></div>

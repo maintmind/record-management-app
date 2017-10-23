@@ -83,6 +83,7 @@ cloudinary.config(process.env.CLOUDINARY_URL)
 //ASSET ENDPOINTS
 app.get('/api/assets/get_all/:user_id', controller.getAllAssets)
 app.post('/api/assets/add', controller.addAsset)
+app.delete('/api/assets/delete/:asset_id/:user_id', controller.deleteAsset)
 
 //CATEGORY ENDPOINTS
 app.get('/api/categories/get_all/:user_id', controller.getAllCategories)
