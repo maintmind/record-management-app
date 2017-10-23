@@ -1,6 +1,5 @@
 import axios from 'axios';
-import fns from '../utilities/jamesTesting';
-console.log(fns);
+import fns from '../utilities/testedActions';
 
 let initialState = {
     user: { user_id: 1 },
