@@ -158,7 +158,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
             
         case TOGGLE_MODAL:
-            return Object.assign({}, state, { modalToggler: action.payload })
+            return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: null, assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
         case ASSET_ROTATE:
             return Object.assign({}, state, { assetView: action.payload })
         case CAT_DISP:
