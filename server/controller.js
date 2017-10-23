@@ -17,6 +17,14 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
+    editAsset: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { user, assetView, assetName, assetDescription } = req.body
+        dbInstance.assets.editAsset(assetName, assetDescription, assetView, user.user_id)
+            .then(asset => res.status(200).send(asset))
+            .catch(err => res.status(500).send(console.log(err)))
+    },
+
     deleteAsset: (req, res) => {
         const dbInstance = req.app.get('db');
         dbInstance.assets.deleteAsset(req.params.asset_id, req.params.user_id)

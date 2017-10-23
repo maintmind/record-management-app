@@ -56,6 +56,7 @@ const UPDATE_REMINDER_NAME = "UPDATE_REMINDER NAME"
 const UPDATE_REMINDER_DESCRIPTION = "UPDATE_REMINDER_DESCRIPTION";
 const GET_ALL_ASSETS = "GET_ALL_ASSETS";
 const ADD_ASSET = "ADD_ASSET";
+const EDIT_ASSET = "EDIT_ASSET";
 const DELETE_ASSET = "DELETE_ASSET";
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 const ADD_CATEGORY = "ADD_CATEGORY";
@@ -121,6 +122,8 @@ export default function dashReducer(state = initialState, action) {
         case GET_ALL_ASSETS + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
         case ADD_ASSET + "_FULFILLED":
+            return Object.assign({}, state, { assetList: action.payload })
+        case EDIT_ASSET + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
         case DELETE_ASSET + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
@@ -311,6 +314,15 @@ export function addAsset(obj) {
     }
 }
 
+export function editAsset(obj) {
+    return {
+        type: EDIT_ASSET,
+        payload: axios.patch('/api/assets/edit', obj).then(resp => {
+            return resp.data
+        })
+    }
+}
+
 export function deleteAsset(asset_id, user_id) {
     return {
         type: DELETE_ASSET,
@@ -468,3 +480,15 @@ export function catDisp(num) {
 export function toggleModal(str) {
     return fns.toggleModal(str)
 }
+
+// export function toggleEditMenu(str, asset_id, asset_title, asset_description, user_id) {
+//     let obj = {
+//         editView: str, 
+//         asset_id: asset_id,
+//         asset_title
+//     }
+//     return {
+//         type: TOGGLE_EDIT_MENU,
+//         payload: str
+//     }
+// }

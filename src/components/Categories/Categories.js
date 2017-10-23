@@ -73,6 +73,7 @@ class Categories extends Component {
         })
         return (
             <div className="category_viewer">
+                <button className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Asset</button>
                 <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Delete Asset</button>
                 <h2 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetTitle}</h2>
                 <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
