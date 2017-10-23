@@ -4,6 +4,7 @@ import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset } f
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
+
 import Logs from '../Logs/Logs';
 
 import './Categories.css';
