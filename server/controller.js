@@ -33,6 +33,13 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
+    deleteCategory: (req, res) => {
+        const dbInstance = req.app.get('db');
+        dbInstance.categories.deleteCategory(req.params.cat_id, req.params.user_id)
+            .then(categories => res.status(200).send(categories))
+            .catch(err => res.status(500).send(console.log(err)))            
+    },
+
     //LOGS
     getAllLogs: (req, res) => {
         const dbInstance = req.app.get('db');

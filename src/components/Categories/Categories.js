@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllCategories, toggleModal, catDisp } from '../../ducks/reducer';
+import { getAllCategories, toggleModal, catDisp, deleteCategory } from '../../ducks/reducer';
 
 import Logs from '../Logs/Logs';
 
@@ -17,8 +17,9 @@ class Categories extends Component {
             if (c.asset_id === this.props.assetView) {
                 return result = (
                     <div key={i}>
-                        <div key={i} className="cat_row" onClick={() => this.props.catDisp(c.cat_id)}>
-                            {c.title} - {c.description}
+                        <div key={i} className="cat_row">
+                        <button onClick={() => this.props.deleteCategory(c.cat_id, this.props.user.user_id)}>Delete</button>
+                            <div className="cat_title" onClick={() => this.props.catDisp(c.cat_id)}>{c.title} - {c.description}</div>
                         </div>
                         <div className={c.cat_id === this.props.catView ? "addCat_show" : "addCat_hide"}>
                             <Logs />
@@ -48,7 +49,8 @@ function mapStateToProps(state) {
 const outputActions = {
     getAllCategories,
     toggleModal,
-    catDisp
+    catDisp,
+    deleteCategory
 }
 
 export default connect(mapStateToProps, outputActions)(Categories);

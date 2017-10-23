@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, catDisp } from '../../ducks/reducer';
+import { getAllLogs, toggleModal, catDisp, deleteLog } from '../../ducks/reducer';
 
 
 
@@ -19,8 +19,8 @@ class Logs extends Component {
                 return result = (
                     <div key={i} className="log_row">
                         <div className="log_buttons">
-                        <button className="edit button" onClick >Edit</button>
-                        <button className="delete button" onClick >Delete</button>
+                        <button className="edit button" >Edit</button>
+                        <button className="delete button" onClick={() => this.props.deleteLog(c.log_id, this.props.user.user_id)} >Delete</button>
                         </div>
                         <div>{c.title}</div>
                         <div><i>{c.description}</i></div>
@@ -63,7 +63,8 @@ function mapStateToProps(state) {
 const outputActions = {
     getAllLogs,
     toggleModal,
-    catDisp
+    catDisp,
+    deleteLog
 }
 
 export default connect(mapStateToProps, outputActions)(Logs);
