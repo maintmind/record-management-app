@@ -12,21 +12,13 @@ class UserInputForm extends Component {
         if (this.props.modalToggler === null) {
             return (<div></div>)
         } else if (this.props.modalToggler === "asset") {
-            return (
-                <AssetModal />
-            )
+            return <AssetModal />
         } else if (this.props.modalToggler === "cat") {
-            return (
-                <CatModal />
-            )
+            return <CatModal />
         } else if (this.props.modalToggler === "log") {
-            return (
-                <LogModal />
-            )
+            return <LogModal />
         } else if (this.props.modalToggler === "reminder") {
-            return (
-                <ReminderModal />
-            )
+            return <ReminderModal />
         }
     }
 
