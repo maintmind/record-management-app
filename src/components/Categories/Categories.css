@@ -13,6 +13,13 @@
     padding-left: 15px;
 }
 
+.cat_row button{
+    width: 23px;
+    height: 23px;
+    border-style: none;
+    background: none;
+}
+
 .cat_title {
     cursor: pointer;    
 }
@@ -29,4 +36,26 @@
 
 .addCat_show {
     visibility: visible;
+}
+
+.asset_info {
+    display: flex;
+    align-items: center;
+}
+
+.asset_info h1 {
+    font-size: 40px;
+}
+
+.asset_button_container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 2px 0px 10px;
+}
+
+.asset_button_container button {
+    width: 20px;
+    height: 20px;
+    border-style: none;
+    background: none;
 }
