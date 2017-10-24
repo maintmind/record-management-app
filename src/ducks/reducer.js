@@ -2,7 +2,7 @@ import axios from 'axios';
 import fns from '../utilities/testedActions';
 
 let initialState = {
-    user: { user_id: 1 },
+    user: {},
     asset_id: 0,
     assetName: '',
     assetDescription: '',
@@ -74,6 +74,7 @@ const TOGGLE_MODAL = "TOGGLE_MODAL";
 const ASSET_ROTATE = "ASSET_ROTATE";
 const CAT_DISP = "CAT_DISP";
 const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
+const GET_USER_INFO = "GET_USER_INFO";
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -166,6 +167,9 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
             return Object.assign({}, state, { cloudinaryUrl: action.payload })
+
+        case GET_USER_INFO + '_FULFILLED':
+            return Object.assign({}, state, { user: action.payload })   
 
         default:
             return state
@@ -286,18 +290,16 @@ export function updateReminderDescription(reminderDescription) {
     }
 }
 
-//AXIOS
-
-// export function getUser(){
-//     var userInfo = axios.get('http://localhost:3005/auth/me').then(response => {
-//         console.log(response)
-//         return response.data
-//         })
-//     return {
-//         type: GET_USER,
-//         payload: userInfo
-//     }
-// }
+//AUTH0 - GET USER//
+export function getUserInfo() {
+    const userInfo = axios.get('/auth/me').then( response => {
+        return response.data
+    })
+    return {
+        type: GET_USER_INFO,
+        payload: userInfo
+    }
+}
 
 //ASSETS//
 export function getAllAssets(num) {

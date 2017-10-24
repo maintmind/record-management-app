@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "../AssetModal/AssetModal.css";
 import { connect } from 'react-redux';
-import { toggleModal, updateAssetName, updateAssetDescription, addAsset } from './../../../ducks/reducer';
+import { toggleModal, updateAssetName, updateAssetDescription, addAsset, getUserInfo } from './../../../ducks/reducer';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {orange500, gray800} from 'material-ui/styles/colors';
@@ -9,7 +9,12 @@ import {orange500, gray800} from 'material-ui/styles/colors';
 // import PhotoUploader from '../../../components/PhotoUploader/PhotoUploader';
 
 class AssetModal extends Component {
+    componentDidMount() {
+        this.props.getUserInfo();
+    }
+
     submitAsset(obj) {
+        console.log('OBJ', obj)
         this.props.addAsset(obj);
         this.props.toggleModal(null);
     }
@@ -52,7 +57,8 @@ const outputActions = {
     toggleModal, 
     updateAssetName, 
     updateAssetDescription, 
-    addAsset 
+    addAsset,
+    getUserInfo
 }
 
 export default connect(mapStateToProps, outputActions)(AssetModal)

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Categories from '../Categories/Categories';
-
-
 import './Assets.css';
-
-import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal } from '../../ducks/reducer';
+import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal, getUserInfo } from '../../ducks/reducer';
 
 class Assets extends Component {
     componentDidMount() {
-        this.props.getAllAssets(this.props.user.user_id)
+        this.props.getUserInfo()
+        this.props.getAllAssets(this.props.user)
     }
 
     changeAsset(num) {
@@ -51,7 +48,8 @@ const outputActions = {
     assetRotate,
     catDisp,
     updateAssetID,
-    toggleModal
+    toggleModal,
+    getUserInfo
 }
 
 export default connect(mapStateToProps, outputActions)(Assets);

@@ -4,15 +4,20 @@ module.exports = {
     //ASSETS
     getAllAssets: (req, res) => {
         const dbInstance = req.app.get('db');
-        dbInstance.assets.getAllAssets(req.params.user_id)
-            .then(assets => res.status(200).send(assets))
+        dbInstance.assets.getAllAssets(req.user.user_id)
+            .then(assets => {
+                console.log("assets: ", assets)
+                res.status(200).send(assets)})
             .catch(err => res.status(500).send(console.log(err)))
     },
 
     addAsset: (req, res) => {
+        console.log('REQ.BODY', req.body)
         const dbInstance = req.app.get('db');
-        const { user, assetName, assetDescription } = req.body;
-        dbInstance.assets.addNewAsset(user.user_id, assetName, assetDescription)
+        const { assetName, assetDescription } = req.body;
+        const user_id = req.body.user.user_id;
+        console.log('USER_ID', user_id)
+        dbInstance.assets.addNewAsset(user_id, assetName, assetDescription)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
     },
@@ -24,12 +29,10 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))            
     },
 
-    
-
     //CATEGORY
     getAllCategories: (req, res) => {
         const dbInstance = req.app.get('db');
-        dbInstance.categories.getAllCategories(req.params.user_id)
+        dbInstance.categories.getAllCategories(req.user.user_id)
             .then(cats => res.status(200).send(cats))
             .catch(err => res.status(500).send(console.log(err)))
     },
