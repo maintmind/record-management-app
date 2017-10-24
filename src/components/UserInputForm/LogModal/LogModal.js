@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "../UserInputForm.css";
 import "./LogModal.css";
 import { connect } from 'react-redux';
-import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, createImageId } from '../../../ducks/reducer';
+import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, createImageId, putLogIdOnImg } from '../../../ducks/reducer';
 import TextField from 'material-ui/TextField';
 import { orange500 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';

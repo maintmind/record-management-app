@@ -385,7 +385,7 @@ export function getAllLogs(num) {
 
 export function addLog(obj) {
     let newObj = Object.assign({}, obj.props, { logCompleteDate: obj.date })
-
+    
     return {
         type: ADD_LOG,
         payload: axios.post(`/api/logs/add`, newObj).then(response => {
