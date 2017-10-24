@@ -89,6 +89,7 @@ app.delete('/api/assets/delete/:asset_id/:user_id', controller.deleteAsset)
 //CATEGORY ENDPOINTS
 app.get('/api/categories/get_all/:user_id', controller.getAllCategories)
 app.post('/api/categories/add', controller.addCategory)
+app.patch('/api/categories/edit', controller.editCategory)
 app.delete('/api/categories/delete/:cat_id/:user_id', controller.deleteCategory)
 
 //LOG ENDPOINTS

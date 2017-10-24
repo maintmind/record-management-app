@@ -4,4 +4,5 @@ WHERE asset_id = $3 AND user_id = $4;
 
 SELECT *
 FROM assets
-WHERE user_id = $4;
+WHERE user_id = $4
+ORDER BY asset_id;

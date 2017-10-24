@@ -35,7 +35,7 @@ class Logs extends Component {
                 return result = (
                     <div key={i} className="log_row">
                         <div className="log_buttons">
-                            <button onClick={() => this.toggleAddEditModal('asset', true)} className="edit button" >Edit Log</button>
+                            <button onClick={() => this.toggleAddEditModal('log', true)} className="edit button" >Edit Log</button>
                             <button className="delete button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)} >Delete</button>
                         </div>
                         <div className="log_title">{c.title}</div>

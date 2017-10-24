@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset,toggleEditMenu } from '../../ducks/reducer';
+import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset,toggleEditMenu, updateAssetName, updateAssetDescription, updateCategoryName, updateCategoryDescription, updateCatID } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -46,11 +46,15 @@ class Categories extends Component {
         })
     };
 
-    toggleAddEditModal(str, bl) {
+    toggleAddEditModal(str, bl, title, desc, num) {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
+        this.props.updateAssetName(title)
+        this.props.updateAssetDescription(desc)
+        this.props.updateCategoryName(title)
+        this.props.updateCategoryDescription(desc)
+        this.props.updateCatID(num)
     }
-
 
     render() {
         const displayCats = this.props.categoryList.map((c, i) => {
@@ -59,7 +63,7 @@ class Categories extends Component {
                 return result = (
                     <div key={i}>
                         <div key={i} className="cat_row">
-                        <button onClick={() => this.toggleAddEditModal('cat', true)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Category</button>
+                        <button onClick={() => this.toggleAddEditModal('cat', true, c.title, c.description, c.cat_id)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Category</button>
                             <button onClick={() => { this.confirmModal(c.cat_id, this.props.user.user_id) }}>Delete</button>
                             <div className="cat_title" onClick={() => this.showHideCat(c.cat_id)}>{c.title} - {c.description}</div>
                         </div>
@@ -71,18 +75,27 @@ class Categories extends Component {
             }
             return result
         })
-        const assetTitle = this.props.assetList.map(asset => {
-            let assetDescription
-            if (asset.asset_id === this.props.assetView) {
-                assetDescription = asset.description
+        const assetTitle = () => {
+            const assets = this.props.assetList
+            for(var i = 0; i < assets.length; i++) {
+                if(assets[i].asset_id === this.props.assetView) {
+                    return assets[i].title
+                }
             }
-            return assetDescription
-        })
+        }
+        const assetDesc = () => {
+            const assets = this.props.assetList
+            for(var i = 0; i < assets.length; i++) {
+                if(assets[i].asset_id === this.props.assetView) {
+                    return assets[i].description
+                }
+            }
+        }
         return (
             <div className="category_viewer">
-                <button onClick={() => this.toggleAddEditModal('asset', true)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Asset</button>
+                <button onClick={() => this.toggleAddEditModal('asset', true, assetTitle(), assetDesc())} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Asset</button>
                 <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Delete Asset</button>
-                <h2 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetTitle}</h2>
+                <h2 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetDesc()}</h2>
                 <button onClick={() => this.toggleAddEditModal('cat', false)} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
                     ADD CATEGORY
                 </button>
@@ -103,7 +116,12 @@ const outputActions = {
     catDisp,
     deleteCategory,
     deleteAsset,
-    toggleEditMenu
+    toggleEditMenu,
+    updateAssetName,
+    updateAssetDescription,
+    updateCategoryName,
+    updateCategoryDescription,
+    updateCatID
 }
 
 export default connect(mapStateToProps, outputActions)(Categories);

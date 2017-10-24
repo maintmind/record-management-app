@@ -61,6 +61,7 @@ const EDIT_ASSET = "EDIT_ASSET";
 const DELETE_ASSET = "DELETE_ASSET";
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 const ADD_CATEGORY = "ADD_CATEGORY";
+const EDIT_CATEGORY = "EDIT_CATEGORY";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
 const GET_ALL_LOGS = "GET_ALL_LOGS";
 const ADD_LOG = "ADD_LOG";
@@ -133,6 +134,8 @@ export default function dashReducer(state = initialState, action) {
         case GET_ALL_CATEGORIES + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
         case ADD_CATEGORY + "_FULFILLED":
+            return Object.assign({}, state, { categoryList: action.payload })
+        case EDIT_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
         case DELETE_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
@@ -224,7 +227,6 @@ export function updateLogID(log_id) {
     }
 }
 export function updateLogComplete(logCompleteDate) {
-    console.log(logCompleteDate)
     return {
         type: UPDATE_LOG_COMPLETE_DATE,
         payload: logCompleteDate
@@ -352,6 +354,15 @@ export function addCategory(obj) {
         type: ADD_CATEGORY,
         payload: axios.post(`/api/categories/add`, obj).then(response => {
             return response.data
+        })
+    }
+}
+
+export function editCategory(obj) {
+    return {
+        type: EDIT_CATEGORY,
+        payload: axios.patch('/api/categories/edit', obj).then(resp => {
+            return resp.data
         })
     }
 }
@@ -490,11 +501,6 @@ export function toggleModal(str) {
 }
 
 export function toggleEditMenu(str) {
-    // let obj = {
-    //     editView:
-    //     asset_id: asset_id,
-    //     asset_title
-    // }
     return {
         type: TOGGLE_EDIT_MENU,
         payload: str
