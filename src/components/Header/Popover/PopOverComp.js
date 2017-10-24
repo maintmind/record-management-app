@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import FontIcon from 'material-ui/FontIcon';
 import '../Header.css';
 import { connect } from 'react-redux';
 import { getRemindersOverdue } from '../../../ducks/reducer';
@@ -42,14 +43,22 @@ class PopOverComp extends Component {
         this.popOverDisplayControl.push(<MenuItem primaryText="Overdue Reminders:" />)
 
         const inlineStyle = {justifyContent: 'flex'}
+        const iconStyles = {marginRight: 24}
 
         var overdueReminders =
 
             this.props.reminderListOverdue.map((reminder, i) => {
                 return (
                     <div style={inlineStyle}>
-                        <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status} >
-                             <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}>Mark Complete</button> 
+                        <MenuItem key={reminder.remind_id}
+                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
+                         
+                         rightIcon={<i class="material-icons"
+                            onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
+                         
+                         >cancel</i>}
+                          >
+                              
                         </MenuItem>
                     </div>
                 )
@@ -63,8 +72,17 @@ class PopOverComp extends Component {
 
                 return (
                     <div>
-                        <MenuItem key={reminder.remind_id} primaryText={reminder.title + " " + reminder.description + " " + reminder.status}>
-                            <button onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")}>Mark Complete</button>
+                        <MenuItem key={reminder.remind_id}
+                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
+                         /* onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")} */
+                         rightIcon={<i class="material-icons"
+                                    onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
+                         
+                         >
+                             
+                             cancel</i>}
+                         >
+                        
 
                         </MenuItem>
 
@@ -129,7 +147,7 @@ class PopOverComp extends Component {
                     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                     onRequestClose={this.handleRequestClose}>
                     <Menu>
-                        {this.props.reminderListOverdue.length === 0 ?
+                        {this.props.reminderListOverdue.length === 0 && this.props.reminderListUpcoming.length === 0 ?
                             this.noRemindersMessage :
                             this.popOverDisplayControl
                         }
