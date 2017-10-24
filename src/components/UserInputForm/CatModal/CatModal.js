@@ -34,8 +34,10 @@ class CatModal extends Component {
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>ADD CATEGORY</h2>
-                    <div className="title">Title:</div><div><TextField onChange={(e) => this.props.updateCategoryName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div className="description">Description:</div><div><TextField onChange={(e) => this.props.updateCategoryDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="title">Title:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateCategoryName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="description">Description:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateCategoryDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="category-form-button"><RaisedButton label="Submit New Category" primary={false} style={style} buttonStyle={style} onClick={() => this.submitCategory(this.props)} /></div>
                 </div>
             )
@@ -44,8 +46,10 @@ class CatModal extends Component {
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>EDIT CATEGORY</h2>
-                    <div className="title">Title:</div><div><TextField onChange={(e) => this.props.updateCategoryName(e.target.value)} hintText={this.props.categoryName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div className="description">Description:</div><div><TextField onChange={(e) => this.props.updateCategoryDescription(e.target.value)} hintText={this.props.categoryDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="title">Title:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateCategoryName(e.target.value)} hintText={this.props.categoryName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="description">Description:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateCategoryDescription(e.target.value)} hintText={this.props.categoryDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="asset-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => this.saveChanges(this.props)} /></div>
                 </div>
             )
