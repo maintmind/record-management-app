@@ -418,9 +418,11 @@ export function newCloudinaryUrl(str) {
 }
 
 export function createImageId(obj) {
+    let newObj = Object.assign({}, obj.props, {logCompleteDate: obj.date})
+    
     return {
         type: CREATE_IMAGE_ID,
-        payload: axios.post(`/api/images/new`).then(response => {
+        payload: axios.post(`/api/images/new`, newObj).then(response => {
            return response.data
         })
     }
