@@ -22,6 +22,14 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
+    editAsset: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { assetName, assetDescription, assetView, user } = req.body
+        dbInstance.assets.editAsset(assetName, assetDescription, assetView, user.user_id)
+            .then(assets => res.status(200).send(assets))
+            .catch(err => res.status(500).send(console.log(err)))
+    },
+
     deleteAsset: (req, res) => {
         const dbInstance = req.app.get('db');
         dbInstance.assets.deleteAsset(req.params.asset_id, req.params.user_id)
@@ -42,6 +50,14 @@ module.exports = {
         const { assetView, user, categoryName, categoryDescription } = req.body;
         dbInstance.categories.addNewCategory(assetView, user.user_id, categoryName, categoryDescription)
             .then(categories => res.status(200).send(categories))
+            .catch(err => res.status(500).send(console.log(err)))
+    },
+
+    editCategory: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { categoryName, categoryDescription, cat_id, user } = req.body
+        dbInstance.categories.editCategory(categoryName, categoryDescription, cat_id, user.user_id)
+            .then(assets => res.status(200).send(assets))
             .catch(err => res.status(500).send(console.log(err)))
     },
 
@@ -124,26 +140,22 @@ module.exports = {
 
     setReminderStatusToClosed: (req, resp) => {
         const dbInstance = req.app.get('db');
-        var reminders = {
+        let reminderList = {
             overdue: [],
             upcoming: []
         }
 
         dbInstance.reminders.setReminderStatusToClosed(req.params.remind_id).then(res => {
-            
             dbInstance.reminders.getRemindersOverdue(1).then(res => {
                 console.log("all is", res)
-                reminders.overdue = res
+                reminderList.overdue = res
                 dbInstance.reminders.getRemindersComingUp7(1).then(res => {
-                    reminders.upcoming = res;
+                    reminderList.upcoming = res;
                     console.log("fsdfsd", reminders)
-                    
-                    resp.status(200).send(reminders)
+                    resp.status(200).send(reminderList)
                 })
-
             })
         })
-        
     },
 
     setReminderStatusToOpen: (req, res) => {

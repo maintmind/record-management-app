@@ -31,7 +31,8 @@ let initialState = {
     assetView: 0,
     catView: 0,
     modalToggler: null,
-    cloudinaryUrl: null
+    cloudinaryUrl: null,
+    editMode: false
 }
 
 
@@ -56,9 +57,11 @@ const UPDATE_REMINDER_NAME = "UPDATE_REMINDER NAME"
 const UPDATE_REMINDER_DESCRIPTION = "UPDATE_REMINDER_DESCRIPTION";
 const GET_ALL_ASSETS = "GET_ALL_ASSETS";
 const ADD_ASSET = "ADD_ASSET";
+const EDIT_ASSET = "EDIT_ASSET";
 const DELETE_ASSET = "DELETE_ASSET";
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 const ADD_CATEGORY = "ADD_CATEGORY";
+const EDIT_CATEGORY = "EDIT_CATEGORY";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
 const GET_ALL_LOGS = "GET_ALL_LOGS";
 const ADD_LOG = "ADD_LOG";
@@ -75,6 +78,7 @@ const ASSET_ROTATE = "ASSET_ROTATE";
 const CAT_DISP = "CAT_DISP";
 const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
 const GET_USER_INFO = "GET_USER_INFO";
+const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -123,12 +127,16 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { assetList: action.payload })
         case ADD_ASSET + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
+        case EDIT_ASSET + "_FULFILLED":
+            return Object.assign({}, state, { assetList: action.payload })
         case DELETE_ASSET + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
 
         case GET_ALL_CATEGORIES + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
         case ADD_CATEGORY + "_FULFILLED":
+            return Object.assign({}, state, { categoryList: action.payload })
+        case EDIT_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
         case DELETE_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
@@ -160,13 +168,15 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
             
         case TOGGLE_MODAL:
-            return Object.assign({}, state, { modalToggler: action.payload })
+            return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: null, assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
         case ASSET_ROTATE:
             return Object.assign({}, state, { assetView: action.payload })
         case CAT_DISP:
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
             return Object.assign({}, state, { cloudinaryUrl: action.payload })
+        case TOGGLE_EDIT_MENU:
+            return Object.assign({}, state, { editMode: action.payload })
 
         case GET_USER_INFO + '_FULFILLED':
             return Object.assign({}, state, { user: action.payload })   
@@ -221,7 +231,6 @@ export function updateLogID(log_id) {
     }
 }
 export function updateLogComplete(logCompleteDate) {
-    console.log(logCompleteDate)
     return {
         type: UPDATE_LOG_COMPLETE_DATE,
         payload: logCompleteDate
@@ -239,17 +248,11 @@ export function updateLogName(logName) {
 }
 
 export function updateLogDescription(logDescription) {
-    return {
-        type: UPDATE_LOG_DESCRIPTION,
-        payload: logDescription
-    }
+    return fns.updateLogDescription(logDescription)
 }
 
 export function updateLogCost(logCost) {
-    return {
-        type: UPDATE_LOG_COST,
-        payload: logCost
-    }
+    return fns.updateLogCost(logCost)
 }
 export function updateReminderID(remind_id) {
     return {
@@ -320,6 +323,15 @@ export function addAsset(obj) {
     }
 }
 
+export function editAsset(obj) {
+    return {
+        type: EDIT_ASSET,
+        payload: axios.patch('/api/assets/edit', obj).then(resp => {
+            return resp.data
+        })
+    }
+}
+
 export function deleteAsset(asset_id, user_id) {
     return {
         type: DELETE_ASSET,
@@ -344,6 +356,15 @@ export function addCategory(obj) {
         type: ADD_CATEGORY,
         payload: axios.post(`/api/categories/add`, obj).then(response => {
             return response.data
+        })
+    }
+}
+
+export function editCategory(obj) {
+    return {
+        type: EDIT_CATEGORY,
+        payload: axios.patch('/api/categories/edit', obj).then(resp => {
+            return resp.data
         })
     }
 }
@@ -478,8 +499,12 @@ export function catDisp(num) {
 }
 
 export function toggleModal(str) {
+    return fns.toggleModal(str)
+}
+
+export function toggleEditMenu(str) {
     return {
-        type: TOGGLE_MODAL,
+        type: TOGGLE_EDIT_MENU,
         payload: str
     }
 }
