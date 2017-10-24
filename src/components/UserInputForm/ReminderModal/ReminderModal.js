@@ -70,9 +70,9 @@ class ReminderModal extends Component {
                 <h2>ADD REMINDER</h2>
                 <div className="asset-title" >Asset:</div><div style={{color:'red'}}>{assetTitle}</div>
                 <div className="asset-category">Category:</div><div style={{color:'red'}}>{categoryTitle}</div>
-                <div className="reminder-title">Title:</div><div><TextField onChange={(e) => { this.props.updateReminderName(e.target.value) }} hintText="Title" underlineStyle={styles.underlineStyle} /></div>
-                <div className="description">Description:</div><div><TextField onChange={(e) => { this.props.updateReminderDescription(e.target.value) }} hintText="Description" underlineStyle={styles.underlineStyle} /></div>
-                <div className="reminder-date">Date Due:</div> <div><DatePicker onChange={this.handleDate} hintText="mm/dd/yyyy" /></div>
+                <div className="reminder-title">Title:</div><div><TextField onChange={(e) => { this.props.updateReminderName(e.target.value) }} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                <div className="description">Description:</div><div><TextField onChange={(e) => { this.props.updateReminderDescription(e.target.value) }} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}  /></div>
+                <div className="reminder-date">Date Due:</div> <div><DatePicker onChange={this.handleDate} hintText="mm/dd/yyyy"  underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
                 <div className="reminder-form-button"><RaisedButton label="Submit New Reminder" primary={false} style={style} buttonStyle={style} onClick={() => this.submitReminder({props: this.props, date: this.state.date})}/></div>
             </div>
         )
