@@ -93,7 +93,7 @@ module.exports = {
         const dbInstance = req.app.get('db');
         const { user_id, asset_id, cat_id, log_id, img_url, cloudinaryUrl } = req.body;
         dbInstance.images.saveImage(user_id, asset_id, cat_id, log_id, img_url, cloudinaryUrl)
-            .then(img_id => res.status(200).send(img_id))
+            .then(img_id => res.status(200).send(img_id[0].img_url))
             .catch(err => res.status(500).send(console.log(err)))
     },
 
