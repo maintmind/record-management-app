@@ -15,11 +15,10 @@ describe("James tests", function () {
         //     expect(fns.updateLogName("Oil Change")).toEqual({ type: "UPDATE_LOG_NAME", payload: "Oil Change" })
         // })
 
-        
-
         // test get all Reminders successfully creates action with payload
-        it('getAllReminders(1) returns all reminders for user_id 1', async () => {
-            expect.assertions(1)
+        it('getAllReminders(1) returns all reminders for user_id 1', (done) => {
+            // expect.assertions(1)
+
             let firstUserReminder = {
                 "payload": {
                     "remind_id": 1,
@@ -33,8 +32,14 @@ describe("James tests", function () {
                     "description": "blub"
                 }
             }
-            const data = await fns.getAllReminders(1)
-            expect(data).toBe(firstUserReminder)
+            function callback(res){
+            //    console.log(res);
+               var result = res.data.filter(item => item.remind_id === 1)
+                expect(result[0]).toEqual(firstUserReminder.payload)
+                done();
+            }
+
+            fns.getAllReminders(1, callback)
         })
 
 
