@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "../UserInputForm.css";
 import "./LogModal.css";
 import { connect } from 'react-redux';
-import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog } from '../../../ducks/reducer';
+import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, createImageId } from '../../../ducks/reducer';
 import TextField from 'material-ui/TextField';
 import { orange500 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -19,6 +19,7 @@ class LogModal extends Component {
         }
     }
     submitLog(obj) {
+        this.props.createImageId(obj.props)
         this.props.addLog(obj);
         this.props.toggleModal(null);
     }
@@ -30,15 +31,11 @@ class LogModal extends Component {
 
     }
 
-
-
     render(props) {
         const styles = {
-
             underlineStyle: {
                 borderColor: orange500,
             },
-
         };
 
         const style = {
@@ -57,7 +54,7 @@ class LogModal extends Component {
                     {/* <div className="description">Description:</div> */}
                     <div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} /></div>
                     {/* <div className="cost">Cost:</div> */}
-                     <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText="Cost" underlineStyle={styles.underlineStyle} /></div>
+                    <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText="Cost" underlineStyle={styles.underlineStyle} /></div>
                     <div><PhotoUploader /></div>
                     <div className="imagePreview">{this.props.cloudinaryUrl ?
                         <div><b>Image Preview:</b><br /><img src={this.props.cloudinaryUrl} alt="" /></div>
@@ -97,7 +94,8 @@ const outputActions = {
     updateLogDescription,
     updateLogComplete,
     updateLogCost,
-    addLog
+    addLog,
+    createImageId
 }
 
 export default connect(mapStateToProps, outputActions)(LogModal)

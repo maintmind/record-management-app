@@ -32,6 +32,7 @@ let initialState = {
     catView: 0,
     modalToggler: null,
     cloudinaryUrl: null,
+    newImageId: null,
     editMode: false
 }
 
