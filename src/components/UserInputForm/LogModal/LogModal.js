@@ -19,9 +19,9 @@ class LogModal extends Component {
         }
     }
     submitLog(obj) {
-        this.props.createImageId(obj.props)
         this.props.addLog(obj);
         this.props.toggleModal(null);
+        this.props.putLogIdOnImg();
     }
 
     handleDate = (event, date) => {
@@ -95,7 +95,7 @@ const outputActions = {
     updateLogComplete,
     updateLogCost,
     addLog,
-    createImageId
+    createImageId,
 }
 
 export default connect(mapStateToProps, outputActions)(LogModal)

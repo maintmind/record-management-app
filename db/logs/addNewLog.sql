@@ -3,6 +3,9 @@ INSERT INTO logs
 VALUES
 ($1, $2, $3, CURRENT_DATE, $4, $5, $6, $7, $8);
 
+
 SELECT *
 FROM logs
 WHERE user_id = $3;
+
+

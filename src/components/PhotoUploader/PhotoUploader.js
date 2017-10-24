@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { newCloudinaryUrl } from '../../ducks/reducer';
+import { newCloudinaryUrl, createImageId } from '../../ducks/reducer';
 
 const preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 const url = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
@@ -12,6 +12,7 @@ class PhotoUploader extends Component {
     constructor(props) {
         super(props);
 
+
     }
 
     onImageDrop(files) {
@@ -20,6 +21,7 @@ class PhotoUploader extends Component {
             uploadedFile: files
         });
         this.handleImageUpload(files)
+
     }
 
     handleImageUpload(file) {
@@ -33,10 +35,9 @@ class PhotoUploader extends Component {
             }
             if (response.body.secure_url !== '') {
                 this.props.newCloudinaryUrl(response.body.secure_url)
+                this.props.createImageId(this.props)
             }
         });
-
-        // this.props.createImageId(this.props)
     }
 
 
@@ -54,12 +55,12 @@ class PhotoUploader extends Component {
         return (
             this.props.cloudinaryUrl ?
                 <div></div>
-                : 
+                :
                 <div className="imagePreview">
-                <Dropzone multiple={false} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
-                    style={dropzoneStyle}>
-                    <div>To upload, click here, or drag an drop and image.</div>
-                </Dropzone>
+                    <Dropzone multiple={false} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
+                        style={dropzoneStyle}>
+                        <div>To upload, click here, or drag an drop and image.</div>
+                    </Dropzone>
                 </div>
         )
 
@@ -73,6 +74,7 @@ function mapStateToProps(state) {
 
 const outputActions = {
     newCloudinaryUrl,
+    createImageId
 }
 
 export default connect(mapStateToProps, outputActions)(PhotoUploader);

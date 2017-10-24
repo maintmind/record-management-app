@@ -49,8 +49,8 @@ description VARCHAR(500)
 CREATE TABLE images (
 img_id SERIAL PRIMARY KEY,
 user_id INTEGER REFERENCES users,
-asset_id INTEGER REFERENCES asset,
+asset_id INTEGER REFERENCES assets,
 cat_id INTEGER REFERENCES categories,
 log_id INTEGER REFERENCES logs,
-img_url VARCHAR(500),
+img_url VARCHAR(500)
 );

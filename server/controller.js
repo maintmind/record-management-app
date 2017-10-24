@@ -91,10 +91,10 @@ module.exports = {
     //IMAGES
     saveImage: (req, res) => {
         const dbInstance = req.app.get('db');
-        console.log(req.body);
-        const { user_id, asset_id, cat_id, log_id, cloudinaryUrl } = req.body;
-        dbInstance.images.saveImage(user_id, asset_id, cat_id, log_id, cloudinaryUrl)
-            .then(img_id => res.status(200).send(img_id[0].img_url))
+        const { user, assetView, catView, cloudinaryUrl } = req.body; // add log_id
+        console.log(user, assetView, catView, cloudinaryUrl);
+        dbInstance.images.saveImage(user.user_id, assetView, catView, cloudinaryUrl)
+            .then(img_id => res.status(200).send(img_id))
             .catch(err => res.status(500).send(console.log(err)))
     },
 
