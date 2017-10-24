@@ -416,7 +416,7 @@ export function newCloudinaryUrl(str) {
     }
 }
 
-export function createImageId(str) {
+export function createImageId(obj) {
     return {
         type: CREATE_IMAGE_ID,
         payload: axios.post(`/api/images/new`).then(response => {

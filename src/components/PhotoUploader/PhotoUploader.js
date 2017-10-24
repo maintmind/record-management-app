@@ -36,7 +36,7 @@ class PhotoUploader extends Component {
             }
         });
 
-        this.props.createImageId(this.props.cloudinaryUrl)
+        this.props.createImageId(this.props)
     }
 
 
