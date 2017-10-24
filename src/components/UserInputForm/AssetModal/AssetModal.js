@@ -40,8 +40,10 @@ class AssetModal extends Component {
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>ADD ASSET</h2>
-                    <div className="title">Title:</div><div><TextField onChange={(e) => this.props.updateAssetName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div className="description">Description:</div><div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="title">Title:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateAssetName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="description">Description:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="asset-form-button"><RaisedButton label="Submit New Asset" primary={false} style={style} buttonStyle={style} onClick={() => this.submitAsset(this.props)} /></div>
                 </div>
             )
@@ -50,8 +52,10 @@ class AssetModal extends Component {
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>EDIT ASSET</h2>
-                    <div className="title">Title:</div><div><TextField onChange={(e) => this.props.updateAssetName(e.target.value)} hintText={this.props.assetName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div className="description">Description:</div><div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText={this.props.assetDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="title">Title:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateAssetName(e.target.value)} hintText={this.props.assetName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    {/* <div className="description">Description:</div> */}
+                    <div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText={this.props.assetDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="asset-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => this.saveChanges(this.props)} /></div>
                 </div>
             )

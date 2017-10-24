@@ -137,26 +137,22 @@ module.exports = {
 
     setReminderStatusToClosed: (req, resp) => {
         const dbInstance = req.app.get('db');
-        var reminders = {
+        let reminderList = {
             overdue: [],
             upcoming: []
         }
 
         dbInstance.reminders.setReminderStatusToClosed(req.params.remind_id).then(res => {
-            
             dbInstance.reminders.getRemindersOverdue(1).then(res => {
                 console.log("all is", res)
-                reminders.overdue = res
+                reminderList.overdue = res
                 dbInstance.reminders.getRemindersComingUp7(1).then(res => {
-                    reminders.upcoming = res;
+                    reminderList.upcoming = res;
                     console.log("fsdfsd", reminders)
-                    
-                    resp.status(200).send(reminders)
+                    resp.status(200).send(reminderList)
                 })
-
             })
         })
-        
     },
 
     setReminderStatusToOpen: (req, res) => {
