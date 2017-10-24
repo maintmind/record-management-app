@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
-import "../UserInputForm.css";
+import '../ReminderModal/ReminderModal.css';
 import { connect } from 'react-redux';
 import { toggleModal, getAllAssets, updateReminderName, updateReminderDescription, updateReminderDue, addReminder } from '../../../ducks/reducer';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
+import {orange500} from 'material-ui/styles/colors';
+
 
 class ReminderModal extends Component {
+
+    constructor() {
+        super();
+
+        this.state= {
+            date: ''
+        }
+    }
     componentDidMount() {
         this.props.getAllAssets(this.props.user.user_id)
     }
@@ -13,7 +26,28 @@ class ReminderModal extends Component {
         this.props.toggleModal(null);
     }
 
+    handleDate = (event, date) => {
+        this.setState({
+            date: date
+        })
+        
+    }
+
     render(props) {
+        const styles = {
+                
+                underlineStyle: {
+                    borderColor: orange500,
+                },
+                
+            };
+
+            const style = {
+                    backgroundColor: orange500
+                    
+            };
+
+        
         const assetTitle = this.props.assetList.map(obj => {
             let result;
             if (obj.asset_id === this.props.assetView) {
@@ -34,12 +68,12 @@ class ReminderModal extends Component {
             <div className="modal_container">
                 <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                 <h2>ADD REMINDER</h2>
-                <div>Asset:</div><div>{assetTitle}</div>
-                <div>Category:</div><div>{categoryTitle}</div>
-                <div>Title:</div><div><input onChange={(e) => { this.props.updateReminderName(e.target.value) }} placeholder="reminder" /></div>
-                <div>Description:</div><div><textarea onChange={(e) => { this.props.updateReminderDescription(e.target.value) }} placeholder="reminder" /></div>
-                <div>Date Due:</div> <div><input onChange={(e) => { this.props.updateReminderDue(e.target.value) }} type="date" placeholder="" /></div>
-                <button onClick={() => this.submitReminder(this.props)}>Submit New Reminder</button>
+                <div className="asset-title" >Asset:</div><div style={{color:'red'}}>{assetTitle}</div>
+                <div className="asset-category">Category:</div><div style={{color:'red'}}>{categoryTitle}</div>
+                <div className="reminder-title">Title:</div><div><TextField onChange={(e) => { this.props.updateReminderName(e.target.value) }} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                <div className="description">Description:</div><div><TextField onChange={(e) => { this.props.updateReminderDescription(e.target.value) }} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}  /></div>
+                <div className="reminder-date">Date Due:</div> <div><DatePicker onChange={this.handleDate} hintText="mm/dd/yyyy"  underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
+                <div className="reminder-form-button"><RaisedButton label="Submit New Reminder" primary={false} style={style} buttonStyle={style} onClick={() => this.submitReminder({props: this.props, date: this.state.date})}/></div>
             </div>
         )
     }

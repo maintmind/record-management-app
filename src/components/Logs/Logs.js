@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, catDisp } from '../../ducks/reducer';
-
+import { getAllLogs, toggleModal, catDisp, deleteLog } from '../../ducks/reducer';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import './Logs.css';
 
@@ -10,6 +11,17 @@ class Logs extends Component {
         this.props.getAllLogs(this.props.user.user_id)
     }
 
+    confirmModal(log_id, user_id) {
+        confirmAlert({
+          title: 'Are you sure?',                      
+          message: 'Deleting this log will delete all information and images associated with it!',              
+          confirmLabel: 'Confirm',                           
+          cancelLabel: 'Cancel',                             
+          onConfirm: () => this.props.deleteLog(log_id, user_id),    
+          onCancel: () => {}, 
+        })
+      };
+
     render() {
         const displayLogs = this.props.logList.map((c, i) => {
             const completionDate = c.date_complete ? (c.date_complete).substring(0, (c.date_complete).indexOf('T')) : null
@@ -17,6 +29,10 @@ class Logs extends Component {
             if (c.cat_id === this.props.catView) {
                 return result = (
                     <div key={i} className="log_row">
+                        <div className="log_buttons">
+                        <button className="edit button" >Edit</button>
+                        <button className="delete button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)} >Delete</button>
+                        </div>
                         <div>{c.title}</div>
                         <div><i>{c.description}</i></div>
                         <div>{completionDate}</div>
@@ -42,6 +58,9 @@ class Logs extends Component {
                     <div>COST</div>
                     <div><small>click image to enlarge</small></div>
                 </div>
+                <div>
+                
+                </div>
                 {displayLogs}
             </div >
         );
@@ -55,7 +74,8 @@ function mapStateToProps(state) {
 const outputActions = {
     getAllLogs,
     toggleModal,
-    catDisp
+    catDisp,
+    deleteLog
 }
 
 export default connect(mapStateToProps, outputActions)(Logs);

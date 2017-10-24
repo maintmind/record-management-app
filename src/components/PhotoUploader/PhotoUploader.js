@@ -52,12 +52,15 @@ class PhotoUploader extends Component {
         };
 
         return (
-            <div className="imagePreview">
+            this.props.cloudinaryUrl ?
+                <div></div>
+                : 
+                <div className="imagePreview">
                 <Dropzone multiple={false} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
                     style={dropzoneStyle}>
-                    <div>To upload, click here, or drag an drop an image.</div>
+                    <div>To upload, click here, or drag an drop and image.</div>
                 </Dropzone>
-            </div>
+                </div>
         )
 
     }

@@ -23,6 +23,7 @@ description VARCHAR(500)
 
 CREATE TABLE logs (
 log_id SERIAL PRIMARY KEY,
+asset_id INTEGER REFERENCES assets,
 cat_id INTEGER REFERENCES categories,
 user_id INTEGER REFERENCES users,
 date_submit DATE,
@@ -35,6 +36,7 @@ cost MONEY
 
 CREATE TABLE reminders (
 remind_id SERIAL PRIMARY KEY,
+asset_id INTEGER REFERENCES assets,
 cat_id INTEGER REFERENCES categories,
 user_id INTEGER REFERENCES users,
 status VARCHAR(50),

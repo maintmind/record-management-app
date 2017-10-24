@@ -35,7 +35,7 @@ class PopOverComp extends Component {
     }
 
     //style for upcoming reminders
-    componentWillReceiveProps(props) {
+    componentWillReceiveProps(nextProps) {
         this.noRemindersMessage = <MenuItem primaryText="You have no reminders." className="hide" />
         this.popOverDisplayControl = [];
 
@@ -47,8 +47,9 @@ class PopOverComp extends Component {
 
         var overdueReminders =
 
-            this.props.reminderListOverdue.map((reminder, i) => {
+        nextProps.reminderListOverdue.map((reminder, i) => {
                 return (
+<<<<<<< HEAD
                     <div style={inlineStyle}>
                         <MenuItem key={reminder.remind_id}
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
@@ -59,6 +60,11 @@ class PopOverComp extends Component {
                          >cancel</i>}
                           >
                               
+=======
+                    <div key={reminder.remind_id}>
+                        <MenuItem primaryText={reminder.title + " " + reminder.description + " "}>
+                            <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}>Mark Complete</button>
+>>>>>>> master
                         </MenuItem>
                     </div>
                 )
@@ -67,10 +73,11 @@ class PopOverComp extends Component {
         this.popOverDisplayControl.push(overdueReminders)
 
         var upcomingReminders =
-            this.props.reminderListUpcoming.map((reminder, j) => {
+            nextProps.reminderListUpcoming.map((reminder, j) => {
 
 
                 return (
+<<<<<<< HEAD
                     <div>
                         <MenuItem key={reminder.remind_id}
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
@@ -83,6 +90,11 @@ class PopOverComp extends Component {
                              cancel</i>}
                          >
                         
+=======
+                    <div key={reminder.remind_id}>
+                        <MenuItem  primaryText={reminder.title + " " + reminder.description + " " + reminder.status}>
+                            <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")}>Mark Complete</button>
+>>>>>>> master
 
                         </MenuItem>
 

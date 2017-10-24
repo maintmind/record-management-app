@@ -16,7 +16,7 @@ import './Reminders.css';
             <div>
                 <div>ADD REMINDER</div>
                 <button onClick={() => this.props.toggleModal(null)}>CLOSE BUTTON</button>
-                <div>Title:</div><div><input onChange={ (e) => this.props.updateReminderName(e.target.value) } placeholder="reminder" /></div>
+                <div className>Title:</div><div><input onChange={ (e) => this.props.updateReminderName(e.target.value) } placeholder="reminder" /></div>
                 <div>Description:</div><div><textarea onChange={ (e) => this.props.updateReminderDescription(e.target.value) } placeholder="reminder" /></div>
                 <div>Date Due:</div><div><input onChange={ (e) => this.props.updateReminderDue(e.target.value) } type="date" placeholder="" /></div>
                 <div className="reminderform"><button onClick={ () => this.props.addReminder(this.props) } >Submit New Reminder</button></div>
