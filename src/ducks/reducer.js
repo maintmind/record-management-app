@@ -31,7 +31,8 @@ let initialState = {
     assetView: 0,
     catView: 0,
     modalToggler: null,
-    cloudinaryUrl: null
+    cloudinaryUrl: null,
+    editMode: false
 }
 
 
@@ -75,6 +76,7 @@ const TOGGLE_MODAL = "TOGGLE_MODAL";
 const ASSET_ROTATE = "ASSET_ROTATE";
 const CAT_DISP = "CAT_DISP";
 const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
+const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -169,6 +171,8 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
             return Object.assign({}, state, { cloudinaryUrl: action.payload })
+        case TOGGLE_EDIT_MENU:
+            return Object.assign({}, state, { editMode: action.payload })
 
         default:
             return state
@@ -485,14 +489,14 @@ export function toggleModal(str) {
     return fns.toggleModal(str)
 }
 
-// export function toggleEditMenu(str, asset_id, asset_title, asset_description, user_id) {
-//     let obj = {
-//         editView: str, 
-//         asset_id: asset_id,
-//         asset_title
-//     }
-//     return {
-//         type: TOGGLE_EDIT_MENU,
-//         payload: str
-//     }
-// }
+export function toggleEditMenu(str) {
+    // let obj = {
+    //     editView:
+    //     asset_id: asset_id,
+    //     asset_title
+    // }
+    return {
+        type: TOGGLE_EDIT_MENU,
+        payload: str
+    }
+}

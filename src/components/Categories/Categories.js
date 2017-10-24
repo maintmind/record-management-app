@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset } from '../../ducks/reducer';
+import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset,toggleEditMenu } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -46,6 +46,11 @@ class Categories extends Component {
         })
     };
 
+    toggleAddEditModal(str, bl) {
+        this.props.toggleEditMenu(bl)
+        this.props.toggleModal(str)
+    }
+
 
     render() {
         const displayCats = this.props.categoryList.map((c, i) => {
@@ -54,6 +59,7 @@ class Categories extends Component {
                 return result = (
                     <div key={i}>
                         <div key={i} className="cat_row">
+                        <button onClick={() => this.toggleAddEditModal('cat', true)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Category</button>
                             <button onClick={() => { this.confirmModal(c.cat_id, this.props.user.user_id) }}>Delete</button>
                             <div className="cat_title" onClick={() => this.showHideCat(c.cat_id)}>{c.title} - {c.description}</div>
                         </div>
@@ -74,10 +80,10 @@ class Categories extends Component {
         })
         return (
             <div className="category_viewer">
-                <button className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Asset</button>
+                <button onClick={() => this.toggleAddEditModal('asset', true)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Asset</button>
                 <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Delete Asset</button>
                 <h2 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetTitle}</h2>
-                <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
+                <button onClick={() => this.toggleAddEditModal('cat', false)} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
                     ADD CATEGORY
                 </button>
 
@@ -96,7 +102,8 @@ const outputActions = {
     toggleModal,
     catDisp,
     deleteCategory,
-    deleteAsset
+    deleteAsset,
+    toggleEditMenu
 }
 
 export default connect(mapStateToProps, outputActions)(Categories);

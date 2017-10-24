@@ -7,30 +7,67 @@
     border-width: 0px 0px 2px 2px;
 }
 
-.log_row {
-    background: #E7E7E7;
-    height: 60px;
-    margin: 5px 10px 5px 10px;
-    padding-left: 15px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
 .log_header {
     background: #333333;
     color: #ffffff;
     height: 60px;
     margin: 5px 10px -5px 10px;
-    padding-left: 15px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     border-bottom: 2px solid #DD4B1A;
 }
 
-.log_row img {
+.log_header_title {
+    width: 185px;
+    margin: 0px 20px 0px 70px;
+}
+
+.log_row {
+    background: #E7E7E7;
+    height: 60px;
+    margin: 5px 10px 5px 10px;
+    padding-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+}
+
+.log_buttons {
+    min-width: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+.log_title {
+    width: 185px;
+    margin-right: 20px;
+}
+
+.log_desc {
+    width: 425px;
+    margin-right: 20px;
+}
+
+.log_date {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.log_cost {
+    width: 175px;
+    margin-right: 20px;
+}
+
+.log_img {
+    width: 200px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.log_img img {
     height: 100%;
 }
 
@@ -51,10 +88,4 @@
 
 .addLog_show {
     visibility: visible;
-}
-
-.log_buttons {
-min-width: 10px;
-
-
 }
