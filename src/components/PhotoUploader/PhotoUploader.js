@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { newCloudinaryUrl } from '../../ducks/reducer';
+import { newCloudinaryUrl, createImageId } from '../../ducks/reducer';
 
 const preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 const url = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
@@ -35,6 +35,8 @@ class PhotoUploader extends Component {
                 this.props.newCloudinaryUrl(response.body.secure_url)
             }
         });
+
+        this.props.createImageId(this.props.cloudinaryUrl)
     }
 
 
@@ -70,7 +72,8 @@ function mapStateToProps(state) {
 }
 
 const outputActions = {
-    newCloudinaryUrl
+    newCloudinaryUrl,
+    createImageId
 }
 
 export default connect(mapStateToProps, outputActions)(PhotoUploader);

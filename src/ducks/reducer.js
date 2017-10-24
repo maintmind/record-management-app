@@ -77,6 +77,7 @@ const TOGGLE_MODAL = "TOGGLE_MODAL";
 const ASSET_ROTATE = "ASSET_ROTATE";
 const CAT_DISP = "CAT_DISP";
 const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
+const CREATE_IMAGE_ID = "CREATE_IMAGE_ID"
 const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
 
 // REDUCER 
@@ -174,6 +175,8 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
             return Object.assign({}, state, { cloudinaryUrl: action.payload })
+        case CREATE_IMAGE_ID:
+            return Object.assign({}, state, { newImageId: action.payload})
         case TOGGLE_EDIT_MENU:
             return Object.assign({}, state, { editMode: action.payload })
 
@@ -410,6 +413,15 @@ export function newCloudinaryUrl(str) {
     return {
         type: NEW_CLOUDINARY_URL,
         payload: str
+    }
+}
+
+export function createImageId(str) {
+    return {
+        type: CREATE_IMAGE_ID,
+        payload: axios.post(`/api/images/new`).then(response => {
+           return response.data
+        })
     }
 }
 

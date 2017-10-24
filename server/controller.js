@@ -88,6 +88,15 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
+    //IMAGES
+    saveImage: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { user_id, asset_id, cat_id, log_id, img_url, cloudinaryUrl } = req.body;
+        dbInstance.images.saveImage(user_id, asset_id, cat_id, log_id, img_url, cloudinaryUrl)
+            .then(img_id => res.status(200).send(img_id))
+            .catch(err => res.status(500).send(console.log(err)))
+    },
+
     //REMINDERS
     getAllRemindersForUser: (req, res) => {
         const dbInstance = req.app.get('db');

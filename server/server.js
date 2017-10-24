@@ -97,6 +97,9 @@ app.get('/api/logs/get_all/:cat_id', controller.getAllLogs)
 app.post('/api/logs/add', controller.addLog)
 app.delete('/api/logs/delete/:log_id/:user_id', controller.deleteLog)
 
+//IMAGES ENDPOINTS
+app.post('/api/images/new', controller.saveImage)
+
 //REMINDER ENDPOINTS
 app.post('/api/reminders/add', controller.addReminder)
 app.get('/api/reminders/overdue/:user_id', controller.getRemindersOverdue)
