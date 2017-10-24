@@ -4,16 +4,14 @@ import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { newCloudinaryUrl } from '../../ducks/reducer';
 
-const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
-const CLOUDINARY_UPLOAD_URL = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
+const preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+const url = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
 
 
 class PhotoUploader extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            uploadedFileCLoudinaryUrl: '',
-        };
+
     }
 
     onImageDrop(files) {
@@ -25,8 +23,8 @@ class PhotoUploader extends Component {
     }
 
     handleImageUpload(file) {
-        let upload = request.post(CLOUDINARY_UPLOAD_URL)
-            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+        let upload = request.post(url)
+            .field('upload_preset', preset)
             .field('file', file);
 
         upload.end((err, response) => {

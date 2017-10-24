@@ -45,3 +45,12 @@ date_due DATE,
 title VARCHAR(180),
 description VARCHAR(500)
 );
+
+CREATE TABLE images (
+img_id SERIAL PRIMARY KEY,
+user_id INTEGER REFERENCES users,
+asset_id INTEGER REFERENCES asset,
+cat_id INTEGER REFERENCES categories,
+log_id INTEGER REFERENCES logs,
+img_url VARCHAR(500),
+);
