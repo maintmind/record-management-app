@@ -1,5 +1,5 @@
 import axios from 'axios';
-import fns from '../utilities/testedActions';
+var fns = require('../utilities/testedActions');
 
 let initialState = {
     user: {},
@@ -94,14 +94,12 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { assetName: action.payload })
         case UPDATE_ASSET_DESCRIPTION:
             return Object.assign({}, state, { assetDescription: action.payload })
-
         case UPDATE_CATEGORY_ID:
             return Object.assign({}, state, { cat_id: action.payload })
         case UPDATE_CATEGORY_NAME:
             return Object.assign({}, state, { categoryName: action.payload })
         case UPDATE_CATEGORY_DESCRIPTION:
             return Object.assign({}, state, { categoryDescription: action.payload })
-
         case UPDATE_LOG_ID:
             return Object.assign({}, state, { logID: action.payload })
         case UPDATE_LOG_COMPLETE_DATE:
@@ -114,7 +112,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logDescription: action.payload })
         case UPDATE_LOG_COST:
             return Object.assign({}, state, { logCost: action.payload })
-
         case UPDATE_REMINDER_ID:
             return Object.assign({}, state, { reminderID: action.payload })
         case UPDATE_REMINDER_STATUS:
@@ -145,7 +142,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { categoryList: action.payload })
         case DELETE_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
-            
+
         case GET_ALL_LOGS + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case ADD_LOG + "_FULFILLED":
@@ -162,7 +159,7 @@ export default function dashReducer(state = initialState, action) {
                 upcoming: action.payload.upcoming,
                 overdue: action.payload.past
             }
-            return Object.assign({} , state, {reminderListUpcoming: newReminders.upcoming, reminderListOverdue: newReminders.overdue})
+            return Object.assign({}, state, { reminderListUpcoming: newReminders.upcoming, reminderListOverdue: newReminders.overdue })
         case DELETE_REMINDER + "_FULFILLED":
             let updatedReminders = {
                 upcoming: action.payload.upcoming,
@@ -177,7 +174,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderListOverdue: action.payload.overdue, reminderListUpcoming: action.payload.upcoming })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
-            
+
         case TOGGLE_MODAL:
             return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: null, assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
         case ASSET_ROTATE:
@@ -189,12 +186,12 @@ export default function dashReducer(state = initialState, action) {
         case TOGGLE_EDIT_MENU:
             return Object.assign({}, state, { editMode: action.payload })
         case TOGGLE_LOG_DETAIL_VIEW:
-            return Object.assign({}, state, {logDetailsView: action.payload})
+            return Object.assign({}, state, { logDetailsView: action.payload })
         case TOGGLE_ALL_LOGS_VIEW:
-            return Object.assign({}, state, {allLogsView: action.payload})
+            return Object.assign({}, state, { allLogsView: action.payload })
 
         case GET_USER_INFO + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload })   
+            return Object.assign({}, state, { user: action.payload })
 
         default:
             return state
@@ -310,7 +307,7 @@ export function updateReminderDescription(reminderDescription) {
 
 //AUTH0 - GET USER//
 export function getUserInfo() {
-    const userInfo = axios.get('/auth/me').then( response => {
+    const userInfo = axios.get('/auth/me').then(response => {
         return response.data
     })
     return {
@@ -395,6 +392,7 @@ export function deleteCategory(cat_id, user_id) {
 
 //LOGS//
 export function getAllLogs(num) {
+    console.log('the num is', num)
     return {
         type: GET_ALL_LOGS,
         payload: axios.get(`/api/logs/get_all/${num}`).then(response => {
@@ -404,8 +402,8 @@ export function getAllLogs(num) {
 }
 
 export function addLog(obj) {
-    let newObj = Object.assign({}, obj.props, {logCompleteDate: obj.date})
-    
+    let newObj = Object.assign({}, obj.props, { logCompleteDate: obj.date })
+
     return {
         type: ADD_LOG,
         payload: axios.post(`/api/logs/add`, newObj).then(response => {
@@ -433,12 +431,7 @@ export function newCloudinaryUrl(str) {
 // REMINDERS//
 
 export function getAllReminders(num) {
-    return {
-        type: GET_ALL_REMINDERS,
-        payload: axios.get(`/api/reminders/get_all/${num}`).then(response => {
-            return response.data
-        })
-    }
+    fns.getAllReminders(num)
 }
 
 export function getRemindersOverdue(num) {
@@ -460,7 +453,7 @@ export function getRemindersComingUp(num) {
 }
 
 export function addReminder(obj) {
-    let newObj = Object.assign({}, obj.props, {reminderDue: obj.date})
+    let newObj = Object.assign({}, obj.props, { reminderDue: obj.date })
     return {
         type: ADD_REMINDER,
         payload: axios.post(`/api/reminders/add`, newObj).then(response => {
@@ -480,13 +473,7 @@ export function editReminder(obj) {
 }
 
 export function deleteReminder(remind_id, user_id) {
-    const reminders = axios.delete(`/api/reminders/delete/${remind_id}/${user_id}`).then((res) => {
-        return res.data
-    })
-    return {
-        type: DELETE_REMINDER,
-        payload: reminders
-    }
+    return fns.deleteReminder(remind_id, user_id)
 }
 
 export function setReminderStatusToClosed(num, type) {
@@ -534,14 +521,14 @@ export function toggleEditMenu(str) {
     }
 }
 
-export function toggleLogDetailView (val) {
+export function toggleLogDetailView(val) {
     return {
         type: TOGGLE_LOG_DETAIL_VIEW,
         payload: val
     }
 }
 
-export function toggleAllLogsView (val) {
+export function toggleAllLogsView(val) {
     return {
         type: TOGGLE_ALL_LOGS_VIEW,
         payload: val

@@ -30,33 +30,33 @@ class LogModal extends Component {
 
     }
 
+    saveChanges() {
+
+    }
+
 
 
     render(props) {
         const styles = {
-
             underlineStyle: {
                 borderColor: orange500,
             },
-
         };
 
         const style = {
             backgroundColor: orange500
 
         };
+        
         if (!this.props.editMode) {
             return (
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>ADD LOG</h2>
-                    {/* <div className="date">Date of Service:</div> */}
                     <div><DatePicker onChange={this.handleDate} hintText="Date of service" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
                     {/* <div>Title:</div> */}
                     <div><TextField onChange={(e) => this.props.updateLogName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    {/* <div className="description">Description:</div> */}
                     <div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
-                    {/* <div className="cost">Cost:</div> */}
                      <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText="Cost" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div><PhotoUploader /></div>
                     <div className="imagePreview">{this.props.cloudinaryUrl ?
@@ -71,7 +71,7 @@ class LogModal extends Component {
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>EDIT LOG</h2>
-                    {/* <div>Title:</div><div><TextField onChange={(e) => this.props.updateLogName(e.target.value)} hintText={this.props.logName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    <div>Title:</div><div><TextField onChange={(e) => this.props.updateLogName(e.target.value)} hintText={this.props.logName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="description">Description:</div><div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText={this.props.logDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="date">Date of Service:</div> <div><DatePicker onChange={this.handleDate} hintText={this.props.logCompleteDate} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
                     <div className="cost">Cost:</div> <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText={this.props.logCost} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
@@ -80,7 +80,7 @@ class LogModal extends Component {
                         <img src={this.props.cloudinaryUrl} alt="" />
                         : "Your upload will display here."}
                     </div>
-                    <div className="log-form-button"><RaisedButton label="Submit New Log" primary={false} style={style} buttonStyle={style} onClick={() => this.submitLog({ props: this.props, date: this.state.date })} /></div> */}
+                    <div className="log-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => this.saveChanges()} /></div>
                 </div>
             )
         }
