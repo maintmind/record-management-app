@@ -41,12 +41,19 @@
 }
 
 .log_buttons button {
-    background: red;
     width: 20px;
     height: 20px;
     cursor: pointer;
     border-style: none;
     background: none;
+}
+
+.log_info {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .log_title {

@@ -1,0 +1,16 @@
+.all_logs_modal {
+    position: absolute;
+    background: white;
+    box-shadow: 0px 1px 15px #000000; 
+    border-radius: 15px;
+    width: 90%;
+    height: 90%;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+.all_logs_modal button {
+    width: 10%;
+    height: 5%;
+}

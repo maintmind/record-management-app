@@ -32,7 +32,9 @@ let initialState = {
     catView: 0,
     modalToggler: null,
     cloudinaryUrl: null,
-    editMode: false
+    editMode: false,
+    logDetailsView: false,
+    allLogsView: false
 }
 
 
@@ -68,6 +70,7 @@ const ADD_LOG = "ADD_LOG";
 const DELETE_LOG = "DELETE_LOG";
 const GET_ALL_REMINDERS = "GET_ALL_REMINDERS";
 const ADD_REMINDER = "ADD_REMINDER";
+const EDIT_REMINDER = "EDIT_REMINDER";
 const DELETE_REMINDER = "DELETE_REMINDER";
 const GET_REMINDERS_OVERDUE = "REMINDER OVERDUE";
 const GET_REMINDERS_COMING_UP = "GET_REMINDERS_COMING_UP";
@@ -79,6 +82,8 @@ const CAT_DISP = "CAT_DISP";
 const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
 const GET_USER_INFO = "GET_USER_INFO";
 const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
+const TOGGLE_LOG_DETAIL_VIEW = "TOGGLE_LOG_DETAIL_VIEW";
+const TOGGLE_ALL_LOGS_VIEW = "TOGGLE_ALL_LOGS_VIEW"
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -152,8 +157,14 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
         case ADD_REMINDER + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
+        case EDIT_REMINDER + "_FULFILLED":
+            let newReminders = {
+                upcoming: action.payload.upcoming,
+                overdue: action.payload.past
+            }
+            return Object.assign({} , state, {reminderListUpcoming: newReminders.upcoming, reminderListOverdue: newReminders.overdue})
         case DELETE_REMINDER + "_FULFILLED":
-            var updatedReminders = {
+            let updatedReminders = {
                 upcoming: action.payload.upcoming,
                 overdue: action.payload.past
             }
@@ -177,6 +188,10 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { cloudinaryUrl: action.payload })
         case TOGGLE_EDIT_MENU:
             return Object.assign({}, state, { editMode: action.payload })
+        case TOGGLE_LOG_DETAIL_VIEW:
+            return Object.assign({}, state, {logDetailsView: action.payload})
+        case TOGGLE_ALL_LOGS_VIEW:
+            return Object.assign({}, state, {allLogsView: action.payload})
 
         case GET_USER_INFO + '_FULFILLED':
             return Object.assign({}, state, { user: action.payload })   
@@ -426,26 +441,6 @@ export function getAllReminders(num) {
     }
 }
 
-export function addReminder(obj) {
-    let newObj = Object.assign({}, obj.props, {reminderDue: obj.date})
-    return {
-        type: ADD_REMINDER,
-        payload: axios.post(`/api/reminders/add`, newObj).then(response => {
-            return response.data
-        })
-    }
-}
-
-export function deleteReminder(remind_id, user_id) {
-    const reminders = axios.delete(`/api/logs/delete/${remind_id}/${user_id}`).then((res) => {
-        return res.data
-    })
-    return {
-        type: DELETE_REMINDER,
-        payload: reminders
-    }
-}
-
 export function getRemindersOverdue(num) {
     return {
         type: GET_REMINDERS_OVERDUE,
@@ -461,6 +456,36 @@ export function getRemindersComingUp(num) {
         payload: axios.get(`/api/reminders/coming-in/${num}`).then(response => {
             return response.data
         })
+    }
+}
+
+export function addReminder(obj) {
+    let newObj = Object.assign({}, obj.props, {reminderDue: obj.date})
+    return {
+        type: ADD_REMINDER,
+        payload: axios.post(`/api/reminders/add`, newObj).then(response => {
+            return response.data
+        })
+    }
+}
+
+export function editReminder(obj) {
+    const reminders = axios.patch(`/api/reminders/edit`, obj).then(res => {
+        return res.data
+    })
+    return {
+        type: EDIT_REMINDER,
+        payload: reminders
+    }
+}
+
+export function deleteReminder(remind_id, user_id) {
+    const reminders = axios.delete(`/api/reminders/delete/${remind_id}/${user_id}`).then((res) => {
+        return res.data
+    })
+    return {
+        type: DELETE_REMINDER,
+        payload: reminders
     }
 }
 
@@ -506,5 +531,19 @@ export function toggleEditMenu(str) {
     return {
         type: TOGGLE_EDIT_MENU,
         payload: str
+    }
+}
+
+export function toggleLogDetailView (val) {
+    return {
+        type: TOGGLE_LOG_DETAIL_VIEW,
+        payload: val
+    }
+}
+
+export function toggleAllLogsView (val) {
+    return {
+        type: TOGGLE_ALL_LOGS_VIEW,
+        payload: val
     }
 }
