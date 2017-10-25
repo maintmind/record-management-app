@@ -1,5 +1,5 @@
 import axios from 'axios';
-import fns from '../utilities/testedActions';
+var fns = require('../utilities/testedActions');
 
 let initialState = {
     user: {},
@@ -89,14 +89,12 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { assetName: action.payload })
         case UPDATE_ASSET_DESCRIPTION:
             return Object.assign({}, state, { assetDescription: action.payload })
-
         case UPDATE_CATEGORY_ID:
             return Object.assign({}, state, { cat_id: action.payload })
         case UPDATE_CATEGORY_NAME:
             return Object.assign({}, state, { categoryName: action.payload })
         case UPDATE_CATEGORY_DESCRIPTION:
             return Object.assign({}, state, { categoryDescription: action.payload })
-
         case UPDATE_LOG_ID:
             return Object.assign({}, state, { logID: action.payload })
         case UPDATE_LOG_COMPLETE_DATE:
@@ -109,7 +107,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logDescription: action.payload })
         case UPDATE_LOG_COST:
             return Object.assign({}, state, { logCost: action.payload })
-
         case UPDATE_REMINDER_ID:
             return Object.assign({}, state, { reminderID: action.payload })
         case UPDATE_REMINDER_STATUS:
@@ -188,11 +185,9 @@ export default function dashReducer(state = initialState, action) {
 
 // ACTION CREATORS
 export function updateAssetID(asset_id) {
-    return {
-        type: UPDATE_ASSET_ID,
-        payload: asset_id
-    }
+    return fns.updateAssetID(asset_id)
 }
+
 export function updateAssetName(assetName) {
     return {
         type: UPDATE_ASSET_NAME,
@@ -293,22 +288,26 @@ export function updateReminderDescription(reminderDescription) {
     }
 }
 
+/////////////////////////////////////
+
 //AUTH0 - GET USER//
 export function getUserInfo() {
-    const userInfo = axios.get('/auth/me').then( response => {
-        return response.data
-    })
+    // console.log('USER_INFO: ', userInfo)
     return {
         type: GET_USER_INFO,
-        payload: userInfo
+        payload: axios.get('/auth/me').then( response => {
+            return response.data
+        })
     }
 }
 
+////////////////////////////////////
+
 //ASSETS//
-export function getAllAssets(num) {
+export function getAllAssets(user_id) {
     return {
         type: GET_ALL_ASSETS,
-        payload: axios.get(`/api/assets/get_all/${num}`).then(response => {
+        payload: axios.get(`/api/assets/get_all/${user_id}`).then(response => {
             return response.data
         })
     }
@@ -418,12 +417,7 @@ export function newCloudinaryUrl(str) {
 // REMINDERS//
 
 export function getAllReminders(num) {
-    return {
-        type: GET_ALL_REMINDERS,
-        payload: axios.get(`/api/reminders/get_all/${num}`).then(response => {
-            return response.data
-        })
-    }
+    fns.getAllReminders(num)
 }
 
 export function addReminder(obj) {
@@ -437,19 +431,15 @@ export function addReminder(obj) {
 }
 
 export function deleteReminder(remind_id, user_id) {
-    const reminders = axios.delete(`/api/logs/delete/${remind_id}/${user_id}`).then((res) => {
-        return res.data
-    })
-    return {
-        type: DELETE_REMINDER,
-        payload: reminders
-    }
+    return fns.deleteReminder(remind_id, user_id)
 }
 
 export function getRemindersOverdue(num) {
+    console.log("num: ", num)
     return {
         type: GET_REMINDERS_OVERDUE,
         payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
+            console.log("overdue response: ", response.data)
             return response.data
         })
     }
@@ -485,10 +475,7 @@ export function setReminderStatusToOpen(num) {
 
 //VIEWS
 export function assetRotate(num) {
-    return {
-        type: ASSET_ROTATE,
-        payload: num
-    }
+    return fns.assetRotate(num)
 }
 
 export function catDisp(num) {
@@ -503,8 +490,5 @@ export function toggleModal(str) {
 }
 
 export function toggleEditMenu(str) {
-    return {
-        type: TOGGLE_EDIT_MENU,
-        payload: str
-    }
+    return fns.toggleEditMenu(str)
 }
