@@ -293,22 +293,28 @@ export function updateReminderDescription(reminderDescription) {
     }
 }
 
+/////////////////////////////////////
+
 //AUTH0 - GET USER//
 export function getUserInfo() {
+    
     const userInfo = axios.get('/auth/me').then( response => {
         return response.data
     })
+    console.log('USER_INFO: ', userInfo)
     return {
         type: GET_USER_INFO,
         payload: userInfo
     }
 }
 
+////////////////////////////////////
+
 //ASSETS//
-export function getAllAssets(num) {
+export function getAllAssets(user_id) {
     return {
         type: GET_ALL_ASSETS,
-        payload: axios.get(`/api/assets/get_all/${num}`).then(response => {
+        payload: axios.get(`/api/assets/get_all/${user_id}`).then(response => {
             return response.data
         })
     }

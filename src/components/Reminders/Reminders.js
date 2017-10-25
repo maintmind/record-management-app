@@ -9,7 +9,7 @@ import './Reminders.css';
  class Reminders extends Component {
     
     componentDidMount(){
-        // this.props.getAllReminders(this.props.user.user.id)
+        // this.props.getAllReminders(this.props.user)
     }
     render () {
         return (

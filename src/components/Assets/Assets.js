@@ -8,7 +8,8 @@ import './Assets.css';
 class Assets extends Component {
     componentDidMount() {
         this.props.getUserInfo()
-        this.props.getAllAssets(this.props.user)
+        console.log('GET_USER_INFO(): ', getUserInfo())
+        this.props.getAllAssets(this.props.user.user_id)
     }
 
     changeAsset(num) {
