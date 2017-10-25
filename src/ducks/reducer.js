@@ -31,7 +31,7 @@ let initialState = {
     assetView: 0,
     catView: 0,
     modalToggler: null,
-    cloudinaryUrl: null,
+    cloudinaryUrl: [],
     newImageId: null,
     editMode: false
 }
@@ -168,7 +168,7 @@ export default function dashReducer(state = initialState, action) {
         case CAT_DISP:
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
-            return Object.assign({}, state, { cloudinaryUrl: action.payload })
+            return Object.assign({}, state, { cloudinaryUrl: [...state.cloudinaryUrl, action.payload] })
         case CREATE_IMAGE_ID + "_FULFILLED":
             console.log("reducer hit:", action.payload);
             return Object.assign({}, state, { newImageId: action.payload })
