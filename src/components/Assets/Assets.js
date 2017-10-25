@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal, toggleEditMenu } from '../../ducks/reducer';
 import Categories from '../Categories/Categories';
 
 
 import './Assets.css';
 
-import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal } from '../../ducks/reducer';
 
 class Assets extends Component {
     componentDidMount() {
@@ -17,6 +16,11 @@ class Assets extends Component {
         this.props.assetRotate(num)
         this.props.catDisp(0)
         this.props.updateAssetID(num)
+    }
+
+    toggleAddModal(str) {
+        this.props.toggleEditMenu(false)
+        this.props.toggleModal(str)
     }
 
     render() {
@@ -33,7 +37,7 @@ class Assets extends Component {
             <div className="assets_viewer">
                 <div className="asset_tabs_container">
                     {displayAsset}
-                    <button onClick={() => this.props.toggleModal('asset')} className="add_asset_button">ADD ASSET</button>
+                    <button onClick={() => this.toggleAddModal('asset')} className="add_asset_button">ADD ASSET</button>
                 </div>
 
                 
@@ -51,7 +55,8 @@ const outputActions = {
     assetRotate,
     catDisp,
     updateAssetID,
-    toggleModal
+    toggleModal,
+    toggleEditMenu
 }
 
 export default connect(mapStateToProps, outputActions)(Assets);

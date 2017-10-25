@@ -34,6 +34,12 @@
     padding: 10px;
 }
 
+.imagePreview img {
+    /* max-width: 100%; */
+    max-width: auto;
+    max-height: 150px;
+}
+
 .log-form-button {
     padding: 10px;
 }

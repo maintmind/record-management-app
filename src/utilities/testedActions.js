@@ -3,7 +3,8 @@ const UPDATE_REMINDER_DESCRIPTION = "UPDATE_REMINDER_DESCRIPTION";
 const UPDATE_REMINDER_NAME = "UPDATE_REMINDER_NAME";
 const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
 const UPDATE_LOG_DESCRIPTION = "UPDATE_LOG_DESCRIPTION";
-
+const UPDATE_LOG_COST = "UPDATE_LOG_COST";
+const TOGGLE_MODAL = "TOGGLE_MODAL";
 
 module.exports = {
     updateLogName(logName) {
@@ -37,4 +38,18 @@ module.exports = {
         }
     },
 
+    toggleModal(str) {
+        return {
+            type: TOGGLE_MODAL,
+            payload: str
+        }
+    },
+
+    updateLogCost(logCost) {
+        return {
+            type: UPDATE_LOG_COST,
+            payload: logCost
+        }
+    }
+    
 }
