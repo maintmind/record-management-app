@@ -57,7 +57,15 @@ class PopOverComp extends Component {
                             onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
                          
                          >cancel</i>}
+                         rightIcon={<i class="material-icons"
+                             onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
+                         
+                         >edit</i>}
                           >
+
+             
+
+                        }
                               
                         </MenuItem>
                     </div>
@@ -76,11 +84,15 @@ class PopOverComp extends Component {
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
                          /* onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")} */
                          rightIcon={<i class="material-icons"
-                                    onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
+                                   // onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
                          
                          >
                              
                              cancel</i>}
+                        rightIcon={<i class="material-icons"
+                            // onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
+                         
+                         >edit</i>}
                          >
                         
 

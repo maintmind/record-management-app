@@ -3,6 +3,9 @@ var axios = require('axios');
 const UPDATE_LOG_NAME = "UPDATE_LOG_NAME";
 const DELETE_REMINDER_FULFILLED = "DELETE_REMINDER_FULFILLED";
 const GET_ALL_REMINDERS = "GET_ALL_REMINDERS";
+const UPDATE_REMINDER_DESCRIPTION = "UPDATE_REMINDER_DESCRIPTION";
+const UPDATE_REMINDER_NAME = "UPDATE_REMINDER_NAME";
+const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
 const UPDATE_LOG_DESCRIPTION = "UPDATE_LOG_DESCRIPTION";
 const UPDATE_LOG_COST = "UPDATE_LOG_COST";
 const TOGGLE_MODAL = "TOGGLE_MODAL";
@@ -31,6 +34,24 @@ module.exports = {
                 console.log(res.data);
                 cb(res);
             })
+        }
+    },
+    updateReminderDescription(reminderDescription) {
+        return {
+            type: UPDATE_REMINDER_DESCRIPTION,
+            payload: reminderDescription
+        }
+    },
+   updateReminderName(reminderName) {
+        return {
+            type: UPDATE_REMINDER_NAME,
+            payload: reminderName
+        }
+    },
+    updateReminderStatus(reminderStatus) {
+        return {
+            type: UPDATE_REMINDER_STATUS,
+            payload: reminderStatus
         }
     },
     updateLogDescription(logDescription) {
