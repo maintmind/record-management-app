@@ -38,8 +38,6 @@ class Assets extends Component {
                     {displayAsset}
                     <button onClick={() => this.toggleAddModal('asset')} className="add_asset_button">ADD ASSET</button>
                 </div>
-
-                
                 <Categories />
             </div>
         );
