@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset,toggleEditMenu, updateAssetName, updateAssetDescription, updateCategoryName, updateCategoryDescription, updateCatID } from '../../ducks/reducer';
+import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset, toggleEditMenu, updateAssetName, updateAssetDescription, updateCategoryName, updateCategoryDescription, updateCatID } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -11,7 +11,7 @@ import './Categories.css';
 
 class Categories extends Component {
     componentDidMount() {
-        this.props.getAllCategories(this.props.user.user_id)
+        this.props.getAllCategories(this.props.user)
     };
 
     showHideCat(cat_id) {
@@ -63,8 +63,8 @@ class Categories extends Component {
                 return result = (
                     <div key={i}>
                         <div key={i} className="cat_row">
-                        <button onClick={() => this.toggleAddEditModal('cat', true, c.title, c.description, c.cat_id)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Category</button>
-                            <button onClick={() => { this.confirmModal(c.cat_id, this.props.user.user_id) }}>Delete</button>
+                            <button onClick={() => this.toggleAddEditModal('cat', true, c.title, c.description, c.cat_id)} className={this.props.assetView === 0 ? "addCat_hide" : "fa fa-pencil-square-o addCat_show"}></button>
+                            <button onClick={() => { this.confirmModal(c.cat_id, this.props.user.user_id) }} className="fa fa-trash"></button>
                             <div className="cat_title" onClick={() => this.showHideCat(c.cat_id)}>{c.title} - {c.description}</div>
                         </div>
                         <div className={c.cat_id === this.props.catView ? "addCat_show" : "addCat_hide"}>
@@ -77,25 +77,29 @@ class Categories extends Component {
         })
         const assetTitle = () => {
             const assets = this.props.assetList
-            for(var i = 0; i < assets.length; i++) {
-                if(assets[i].asset_id === this.props.assetView) {
+            for (var i = 0; i < assets.length; i++) {
+                if (assets[i].asset_id === this.props.assetView) {
                     return assets[i].title
                 }
             }
         }
         const assetDesc = () => {
             const assets = this.props.assetList
-            for(var i = 0; i < assets.length; i++) {
-                if(assets[i].asset_id === this.props.assetView) {
+            for (var i = 0; i < assets.length; i++) {
+                if (assets[i].asset_id === this.props.assetView) {
                     return assets[i].description
                 }
             }
         }
         return (
             <div className="category_viewer">
-                <button onClick={() => this.toggleAddEditModal('asset', true, assetTitle(), assetDesc())} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Edit Asset</button>
-                <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Delete Asset</button>
-                <h2 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetDesc()}</h2>
+                <div className="asset_info">
+                    <div className="asset_button_container">
+                        <button onClick={() => this.toggleAddEditModal('asset', true, assetTitle(), assetDesc())} className={this.props.assetView === 0 ? "addCat_hide" : "fa fa-pencil-square-o addCat_show"}></button>
+                        <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "fa fa-trash addCat_show"}></button>
+                    </div>
+                    <h1 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetDesc()}</h1>
+                </div>
                 <button onClick={() => this.toggleAddEditModal('cat', false)} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
                     ADD CATEGORY
                 </button>
