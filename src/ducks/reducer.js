@@ -288,22 +288,26 @@ export function updateReminderDescription(reminderDescription) {
     }
 }
 
+/////////////////////////////////////
+
 //AUTH0 - GET USER//
 export function getUserInfo() {
-    const userInfo = axios.get('/auth/me').then( response => {
-        return response.data
-    })
+    // console.log('USER_INFO: ', userInfo)
     return {
         type: GET_USER_INFO,
-        payload: userInfo
+        payload: axios.get('/auth/me').then( response => {
+            return response.data
+        })
     }
 }
 
+////////////////////////////////////
+
 //ASSETS//
-export function getAllAssets(num) {
+export function getAllAssets(user_id) {
     return {
         type: GET_ALL_ASSETS,
-        payload: axios.get(`/api/assets/get_all/${num}`).then(response => {
+        payload: axios.get(`/api/assets/get_all/${user_id}`).then(response => {
             return response.data
         })
     }
@@ -431,9 +435,11 @@ export function deleteReminder(remind_id, user_id) {
 }
 
 export function getRemindersOverdue(num) {
+    console.log("num: ", num)
     return {
         type: GET_REMINDERS_OVERDUE,
         payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
+            console.log("overdue response: ", response.data)
             return response.data
         })
     }
