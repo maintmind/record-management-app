@@ -11,17 +11,16 @@ const url = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
 class PhotoUploader extends Component {
     constructor(props) {
         super(props);
-
+        this.state = { files: [] }
 
     }
 
-    onImageDrop(files) {
-        console.log(files)
+    onImageDrop = (files) => {
         this.setState({
-            uploadedFile: files
+            files
         });
-        this.handleImageUpload(files)
-
+        console.log(this.state.files)
+        // this.handleImageUpload(files)
     }
 
     handleImageUpload(file) {
@@ -40,7 +39,6 @@ class PhotoUploader extends Component {
         });
     }
 
-
     render() {
         const dropzoneStyle = {
             width: "50%",
@@ -57,7 +55,7 @@ class PhotoUploader extends Component {
                 <div></div>
                 :
                 <div className="imagePreview">
-                    <Dropzone multiple={false} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
+                    <Dropzone accept="images/*" onDrop={this.onImageDrop.bind(this)}
                         style={dropzoneStyle}>
                         <div>To upload, click here, or drag an drop and image.</div>
                     </Dropzone>

@@ -29,7 +29,7 @@ module.exports = {
     getAllReminders: function (num, cb) {
         return {
             type: GET_ALL_REMINDERS,
-            payload: axios.get(`http://localhost:3005/api/reminders/get_all/${num}`).then((res)=>{
+            payload: axios.get(`http://localhost:3005/api/reminders/get_all/${num}`).then((res) => {
                 // console.log(res.data);
                 cb(res);
             })
@@ -41,7 +41,7 @@ module.exports = {
             payload: reminderDescription
         }
     },
-   updateReminderName(reminderName) {
+    updateReminderName(reminderName) {
         return {
             type: UPDATE_REMINDER_NAME,
             payload: reminderName
@@ -59,19 +59,17 @@ module.exports = {
             payload: logDescription
         }
     },
-
     toggleModal(str) {
         return {
             type: TOGGLE_MODAL,
             payload: str
         }
     },
-
     updateLogCost(logCost) {
         return {
             type: UPDATE_LOG_COST,
             payload: logCost
         }
     }
-    
+
 }
