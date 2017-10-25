@@ -41,7 +41,8 @@
 }
 
 .log_buttons button {
-    width: 25px;
+    background: red;
+    width: 20px;
     height: 20px;
     cursor: pointer;
     border-style: none;
