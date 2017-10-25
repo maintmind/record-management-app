@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import request from 'superagent';
+import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { newCloudinaryUrl, createImageId } from '../../ducks/reducer';
@@ -24,27 +25,53 @@ class PhotoUploader extends React.Component {
 
 
     handleImageUpload(files) {
-        console.log(files)
+        // Push all the axios request promise into a single array
         const uploaders = files.map(file => {
-            console.log(file.name)
-            let upload = request.post(url)
-                .field('upload_preset', preset)
-                .field('file', file);
+            // Initial FormData
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("tags", `codeinfuse, medium, gist`);
+            formData.append("upload_preset", preset); // Replace the preset name with your own
+            formData.append("api_key", 428332871437726); // Replace API key with your own Cloudinary key
+            formData.append("timestamp", (Date.now() / 1000) | 0);
 
-            upload.end((err, response) => {
-                if (err) {
-                    console.error(err);
-                }
-                if (response.body.secure_url !== '') {
-                    console.log(response.body.secure_url)
-                    this.props.newCloudinaryUrl(response.body.secure_url)
-                    // this.props.createImageId(this.props)
-                }
-
+            // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+            return axios.post(url, formData, {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+            }).then(response => {
+                const data = response.data;
+                console.log(data);
+                // this.props.newCloudinaryUrl(response.data.secure_url) // You should store this URL for future references in your app
             })
-
         });
-        console.log(uploaders)
+
+        // Once all the files are uploaded 
+        axios.all(uploaders).then(() => {
+            console.log("DONE")
+            // ... perform after upload is successful operation
+        });
+
+        // console.log(files)
+        // const uploaders = files.map(file => {
+        //     console.log(file.name)
+        //     let upload = request.post(url)
+        //         .field('upload_preset', preset)
+        //         .field('file', file);
+
+        //     upload.end((err, response) => {
+        //         if (err) {
+        //             console.error(err);
+        //         }
+        //         if (response.body.secure_url !== '') {
+        //             console.log(response.body.secure_url)
+        //             this.props.newCloudinaryUrl(response.body.secure_url)
+        //             // this.props.createImageId(this.props)
+        //         }
+
+        //     })
+
+        // });
+        // console.log(uploaders)
     }
 
 

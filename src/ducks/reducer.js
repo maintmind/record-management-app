@@ -31,16 +31,10 @@ let initialState = {
     assetView: 0,
     catView: 0,
     modalToggler: null,
-<<<<<<< HEAD
-    cloudinaryUrl: [],
-    newImageId: null,
-    editMode: false
-=======
     cloudinaryUrl: null,
     editMode: false,
     logDetailsView: false,
     allLogsView: false
->>>>>>> master
 }
 
 
@@ -147,10 +141,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { categoryList: action.payload })
         case DELETE_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         case GET_ALL_LOGS + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case ADD_LOG + "_FULFILLED":
@@ -181,10 +171,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderListOverdue: action.payload.overdue, reminderListUpcoming: action.payload.upcoming })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         case TOGGLE_MODAL:
             return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: null, assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
         case ASSET_ROTATE:
@@ -417,11 +403,6 @@ export function getAllLogs(num) {
 
 export function addLog(obj) {
     let newObj = Object.assign({}, obj.props, { logCompleteDate: obj.date })
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> master
     return {
         type: ADD_LOG,
         payload: axios.post(`/api/logs/add`, newObj).then(response => {
@@ -472,16 +453,12 @@ export function addReminder(obj) {
     }
 }
 
-export function deleteReminder(remind_id, user_id) {
-    return fns.deleteReminder(remind_id, user_id)
-}
-
 export function getRemindersOverdue(num) {
     console.log("num: ", num)
     return {
         type: GET_REMINDERS_OVERDUE,
         payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
-            console.log("overdue response: ", response.data)
+            // console.log("overdue response: ", response.data)
             return response.data
         })
     }
@@ -491,16 +468,6 @@ export function getRemindersComingUp(num) {
     return {
         type: GET_REMINDERS_COMING_UP,
         payload: axios.get(`/api/reminders/coming-in/${num}`).then(response => {
-            return response.data
-        })
-    }
-}
-
-export function addReminder(obj) {
-    let newObj = Object.assign({}, obj.props, { reminderDue: obj.date })
-    return {
-        type: ADD_REMINDER,
-        payload: axios.post(`/api/reminders/add`, newObj).then(response => {
             return response.data
         })
     }

@@ -18,7 +18,7 @@ componentDidMount(){
     })
 }
     render() {
-        console.log("USER ID: ", this.props.user.user_id);
+        // console.log("USER ID: ", this.props.user.user_id);
         return (
             <div className="dash_main_container">
                 <Header />

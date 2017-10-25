@@ -36,6 +36,10 @@ module.exports = {
 
     //CATEGORY
     getAllCategories: (req, res) => {
+        // if (req.user_id === undefined) {
+        //     console.log("getAllCategories hit with no user_id.")
+        //     res.status(500).send("No user ID sent with request.")
+        // }
         const dbInstance = req.app.get('db');
         dbInstance.categories.getAllCategories(req.user.user_id)
             .then(cats => res.status(200).send(cats))
