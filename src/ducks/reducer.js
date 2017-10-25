@@ -32,7 +32,9 @@ let initialState = {
     catView: 0,
     modalToggler: null,
     cloudinaryUrl: null,
-    editMode: false
+    editMode: false,
+    logDetailsView: false,
+    allLogsView: false
 }
 
 
@@ -68,6 +70,7 @@ const ADD_LOG = "ADD_LOG";
 const DELETE_LOG = "DELETE_LOG";
 const GET_ALL_REMINDERS = "GET_ALL_REMINDERS";
 const ADD_REMINDER = "ADD_REMINDER";
+const EDIT_REMINDER = "EDIT_REMINDER";
 const DELETE_REMINDER = "DELETE_REMINDER";
 const GET_REMINDERS_OVERDUE = "REMINDER OVERDUE";
 const GET_REMINDERS_COMING_UP = "GET_REMINDERS_COMING_UP";
@@ -79,6 +82,8 @@ const CAT_DISP = "CAT_DISP";
 const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
 const GET_USER_INFO = "GET_USER_INFO";
 const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
+const TOGGLE_LOG_DETAIL_VIEW = "TOGGLE_LOG_DETAIL_VIEW";
+const TOGGLE_ALL_LOGS_VIEW = "TOGGLE_ALL_LOGS_VIEW"
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -137,7 +142,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { categoryList: action.payload })
         case DELETE_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
-            
+
         case GET_ALL_LOGS + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case ADD_LOG + "_FULFILLED":
@@ -149,8 +154,14 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderList: action.payload })
         case ADD_REMINDER + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
+        case EDIT_REMINDER + "_FULFILLED":
+            let newReminders = {
+                upcoming: action.payload.upcoming,
+                overdue: action.payload.past
+            }
+            return Object.assign({}, state, { reminderListUpcoming: newReminders.upcoming, reminderListOverdue: newReminders.overdue })
         case DELETE_REMINDER + "_FULFILLED":
-            var updatedReminders = {
+            let updatedReminders = {
                 upcoming: action.payload.upcoming,
                 overdue: action.payload.past
             }
@@ -163,7 +174,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderListOverdue: action.payload.overdue, reminderListUpcoming: action.payload.upcoming })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
-            
+
         case TOGGLE_MODAL:
             return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: null, assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
         case ASSET_ROTATE:
@@ -174,9 +185,13 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { cloudinaryUrl: action.payload })
         case TOGGLE_EDIT_MENU:
             return Object.assign({}, state, { editMode: action.payload })
+        case TOGGLE_LOG_DETAIL_VIEW:
+            return Object.assign({}, state, { logDetailsView: action.payload })
+        case TOGGLE_ALL_LOGS_VIEW:
+            return Object.assign({}, state, { allLogsView: action.payload })
 
         case GET_USER_INFO + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload })   
+            return Object.assign({}, state, { user: action.payload })
 
         default:
             return state
@@ -292,7 +307,6 @@ export function updateReminderDescription(reminderDescription) {
 
 //AUTH0 - GET USER//
 export function getUserInfo() {
-    // console.log('USER_INFO: ', userInfo)
     return {
         type: GET_USER_INFO,
         payload: axios.get('/auth/me').then( response => {
@@ -379,6 +393,7 @@ export function deleteCategory(cat_id, user_id) {
 
 //LOGS//
 export function getAllLogs(num) {
+    console.log('the num is', num)
     return {
         type: GET_ALL_LOGS,
         payload: axios.get(`/api/logs/get_all/${num}`).then(response => {
@@ -388,8 +403,8 @@ export function getAllLogs(num) {
 }
 
 export function addLog(obj) {
-    let newObj = Object.assign({}, obj.props, {logCompleteDate: obj.date})
-    
+    let newObj = Object.assign({}, obj.props, { logCompleteDate: obj.date })
+
     return {
         type: ADD_LOG,
         payload: axios.post(`/api/logs/add`, newObj).then(response => {
@@ -420,20 +435,6 @@ export function getAllReminders(num) {
     fns.getAllReminders(num)
 }
 
-export function addReminder(obj) {
-    let newObj = Object.assign({}, obj.props, {reminderDue: obj.date})
-    return {
-        type: ADD_REMINDER,
-        payload: axios.post(`/api/reminders/add`, newObj).then(response => {
-            return response.data
-        })
-    }
-}
-
-export function deleteReminder(remind_id, user_id) {
-    return fns.deleteReminder(remind_id, user_id)
-}
-
 export function getRemindersOverdue(num) {
     console.log("num: ", num)
     return {
@@ -452,6 +453,30 @@ export function getRemindersComingUp(num) {
             return response.data
         })
     }
+}
+
+export function addReminder(obj) {
+    let newObj = Object.assign({}, obj.props, { reminderDue: obj.date })
+    return {
+        type: ADD_REMINDER,
+        payload: axios.post(`/api/reminders/add`, newObj).then(response => {
+            return response.data
+        })
+    }
+}
+
+export function editReminder(obj) {
+    const reminders = axios.patch(`/api/reminders/edit`, obj).then(res => {
+        return res.data
+    })
+    return {
+        type: EDIT_REMINDER,
+        payload: reminders
+    }
+}
+
+export function deleteReminder(remind_id, user_id) {
+    return fns.deleteReminder(remind_id, user_id)
 }
 
 export function setReminderStatusToClosed(num, type) {
@@ -491,4 +516,18 @@ export function toggleModal(str) {
 
 export function toggleEditMenu(str) {
     return fns.toggleEditMenu(str)
+}
+
+export function toggleLogDetailView(val) {
+    return {
+        type: TOGGLE_LOG_DETAIL_VIEW,
+        payload: val
+    }
+}
+
+export function toggleAllLogsView(val) {
+    return {
+        type: TOGGLE_ALL_LOGS_VIEW,
+        payload: val
+    }
 }

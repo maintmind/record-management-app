@@ -105,6 +105,24 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
+    editReminder: (req, resp) => {
+        var newReminders = {
+            upcoming: [],
+            past: []
+        }
+        const dbInstance = req.app.get('db');
+        const { reminderDue, reminderName, reminderDescription, remind_id, user } = req.body;        
+        dbInstance.reminders.editReminder(reminderDue, reminderName, reminderDescription, remind_id, user.user_id).then(response => {
+            dbInstance.reminders.getRemindersComingUp7(user.user_id).then(res => {
+                newReminders.upcoming = res
+                dbInstance.reminders.getRemindersOverdue(user.user_id).then(res => {
+                    newReminders.past = res
+                    resp.status(200).send(newReminders)
+                })
+            })
+        })
+    },
+
     deleteReminder: (req, resp) => {
         var newReminders = {
             upcoming: [],
