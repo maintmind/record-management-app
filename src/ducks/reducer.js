@@ -1,5 +1,5 @@
 import axios from 'axios';
-import fns from '../utilities/testedActions';
+var fns = require('../utilities/testedActions');
 
 let initialState = {
     user: {},
@@ -425,12 +425,7 @@ export function createImageId(obj) {
 // REMINDERS//
 
 export function getAllReminders(num) {
-    return {
-        type: GET_ALL_REMINDERS,
-        payload: axios.get(`/api/reminders/get_all/${num}`).then(response => {
-            return response.data
-        })
-    }
+    fns.getAllReminders(num)
 }
 
 export function addReminder(obj) {
@@ -444,13 +439,7 @@ export function addReminder(obj) {
 }
 
 export function deleteReminder(remind_id, user_id) {
-    const reminders = axios.delete(`/api/logs/delete/${remind_id}/${user_id}`).then((res) => {
-        return res.data
-    })
-    return {
-        type: DELETE_REMINDER,
-        payload: reminders
-    }
+    return fns.deleteReminder(remind_id, user_id)
 }
 
 export function getRemindersOverdue(num) {
