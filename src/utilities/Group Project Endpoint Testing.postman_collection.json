@@ -1,0 +1,98 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Group Project Endpoint Testing",
+		"_postman_id": "8b9d7c4f-67ea-1410-6b4b-1d322588ec2d",
+		"description": "Endpoint testing for Group Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3005/api/categories/get_all/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('status code is 200', function() {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('response is an array', function() {",
+							"   const res = pm.response.json();",
+							"   pm.expect(Array.isArray(res)).to.eql(true);",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3005/api/categories/get_all/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3005/api/reminders/overdue/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('status code is 200', function() {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3005/api/reminders/overdue/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3005/api/logs/get_all/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('status code is 200', function() {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is array\", function () {",
+							"    pm.expect(Array.isArray(pm.response.json())).to.eql(true);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3005/api/logs/get_all/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
