@@ -79,3 +79,7 @@
     color: #E28413;
     background-color: #36453B;
 }
+
+a {
+    text-decoration: none;
+}

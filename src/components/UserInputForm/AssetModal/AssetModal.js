@@ -76,8 +76,8 @@ const outputActions = {
     updateAssetName, 
     updateAssetDescription, 
     addAsset,
-    getUserInfo,
-    editAsset
+    editAsset,
+    getUserInfo
 }
 
 export default connect(mapStateToProps, outputActions)(AssetModal)

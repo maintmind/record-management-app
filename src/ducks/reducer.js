@@ -200,11 +200,9 @@ export default function dashReducer(state = initialState, action) {
 
 // ACTION CREATORS
 export function updateAssetID(asset_id) {
-    return {
-        type: UPDATE_ASSET_ID,
-        payload: asset_id
-    }
+    return fns.updateAssetID(asset_id)
 }
+
 export function updateAssetName(assetName) {
     return {
         type: UPDATE_ASSET_NAME,
@@ -305,22 +303,25 @@ export function updateReminderDescription(reminderDescription) {
     }
 }
 
+/////////////////////////////////////
+
 //AUTH0 - GET USER//
 export function getUserInfo() {
-    const userInfo = axios.get('/auth/me').then(response => {
-        return response.data
-    })
     return {
         type: GET_USER_INFO,
-        payload: userInfo
+        payload: axios.get('/auth/me').then( response => {
+            return response.data
+        })
     }
 }
 
+////////////////////////////////////
+
 //ASSETS//
-export function getAllAssets(num) {
+export function getAllAssets(user_id) {
     return {
         type: GET_ALL_ASSETS,
-        payload: axios.get(`/api/assets/get_all/${num}`).then(response => {
+        payload: axios.get(`/api/assets/get_all/${user_id}`).then(response => {
             return response.data
         })
     }
@@ -435,9 +436,11 @@ export function getAllReminders(num) {
 }
 
 export function getRemindersOverdue(num) {
+    console.log("num: ", num)
     return {
         type: GET_REMINDERS_OVERDUE,
         payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
+            console.log("overdue response: ", response.data)
             return response.data
         })
     }
@@ -497,10 +500,7 @@ export function setReminderStatusToOpen(num) {
 
 //VIEWS
 export function assetRotate(num) {
-    return {
-        type: ASSET_ROTATE,
-        payload: num
-    }
+    return fns.assetRotate(num)
 }
 
 export function catDisp(num) {
@@ -515,10 +515,7 @@ export function toggleModal(str) {
 }
 
 export function toggleEditMenu(str) {
-    return {
-        type: TOGGLE_EDIT_MENU,
-        payload: str
-    }
+    return fns.toggleEditMenu(str)
 }
 
 export function toggleLogDetailView(val) {
