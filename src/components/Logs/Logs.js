@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, deleteLog, toggleEditMenu, toggleLogDetailView, toggleAllLogsView } from '../../ducks/reducer';
+import { getAllLogs, toggleModal, deleteLog, toggleEditMenu, toggleLogDetailView, toggleAllLogsView, updateLogName, updateLogDescription, updateLogComplete, updateLogCost } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './Logs.css';
@@ -20,7 +20,7 @@ class Logs extends Component {
             onCancel: () => { },
         })
     };
-
+    
     toggleAddEditModal(str, bl, obj) {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
@@ -89,7 +89,11 @@ const outputActions = {
     deleteLog,
     toggleEditMenu,
     toggleLogDetailView,
-    toggleAllLogsView
+    toggleAllLogsView,
+    updateLogName, 
+    updateLogDescription,
+    updateLogComplete, 
+    updateLogCost
 }
 
 export default connect(mapStateToProps, outputActions)(Logs);

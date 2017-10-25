@@ -75,11 +75,11 @@ class LogModal extends Component {
                     <div className="description">Description:</div><div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText={this.props.logDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="date">Date of Service:</div> <div><DatePicker onChange={this.handleDate} hintText={this.props.logCompleteDate} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
                     <div className="cost">Cost:</div> <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText={this.props.logCost} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div><PhotoUploader /></div>
+                    {/* <div><PhotoUploader /></div>
                     <div className="imagePreview">{this.props.cloudinaryUrl ?
                         <img src={this.props.cloudinaryUrl} alt="" />
                         : "Your upload will display here."}
-                    </div>
+                    </div> */}
                     <div className="log-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => this.saveChanges()} /></div>
                 </div>
             )
