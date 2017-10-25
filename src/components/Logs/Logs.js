@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getAllLogs, toggleModal, catDisp, deleteLog, toggleEditMenu } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
 import './Logs.css';
 
 class Logs extends Component {
@@ -35,8 +34,8 @@ class Logs extends Component {
                 return result = (
                     <div key={i} className="log_row">
                         <div className="log_buttons">
-                            <button onClick={() => this.toggleAddEditModal('log', true)} className="edit button" >Edit Log</button>
-                            <button className="delete button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)} >Delete</button>
+                            <button onClick={() => this.toggleAddEditModal('log', true)} className="edit_button fa fa-pencil-square-o" ></button>
+                            <button className="fa fa-trash delete_button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)}></button>
                         </div>
                         <div className="log_title">{c.title}</div>
                         <div className="log_desc"><i>{c.description}</i></div>

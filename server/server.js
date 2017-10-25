@@ -4,16 +4,27 @@ const bodyParser = require('body-parser'),
         cors = require('cors'),
         massive = require('massive'),
         express = require('express'),
-        // passport = require('passport'),
-        // Auth0Strategy = require('passport-auth0'),
-        // session = require('express-session'),
+        passport = require('passport'),
+        Auth0Strategy = require('passport-auth0'),
+        session = require('express-session'),
         cloudinary = require('cloudinary');
 
 const app = express();
 const controller = require('./controller');
 
 app.use(bodyParser.json());
+app.use( express.static( `${__dirname}/../public/build` ) );
 app.use(cors());
+
+app.use(session({
+        secret: process.env.SECRET,
+        resave: false,
+        saveUninitialized: true
+      }));
+
+//MIDDLEWARE USING PASSPORT
+app.use( passport.initialize() );
+app.use( passport.session() );
 
 
 //DATABASE CONNECTION
@@ -21,63 +32,65 @@ massive(process.env.CONNECTIONSTRING).then(db => {
         app.set('db', db)
 })
 
-
 //CLOUDINARY CONFIG (FOR PHOTO UPLOADS)
 cloudinary.config(process.env.CLOUDINARY_URL)
 
-
-//AUTHENTICATION (WHEN WE ARE READY)
-//AUTHENTICATION (AUTH0)
-// passport.use(new Auth0Strategy({
-//         domain: process.env.AUTH_DOMAIN,
-//         clientID: process.env.AUTH_CLIENT_ID,
-//         clientSecret: process.env.AUTH_CLIENT_SECRET,
-//         callbackURL: process.env.AUTH_CALLBACK
-//       }, function(accessToken, refreshToken, extraParams, profile, done){
-          
-//         const db = app.get('db');
-//         db.{REVISE HERE FOR DATABASE}(profile.emails[0].value).then( user => {
-//           if(user[0]) {
-//             return done(null, user);
-//           } else {
-//             db.{REVISE HERE FOR DATABASE}([profile.name.givenName, profile.name.familyName, profile.emails[0].value
-//             ]).then( user => {
-//               return done(null, user);
-//             })
-//           }
-//         })
-//       }));
+//AUTHENTICATION -- AUTH0
+passport.use(new Auth0Strategy({
+        domain: process.env.AUTH_DOMAIN,
+        clientID: process.env.AUTH_CLIENT_ID,
+        clientSecret: process.env.AUTH_CLIENT_SECRET,
+        callbackURL: process.env.AUTH_CALLBACK
+      }, function(accessToken, refreshToken, extraParams, profile, done){
+       
+        const db = app.get('db');
+        db.users.find_user(profile.id).then( user => {
+          if(user[0]) {
+            return done(null, user[0]);
+          } else {
+            db.users.create_user([profile.displayName, profile.emails[0].value,
+            profile.picture, profile.id]).then(user => {
+              return done(null, user[0]);
+            })
+          }
+        })
+      }));
       
-//       //THIS IS INVOKED ONE TIME TO SET UP
-//       passport.serializeUser(function(user, done) {
-//         done(null, user[0]);
-//       });
+      //SERIALIZE-USER INVOKED ONE TIME TO SET THINGS UP
+      passport.serializeUser(function(user, done) {
+        done(null, user);
+      });
       
-//       //USER COMES FROM SESSION - THIS IS INVOKED FOR EVERY ENDPOINT
-//       passport.deserializeUser(function(user, done){
-//         done(null, user);
-//       });
+      //USER COMES FROM SESSION - THIS IS INVOKED FOR EVERY ENDPOINT
+      passport.deserializeUser(function(user, done){
+        app.get('db').users.find_session_user(user.user_id).then(user => {
+          return done(null, user[0]);
+        })
+      });
       
-//       //ENDPOINT #1 - AUTH0 AUTHENTICATION
-//       app.get('/auth', passport.authenticate('auth0', {
-//         successRedirect: 'http://localhost:3000/#/dashboard',
-//         failureRedirect: 'http://localhost:3000/#/'
-//       }));
+      //ENDPOINT -- PASSPORT AUTHENTICATE
+      app.get('/auth', passport.authenticate('auth0'));
       
-//       //ENDPOINT (Login)
-//       app.get('/auth/me', (req, res) => {
-//         if(!req.user) {
-//           return res.status(404).send('User not found')
-//         } else {
-//           return res.status(200).send(req.user);
-//         }
-//       });
+      //ENDPOINT AUTH CALLBACK
+      app.get('/auth/callback', passport.authenticate('auth0', {
+        successRedirect: 'http://localhost:3000/dashboard',
+        failureRedirect: 'http://localhost:3000/'
+      }));
       
-//       //ENDPOINT (Logout)
-//       app.get('/auth/logout', (req, res) => {
-//         req.logout() //PASSPORT GIVES US THIS TO TERMINATE A LOGIN SESSION
-//         return res.redirect(302, 'http://localhost:3000/#/'); 
-//       })
+      //ENDPOINT AUTH0 - CHECKING FOR USER
+      app.get('/auth/me', (req, res) => {
+        if(!req.user) {
+          return res.status(404).send('User not found')
+        } else {
+          return res.status(200).send(req.user);
+        }
+      });
+      
+      //AUTH ENDPOINT (Logout)
+      app.get('/auth/logout', (req, res) => {
+        req.logout() //PASSPORT TO TERMINATE LOGIN SESSION
+        return res.redirect(302, 'http://localhost:3000/'); //res.redirect comes from express to redirect user to the given url
+      })
 
 
 //ASSET ENDPOINTS
