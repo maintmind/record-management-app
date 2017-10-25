@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset } from '../../ducks/reducer';
+import { getAllCategories, toggleModal, catDisp, deleteCategory, deleteAsset, toggleEditMenu, updateAssetName, updateAssetDescription, updateCategoryName, updateCategoryDescription, updateCatID } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -11,31 +11,50 @@ import './Categories.css';
 
 class Categories extends Component {
     componentDidMount() {
-        this.props.getAllCategories(this.props.user.user_id)
+        this.props.getAllCategories(this.props.user)
     };
+
+    showHideCat(cat_id) {
+        if (this.props.catView === 0) {
+            this.props.catDisp(cat_id)
+        } else if (this.props.catView === cat_id) {
+            this.props.catDisp(0)
+        } else {
+            this.props.catDisp(cat_id)
+        }
+    }
 
     confirmModal(cat_id, user_id) {
         confirmAlert({
-          title: 'Are you sure?',                      
-          message: 'Deleting this category will delete all logs and reminders associated with it!',              
-          confirmLabel: 'Confirm',                           
-          cancelLabel: 'Cancel',                             
-          onConfirm: () => this.props.deleteCategory(cat_id, user_id),    
-          onCancel: () => {}, 
+            title: 'Are you sure?',
+            message: 'Deleting this category will delete all logs and reminders associated with it!',
+            confirmLabel: 'Confirm',
+            cancelLabel: 'Cancel',
+            onConfirm: () => this.props.deleteCategory(cat_id, user_id),
+            onCancel: () => { },
         })
-      };
+    };
 
-      deleteAssetConfirm(asset_id, user_id) {
+    deleteAssetConfirm(asset_id, user_id) {
         confirmAlert({
-          title: 'Are you sure?',                      
-          message: 'Deleting this asset will delete all categories, logs, and reminders associated with it!',              
-          confirmLabel: 'Confirm',                           
-          cancelLabel: 'Cancel',                             
-          onConfirm: () => this.props.deleteAsset(asset_id, user_id),    
-          onCancel: () => {}, 
+            title: 'Are you sure?',
+            message: 'Deleting this asset will delete all categories, logs, and reminders associated with it!',
+            confirmLabel: 'Confirm',
+            cancelLabel: 'Cancel',
+            onConfirm: () => this.props.deleteAsset(asset_id, user_id),
+            onCancel: () => { },
         })
-      };
+    };
 
+    toggleAddEditModal(str, bl, title, desc, num) {
+        this.props.toggleEditMenu(bl)
+        this.props.toggleModal(str)
+        this.props.updateAssetName(title)
+        this.props.updateAssetDescription(desc)
+        this.props.updateCategoryName(title)
+        this.props.updateCategoryDescription(desc)
+        this.props.updateCatID(num)
+    }
 
     render() {
         const displayCats = this.props.categoryList.map((c, i) => {
@@ -44,8 +63,9 @@ class Categories extends Component {
                 return result = (
                     <div key={i}>
                         <div key={i} className="cat_row">
-                        <button onClick={() => {this.confirmModal(c.cat_id, this.props.user.user_id)}}>Delete</button>
-                            <div className="cat_title" onClick={() => this.props.catDisp(c.cat_id)}>{c.title} - {c.description}</div>
+                            <button onClick={() => this.toggleAddEditModal('cat', true, c.title, c.description, c.cat_id)} className={this.props.assetView === 0 ? "addCat_hide" : "fa fa-pencil-square-o addCat_show"}></button>
+                            <button onClick={() => { this.confirmModal(c.cat_id, this.props.user.user_id) }} className="fa fa-trash"></button>
+                            <div className="cat_title" onClick={() => this.showHideCat(c.cat_id)}>{c.title} - {c.description}</div>
                         </div>
                         <div className={c.cat_id === this.props.catView ? "addCat_show" : "addCat_hide"}>
                             <Logs />
@@ -55,18 +75,32 @@ class Categories extends Component {
             }
             return result
         })
-        const assetTitle = this.props.assetList.map(asset => {
-            let assetDescription
-            if(asset.asset_id === this.props.assetView){
-                assetDescription = asset.description
+        const assetTitle = () => {
+            const assets = this.props.assetList
+            for (var i = 0; i < assets.length; i++) {
+                if (assets[i].asset_id === this.props.assetView) {
+                    return assets[i].title
+                }
             }
-            return assetDescription
-        })
+        }
+        const assetDesc = () => {
+            const assets = this.props.assetList
+            for (var i = 0; i < assets.length; i++) {
+                if (assets[i].asset_id === this.props.assetView) {
+                    return assets[i].description
+                }
+            }
+        }
         return (
             <div className="category_viewer">
-                <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>Delete Asset</button>
-                <h2 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetTitle}</h2>
-                <button onClick={() => { this.props.toggleModal('cat') }} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
+                <div className="asset_info">
+                    <div className="asset_button_container">
+                        <button onClick={() => this.toggleAddEditModal('asset', true, assetTitle(), assetDesc())} className={this.props.assetView === 0 ? "addCat_hide" : "fa fa-pencil-square-o addCat_show"}></button>
+                        <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "fa fa-trash addCat_show"}></button>
+                    </div>
+                    <h1 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetDesc()}</h1>
+                </div>
+                <button onClick={() => this.toggleAddEditModal('cat', false)} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
                     ADD CATEGORY
                 </button>
 
@@ -85,7 +119,13 @@ const outputActions = {
     toggleModal,
     catDisp,
     deleteCategory,
-    deleteAsset
+    deleteAsset,
+    toggleEditMenu,
+    updateAssetName,
+    updateAssetDescription,
+    updateCategoryName,
+    updateCategoryDescription,
+    updateCatID
 }
 
 export default connect(mapStateToProps, outputActions)(Categories);

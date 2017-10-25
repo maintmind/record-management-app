@@ -5,4 +5,5 @@ VALUES
 
 SELECT *
 FROM categories
-WHERE user_id = $2;
+WHERE user_id = $2
+ORDER BY cat_id;

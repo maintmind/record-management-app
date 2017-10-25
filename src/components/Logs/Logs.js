@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, catDisp, deleteLog } from '../../ducks/reducer';
+import { getAllLogs, toggleModal, catDisp, deleteLog, toggleEditMenu } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
 import './Logs.css';
 
 class Logs extends Component {
@@ -13,14 +12,19 @@ class Logs extends Component {
 
     confirmModal(log_id, user_id) {
         confirmAlert({
-          title: 'Are you sure?',                      
-          message: 'Deleting this log will delete all information and images associated with it!',              
-          confirmLabel: 'Confirm',                           
-          cancelLabel: 'Cancel',                             
-          onConfirm: () => this.props.deleteLog(log_id, user_id),    
-          onCancel: () => {}, 
+            title: 'Are you sure?',
+            message: 'Deleting this log will delete all information and images associated with it!',
+            confirmLabel: 'Confirm',
+            cancelLabel: 'Cancel',
+            onConfirm: () => this.props.deleteLog(log_id, user_id),
+            onCancel: () => { },
         })
-      };
+    };
+
+    toggleAddEditModal(str, bl) {
+        this.props.toggleEditMenu(bl)
+        this.props.toggleModal(str)
+    }
 
     render() {
         const displayLogs = this.props.logList.map((c, i) => {
@@ -30,14 +34,14 @@ class Logs extends Component {
                 return result = (
                     <div key={i} className="log_row">
                         <div className="log_buttons">
-                        <button className="edit button" >Edit</button>
-                        <button className="delete button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)} >Delete</button>
+                            <button onClick={() => this.toggleAddEditModal('log', true)} className="edit_button fa fa-pencil-square-o" ></button>
+                            <button className="fa fa-trash delete_button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)}></button>
                         </div>
-                        <div>{c.title}</div>
-                        <div><i>{c.description}</i></div>
-                        <div>{completionDate}</div>
-                        <div>{c.cost}</div>
-                        <a href={c.img} className="log_row" target="blank"><img src={c.img} alt="preview" /></a>
+                        <div className="log_title">{c.title}</div>
+                        <div className="log_desc"><i>{c.description}</i></div>
+                        <div className="log_date">{completionDate}</div>
+                        <div className="log_cost">{c.cost}</div>
+                        <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a>
                     </div>
                 )
             }
@@ -47,19 +51,18 @@ class Logs extends Component {
         return (
             <div className="log_viewer">
                 <div>
-                    <button className="close_cat_button" onClick={() => this.props.catDisp(0)}>^</button>
-                    <button onClick={() => { this.props.toggleModal('log') }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD LOG</button>
-                    <button onClick={() => { this.props.toggleModal('reminder') }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD REMINDER</button>
+                    <button onClick={() => { this.toggleAddEditModal('log', false) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD LOG</button>
+                    <button onClick={() => { this.toggleAddEditModal('reminder', false) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD REMINDER</button>
                 </div>
                 <div className="log_header">
-                    <div>TITLE</div>
-                    <div>DESCRIPTION</div>
-                    <div>DATE COMPLETE</div>
-                    <div>COST</div>
+                    <div className="log_header_title">TITLE</div>
+                    <div className="log_desc">DESCRIPTION</div>
+                    <div className="log_date">DATE COMPLETE</div>
+                    <div className="log_cost">COST</div>
                     <div><small>click image to enlarge</small></div>
                 </div>
                 <div>
-                
+
                 </div>
                 {displayLogs}
             </div >
@@ -75,7 +78,8 @@ const outputActions = {
     getAllLogs,
     toggleModal,
     catDisp,
-    deleteLog
+    deleteLog,
+    toggleEditMenu
 }
 
 export default connect(mapStateToProps, outputActions)(Logs);

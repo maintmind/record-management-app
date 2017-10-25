@@ -23,7 +23,7 @@ export default class Landing extends Component {
                                 <span className="title1">Maintenance<span className="minder-title">Minder</span></span>
                                 <span className="title2"><span>YOU LIVE YOUR LIFE.</span>  &nbsp; <u>WE WILL MIND THE MAINTENANCE.</u></span>
                             </div>
-                            <button className="register-button" href={process.env.REACT_APP_LOGIN} >LOG IN</button>
+                            <a href={process.env.REACT_APP_LOGIN}><button className="register-button" >LOG IN</button></a>
                         </div>
                     </section>
                 </div>
