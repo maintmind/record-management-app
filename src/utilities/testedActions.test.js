@@ -27,16 +27,10 @@ describe("Reducer tests", function () {
     
 // JAMES 5
 describe("James tests", function () {
-        //JAMES 5
-        // test update Log Name
-        // test('updateLogName("Oil Change") should return { type: UPDATE_LOG_NAME, payload: "Oil Change" }', function () {
-        //     expect(fns.updateLogName("Oil Change")).toEqual({ type: "UPDATE_LOG_NAME", payload: "Oil Change" })
-        // })
 
     test('updateLogName("Oil Change") should return { type: UPDATE_ASSET_ID, payload: "Oil Change" }', function(){
         expect(fns.updateLogName("Oil Change")).toEqual({type: "UPDATE_LOG_NAME", payload: "Oil Change"})
     })
->>>>>>> master
 
         // test get all Reminders successfully creates action with payload
         it('getAllReminders(1) returns all reminders for user_id 1', (done) => {
@@ -61,7 +55,6 @@ describe("James tests", function () {
                 expect(result[0]).toEqual(firstUserReminder.payload)
                 done();
             }
-
             fns.getAllReminders(1, callback)
         })
 
