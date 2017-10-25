@@ -12,6 +12,7 @@ import { getRemindersOverdue } from '../../../ducks/reducer';
 import { getRemindersComingUp } from '../../../ducks/reducer';
 import { setReminderStatusToClosed } from '../../../ducks/reducer';
 
+
 class PopOverComp extends Component {
     constructor(props) {
         super(props)
@@ -20,14 +21,12 @@ class PopOverComp extends Component {
             open: false,
         };
 
-
         this.overdueStyle = { backgroundColor: "red", height: "25px", width: "25px" } //style for overdue reminders
         this.upcomingStyle = { backgroundColor: "orange", height: "25px", width: "25px" }
 
     }
 
     componentDidMount(props) {
-        
         // this.props.getRemindersOverdue(this.props.user.user_id);
         // this.props.getRemindersComingUp(this.props.user.user_id);
 

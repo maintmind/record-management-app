@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllReminders, addReminder, updateReminderStatus, updateReminderName,
         updateReminderDescription, updateReminderDue } from '../../ducks/reducer';
-
 import './Reminders.css';
-
 
  class Reminders extends Component {
     

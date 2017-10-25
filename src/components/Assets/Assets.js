@@ -8,7 +8,6 @@ import './Assets.css';
 class Assets extends Component {
     componentDidMount() {
         this.props.getUserInfo()
-        console.log('GET_USER_INFO(): ', getUserInfo())
         this.props.getAllAssets(this.props.user.user_id)
     }
 
