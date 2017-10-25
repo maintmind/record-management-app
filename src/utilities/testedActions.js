@@ -27,11 +27,10 @@ module.exports = {
         }
     },
     getAllReminders: function (num, cb) {
-        console.log("hit?")
         return {
             type: GET_ALL_REMINDERS,
             payload: axios.get(`http://localhost:3005/api/reminders/get_all/${num}`).then((res)=>{
-                console.log(res.data);
+                // console.log(res.data);
                 cb(res);
             })
         }
