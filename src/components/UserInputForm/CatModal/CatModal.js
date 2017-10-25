@@ -13,7 +13,6 @@ class CatModal extends Component {
     }
 
     saveChanges(obj) {
-        console.log(obj)
         this.props.editCategory(obj);
         this.props.toggleModal(null);
     }
@@ -50,7 +49,7 @@ class CatModal extends Component {
                     <div><TextField onChange={(e) => this.props.updateCategoryName(e.target.value)} hintText={this.props.categoryName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     {/* <div className="description">Description:</div> */}
                     <div><TextField onChange={(e) => this.props.updateCategoryDescription(e.target.value)} hintText={this.props.categoryDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div className="asset-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => this.saveChanges(this.props)} /></div>
+                    <div className="asset-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => {this.props.categoryName !== '' && this.props.categoryDescription !== '' ? this.saveChanges(this.props) : alert('Please make sure all fields are filled out')}} /></div>
                 </div>
             )
         }

@@ -14,7 +14,6 @@ class AssetModal extends Component {
     }
 
     submitAsset(obj) {
-        console.log('OBJ', obj)
         this.props.addAsset(obj);
         this.props.toggleModal(null);
     }
@@ -61,7 +60,7 @@ class AssetModal extends Component {
                     <div><TextField onChange={(e) => this.props.updateAssetName(e.target.value)} hintText={this.props.assetName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     {/* <div className="description">Description:</div> */}
                     <div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText={this.props.assetDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div className="asset-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => this.saveChanges(this.props)} /></div>
+                    <div className="asset-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => {this.props.assetName !== '' && this.props.assetDescription !== '' ? this.saveChanges(this.props) : alert('Please make sure all fields are filled out')}} /></div>
                 </div>
             )
         }
@@ -77,12 +76,8 @@ const outputActions = {
     updateAssetName, 
     updateAssetDescription, 
     addAsset,
-    getUserInfo,
-    toggleModal,
-    updateAssetName,
-    updateAssetDescription,
-    addAsset,
-    editAsset
+    editAsset,
+    getUserInfo
 }
 
 export default connect(mapStateToProps, outputActions)(AssetModal)

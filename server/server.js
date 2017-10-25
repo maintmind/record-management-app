@@ -114,9 +114,10 @@ app.delete('/api/logs/delete/:log_id/:user_id', controller.deleteLog)
 app.post('/api/images/new', controller.saveImage)
 
 //REMINDER ENDPOINTS
-app.post('/api/reminders/add', controller.addReminder)
 app.get('/api/reminders/overdue/:user_id', controller.getRemindersOverdue)
 app.get('/api/reminders/coming-in/:user_id', controller.getRemindersComingUp7)
+app.post('/api/reminders/add', controller.addReminder)
+app.patch('/api/reminders/edit', controller.editReminder)
 app.put('/api/reminders/close/:remind_id', controller.setReminderStatusToClosed)
 app.put('/api/reminders/open/:remind_id', controller.setReminderStatusToOpen)
 app.delete('/api/reminders/delete/:remind_id/:user_id', controller.deleteReminder)
