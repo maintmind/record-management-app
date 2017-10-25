@@ -49,16 +49,16 @@ describe("James tests", function () {
 
     describe("Action Creator Tests", function () {
 
-        test('UPDATE_ASSET_ID: updateLogName("Oil Change") should return { type: UPDATE_ASSET_ID, payload: "Oil Change" }', function () {
-            expect(fns.updateLogName("Oil Change")).toEqual({ type: "UPDATE_LOG_NAME", payload: "Oil Change" })
+        test('TOGGLE_EDIT_MENU: toggleEditMenu("New Log Name") should return { type: TOGGLE_EDIT_MENU, payload: "New Log Name" }', function () {
+            expect(fns.toggleEditMenu("New Log Name")).toEqual({ type: "TOGGLE_EDIT_MENU", payload: "New Log Name" })
         })
 
-        test('UPDATE_ASSET_ID: updateLogName("Oil Change") should return { type: UPDATE_ASSET_ID, payload: "Oil Change" }', function () {
-            expect(fns.updateLogName("Oil Change")).toEqual({ type: "UPDATE_LOG_NAME", payload: "Oil Change" })
+        test('ASSET_ROTATE: assetRotate(3) should return { type: ASSET_ROTATE, payload: 3 }', function () {
+            expect(fns.assetRotate(3)).toEqual({ type: "ASSET_ROTATE", payload: 3 })
         })
 
-        test('UPDATE_ASSET_ID: updateLogName("Oil Change") should return { type: UPDATE_ASSET_ID, payload: "Oil Change" }', function () {
-            expect(fns.updateLogName("Oil Change")).toEqual({ type: "UPDATE_LOG_NAME", payload: "Oil Change" })
+        test('UPDATE_ASSET_ID: updateAssetID(6) should return { type: UPDATE_ASSET_ID, payload: 6 }', function () {
+            expect(fns.updateAssetID(6)).toEqual({ type: "UPDATE_ASSET_ID", payload: 6 })
         })
     })
 
