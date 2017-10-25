@@ -185,11 +185,9 @@ export default function dashReducer(state = initialState, action) {
 
 // ACTION CREATORS
 export function updateAssetID(asset_id) {
-    return {
-        type: UPDATE_ASSET_ID,
-        payload: asset_id
-    }
+    return fns.updateAssetID(asset_id)
 }
+
 export function updateAssetName(assetName) {
     return {
         type: UPDATE_ASSET_NAME,
@@ -471,10 +469,7 @@ export function setReminderStatusToOpen(num) {
 
 //VIEWS
 export function assetRotate(num) {
-    return {
-        type: ASSET_ROTATE,
-        payload: num
-    }
+    return fns.assetRotate(num)
 }
 
 export function catDisp(num) {
@@ -489,8 +484,5 @@ export function toggleModal(str) {
 }
 
 export function toggleEditMenu(str) {
-    return {
-        type: TOGGLE_EDIT_MENU,
-        payload: str
-    }
+    return fns.toggleEditMenu(str)
 }
