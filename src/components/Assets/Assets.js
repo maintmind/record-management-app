@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal, toggleEditMenu } from '../../ducks/reducer';
+import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal, toggleEditMenu, getUserInfo  } from '../../ducks/reducer';
 import Categories from '../Categories/Categories';
-
-
 import './Assets.css';
 
 
 class Assets extends Component {
     componentDidMount() {
-        this.props.getAllAssets(this.props.user.user_id)
+        this.props.getUserInfo()
+        this.props.getAllAssets(this.props.user)
     }
 
     changeAsset(num) {
@@ -56,6 +55,7 @@ const outputActions = {
     catDisp,
     updateAssetID,
     toggleModal,
+    getUserInfo,
     toggleEditMenu
 }
 

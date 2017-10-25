@@ -11,7 +11,7 @@ import './Categories.css';
 
 class Categories extends Component {
     componentDidMount() {
-        this.props.getAllCategories(this.props.user.user_id)
+        this.props.getAllCategories(this.props.user)
     };
 
     showHideCat(cat_id) {
