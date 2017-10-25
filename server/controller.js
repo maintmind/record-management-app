@@ -144,7 +144,7 @@ module.exports = {
             overdue: [],
             upcoming: []
         }
-
+        
         dbInstance.reminders.setReminderStatusToClosed(req.params.remind_id).then(res => {
             dbInstance.reminders.getRemindersOverdue(1).then(res => {
                 console.log("all is", res)

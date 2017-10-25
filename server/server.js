@@ -117,7 +117,7 @@ app.get('/api/reminders/coming-in/:user_id', controller.getRemindersComingUp7)
 app.put('/api/reminders/close/:remind_id', controller.setReminderStatusToClosed)
 app.put('/api/reminders/open/:remind_id', controller.setReminderStatusToOpen)
 app.delete('/api/reminders/delete/:remind_id/:user_id', controller.deleteReminder)
-// app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
+app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
 
 
 // controller.imageUpload)
