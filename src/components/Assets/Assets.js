@@ -8,7 +8,7 @@ import './Assets.css';
 class Assets extends Component {
     componentDidMount() {
         this.props.getUserInfo()
-        this.props.getAllAssets(this.props.user)
+        this.props.getAllAssets(this.props.user.user_id)
     }
 
     changeAsset(num) {
@@ -38,8 +38,6 @@ class Assets extends Component {
                     {displayAsset}
                     <button onClick={() => this.toggleAddModal('asset')} className="add_asset_button">ADD ASSET</button>
                 </div>
-
-                
                 <Categories />
             </div>
         );

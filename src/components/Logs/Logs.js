@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, catDisp, deleteLog, toggleEditMenu } from '../../ducks/reducer';
+import { getAllLogs, toggleModal, deleteLog, toggleEditMenu, toggleLogDetailView, toggleAllLogsView, updateLogName, updateLogDescription, updateLogComplete, updateLogCost } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './Logs.css';
@@ -20,29 +20,39 @@ class Logs extends Component {
             onCancel: () => { },
         })
     };
-
-    toggleAddEditModal(str, bl) {
+    
+    toggleAddEditModal(str, bl, obj) {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
+        this.props.updateLogName(obj.title)
+        this.props.updateLogDescription(obj.description)
+        this.props.updateLogComplete(obj.date_complete)
+        this.props.updateLogCost(obj.cost)
     }
 
     render() {
-        const displayLogs = this.props.logList.map((c, i) => {
+        const catSpecLogs = this.props.logList.filter((c, i) => {
+           return c.cat_id === this.props.catView
+        })
+
+        const displayLogs = catSpecLogs.map((c, i, arr) => {
             const completionDate = c.date_complete ? (c.date_complete).substring(0, (c.date_complete).indexOf('T')) : null
             let result;
-            if (c.cat_id === this.props.catView) {
+            if (i < 5) {
                 return result = (
-                    <div key={i} className="log_row">
+                    <section key={i} className="log_row">
                         <div className="log_buttons">
-                            <button onClick={() => this.toggleAddEditModal('log', true)} className="edit_button fa fa-pencil-square-o" ></button>
+                            <button onClick={() => this.toggleAddEditModal('log', true, c)} className="edit_button fa fa-pencil-square-o" ></button>
                             <button className="fa fa-trash delete_button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)}></button>
                         </div>
-                        <div className="log_title">{c.title}</div>
-                        <div className="log_desc"><i>{c.description}</i></div>
-                        <div className="log_date">{completionDate}</div>
-                        <div className="log_cost">{c.cost}</div>
+                        <div className="log_info" onClick={() => {this.props.toggleLogDetailView(!this.props.logDetailsView)}}>
+                            <div className="log_title">{c.title}</div>
+                            <div className="log_desc"><i>{c.description}</i></div>
+                            <div className="log_date">{completionDate}</div>
+                            <div className="log_cost">{c.cost}</div>
+                        </div>
                         <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a>
-                    </div>
+                    </section>
                 )
             }
             return result;
@@ -53,18 +63,17 @@ class Logs extends Component {
                 <div>
                     <button onClick={() => { this.toggleAddEditModal('log', false) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD LOG</button>
                     <button onClick={() => { this.toggleAddEditModal('reminder', false) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD REMINDER</button>
+                    {/* <button onClick={() => { this.props.toggleAllLogsView(!this.props.allLogsView) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>SHOW ALL LOGS</button> */}
                 </div>
-                <div className="log_header">
+                <section className="log_header">
                     <div className="log_header_title">TITLE</div>
                     <div className="log_desc">DESCRIPTION</div>
                     <div className="log_date">DATE COMPLETE</div>
                     <div className="log_cost">COST</div>
-                    <div><small>click image to enlarge</small></div>
-                </div>
-                <div>
-
-                </div>
+                    <div><small>CLICK IMAGE TO ENLARGE</small></div>
+                </section>
                 {displayLogs}
+                <button className={catSpecLogs.length > 5 ? "addLog_show" : "addLog_hide"} onClick={() => { this.props.toggleAllLogsView(!this.props.allLogsView) }}>5 of {catSpecLogs.length} shown. Click here to show all</button>
             </div >
         );
     }
@@ -77,9 +86,14 @@ function mapStateToProps(state) {
 const outputActions = {
     getAllLogs,
     toggleModal,
-    catDisp,
     deleteLog,
-    toggleEditMenu
+    toggleEditMenu,
+    toggleLogDetailView,
+    toggleAllLogsView,
+    updateLogName, 
+    updateLogDescription,
+    updateLogComplete, 
+    updateLogCost
 }
 
 export default connect(mapStateToProps, outputActions)(Logs);

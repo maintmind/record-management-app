@@ -6,17 +6,14 @@ module.exports = {
         const dbInstance = req.app.get('db');
         dbInstance.assets.getAllAssets(req.user.user_id)
             .then(assets => {
-                console.log("assets: ", assets)
                 res.status(200).send(assets)})
             .catch(err => res.status(500).send(console.log(err)))
     },
 
     addAsset: (req, res) => {
-        console.log('REQ.BODY', req.body)
         const dbInstance = req.app.get('db');
         const { assetName, assetDescription } = req.body;
         const user_id = req.body.user.user_id;
-        console.log('USER_ID', user_id)
         dbInstance.assets.addNewAsset(user_id, assetName, assetDescription)
             .then(asset => res.status(200).send(asset))
             .catch(err => res.status(500).send(console.log(err)))
@@ -101,10 +98,29 @@ module.exports = {
 
     addReminder: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { user, assetView, catView, reminderDue, reminderName, reminderDescription } = req.body;
-        dbInstance.reminders.addNewReminder(user.user_id, assetView, catView, reminderDue, reminderName, reminderDescription)
+        const { assetView, catView, reminderDue, reminderName, reminderDescription } = req.body;
+        const user_id = req.body.user.user_id;
+        dbInstance.reminders.addNewReminder(user_id, assetView, catView, reminderDue, reminderName, reminderDescription)
             .then(reminders => res.status(200).send(reminders))
             .catch(err => res.status(500).send(console.log(err)))
+    },
+
+    editReminder: (req, resp) => {
+        var newReminders = {
+            upcoming: [],
+            past: []
+        }
+        const dbInstance = req.app.get('db');
+        const { reminderDue, reminderName, reminderDescription, remind_id, user } = req.body;        
+        dbInstance.reminders.editReminder(reminderDue, reminderName, reminderDescription, remind_id, user.user_id).then(response => {
+            dbInstance.reminders.getRemindersComingUp7(user.user_id).then(res => {
+                newReminders.upcoming = res
+                dbInstance.reminders.getRemindersOverdue(user.user_id).then(res => {
+                    newReminders.past = res
+                    resp.status(200).send(newReminders)
+                })
+            })
+        })
     },
 
     deleteReminder: (req, resp) => {
@@ -144,7 +160,7 @@ module.exports = {
             overdue: [],
             upcoming: []
         }
-
+        
         dbInstance.reminders.setReminderStatusToClosed(req.params.remind_id).then(res => {
             dbInstance.reminders.getRemindersOverdue(1).then(res => {
                 console.log("all is", res)
