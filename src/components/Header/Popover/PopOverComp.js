@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-// import FontIcon from 'material-ui/FontIcon';
+import FontIcon from 'material-ui/FontIcon';
 import '../Header.css';
 import { connect } from 'react-redux';
 import { getRemindersOverdue } from '../../../ducks/reducer';
@@ -53,20 +53,10 @@ class PopOverComp extends Component {
                         <MenuItem key={reminder.remind_id}
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
                          
-                         rightIcon={<i class="material-icons"
-                            onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
                          
-                         >cancel</i>}
-                         rightIcon={<i class="material-icons"
-                             onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
-                         
-                         >edit</i>}
-                          >
-
-             
-
-                        }
-                              
+                        >
+                            <FontIcon className="material-icons">edit</FontIcon>
+                            <FontIcon className="material-icons">cancel</FontIcon>      
                         </MenuItem>
                     </div>
                 )
@@ -82,18 +72,10 @@ class PopOverComp extends Component {
                     <div>
                         <MenuItem key={reminder.remind_id}
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
-                         /* onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")} */
-                         rightIcon={<i class="material-icons"
-                                   // onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
-                         
-                         >
-                             
-                             cancel</i>}
-                        rightIcon={<i class="material-icons"
-                            // onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
-                         
-                         >edit</i>}
-                         >
+                        >
+
+                        <FontIcon className="material-icons">edit</FontIcon>
+                        <FontIcon className="material-icons">cancel</FontIcon>  
                         
 
                         </MenuItem>
