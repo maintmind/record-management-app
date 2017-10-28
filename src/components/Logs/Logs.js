@@ -20,19 +20,22 @@ class Logs extends Component {
             onCancel: () => { },
         })
     };
-    
+
     toggleAddEditModal(str, bl, obj) {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
-        this.props.updateLogName(obj.title)
-        this.props.updateLogDescription(obj.description)
-        this.props.updateLogComplete(obj.date_complete)
-        this.props.updateLogCost(obj.cost)
+        if (obj) {
+            this.props.updateLogName(obj.title);
+            this.props.updateLogDescription(obj.description);
+            this.props.updateLogComplete(obj.date_complete);
+            this.props.updateLogCost(obj.cost);
+        }
     }
 
     render() {
         const catSpecLogs = this.props.logList.filter((c, i) => {
-           return c.cat_id === this.props.catView
+            console.log("c", c)
+            return c.cat_id === this.props.catView
         })
 
         const displayLogs = catSpecLogs.map((c, i, arr) => {
@@ -45,7 +48,7 @@ class Logs extends Component {
                             <button onClick={() => this.toggleAddEditModal('log', true, c)} className="edit_button fa fa-pencil-square-o" ></button>
                             <button className="fa fa-trash delete_button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)}></button>
                         </div>
-                        <div className="log_info" onClick={() => {this.props.toggleLogDetailView(!this.props.logDetailsView)}}>
+                        <div className="log_info" onClick={() => { this.props.toggleLogDetailView(!this.props.logDetailsView) }}>
                             <div className="log_title">{c.title}</div>
                             <div className="log_desc"><i>{c.description}</i></div>
                             <div className="log_date">{completionDate}</div>
@@ -90,9 +93,9 @@ const outputActions = {
     toggleEditMenu,
     toggleLogDetailView,
     toggleAllLogsView,
-    updateLogName, 
+    updateLogName,
     updateLogDescription,
-    updateLogComplete, 
+    updateLogComplete,
     updateLogCost
 }
 
