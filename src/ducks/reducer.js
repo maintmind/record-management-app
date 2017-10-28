@@ -31,7 +31,7 @@ let initialState = {
     assetView: 0,
     catView: 0,
     modalToggler: null,
-    cloudinaryUrl: null,
+    cloudinaryUrl: [],
     editMode: false,
     logDetailsView: false,
     allLogsView: false
@@ -79,12 +79,13 @@ const SET_REMINDER_STATUS_TO_OPEN = "SET_REMINDER_STATUS_TO_OPEN";
 const TOGGLE_MODAL = "TOGGLE_MODAL";
 const ASSET_ROTATE = "ASSET_ROTATE";
 const CAT_DISP = "CAT_DISP";
-const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
+const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL"; // this puts the url of an uploaded image on state in cloudinaryUrl
 const CREATE_IMAGE_ID = "CREATE_IMAGE_ID"
 const GET_USER_INFO = "GET_USER_INFO";
 const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
 const TOGGLE_LOG_DETAIL_VIEW = "TOGGLE_LOG_DETAIL_VIEW";
 const TOGGLE_ALL_LOGS_VIEW = "TOGGLE_ALL_LOGS_VIEW"
+
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -172,15 +173,15 @@ export default function dashReducer(state = initialState, action) {
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
         case TOGGLE_MODAL:
-            return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: null, assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
+            return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: [], assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
         case ASSET_ROTATE:
             return Object.assign({}, state, { assetView: action.payload })
         case CAT_DISP:
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
-            return Object.assign({}, state, { cloudinaryUrl: [...state.cloudinaryUrl, action.payload] })
+            // return Object.assign({}, state, { cloudinaryUrl: [...state.cloudinaryUrl, action.payload] })
+            return {...state, cloudinaryUrl: [action.payload, ...state.cloudinaryUrl]}
         case CREATE_IMAGE_ID + "_FULFILLED":
-            console.log("reducer hit:", action.payload);
             return Object.assign({}, state, { newImageId: action.payload })
         case TOGGLE_EDIT_MENU:
             return Object.assign({}, state, { editMode: action.payload })

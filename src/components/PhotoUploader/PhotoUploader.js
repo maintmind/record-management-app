@@ -30,7 +30,7 @@ class PhotoUploader extends React.Component {
             // Initial FormData
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("tags", this.props.user_id, this.props.asset_id, this.props.cat_id, this.props.log_id);
+            formData.append("tags", this.props.user.user_id.toString());
             formData.append("upload_preset", preset); // Replace the preset name with your own
             formData.append("api_key", 428332871437726); // Replace API key with your own Cloudinary key
             formData.append("timestamp", (Date.now() / 1000) | 0);
@@ -41,7 +41,7 @@ class PhotoUploader extends React.Component {
             }).then(response => {
                 const data = response.data;
                 console.log(data);
-                // this.props.newCloudinaryUrl(response.data.secure_url) // You should store this URL for future references in your app
+                this.props.newCloudinaryUrl(response.data.secure_url)
             })
         });
 
@@ -66,18 +66,23 @@ class PhotoUploader extends React.Component {
         };
 
         return (
-            this.props.cloudinaryUrl ?
-                <div></div>
-                :
+            <div className="imagePreview">
+                <Dropzone multiple={true} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
+                    style={dropzoneStyle}>
+                    <div>To upload, click here, or drag an drop and image.</div>
+                </Dropzone>
+                {
+                    this.state.files.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
+                }
                 <div className="imagePreview">
-                    <Dropzone multiple={true} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
-                        style={dropzoneStyle}>
-                        <div>To upload, click here, or drag an drop and image.</div>
-                    </Dropzone>
-                    {
-                        this.state.files.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
-                    }
+                    {this.props.cloudinaryUrl.length !== 0 ? <div><b>Image Preview:</b></div> : () => { }}
+                    {this.props.cloudinaryUrl.map((img, i) => {
+                        return <div>
+                            <div><img src={this.props.cloudinaryUrl[i]} alt="uploaded image" /></div>
+                        </div>
+                    })}
                 </div>
+            </div>
         )
 
     }

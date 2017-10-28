@@ -60,10 +60,6 @@ class LogModal extends Component {
                     <div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
                      <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText="Cost" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div><PhotoUploader /></div>
-                    <div className="imagePreview">{this.props.cloudinaryUrl ?
-                        <div><b>Image Preview:</b><br /><img src={this.props.cloudinaryUrl} alt="" /></div>
-                        : "Your upload will display here."}
-                    </div>
                     <div className="log-form-button"><RaisedButton label="Submit New Log" primary={false} style={style} buttonStyle={style} onClick={() => this.submitLog({ props: this.props, date: this.state.date })} /></div>
                 </div>
             )
