@@ -30,7 +30,7 @@ class PhotoUploader extends React.Component {
             // Initial FormData
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("tags", `codeinfuse, medium, gist`);
+            formData.append("tags", this.props.user_id, this.props.asset_id, this.props.cat_id, this.props.log_id);
             formData.append("upload_preset", preset); // Replace the preset name with your own
             formData.append("api_key", 428332871437726); // Replace API key with your own Cloudinary key
             formData.append("timestamp", (Date.now() / 1000) | 0);
