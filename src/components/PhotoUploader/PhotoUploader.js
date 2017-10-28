@@ -51,27 +51,6 @@ class PhotoUploader extends React.Component {
             // ... perform after upload is successful operation
         });
 
-        // console.log(files)
-        // const uploaders = files.map(file => {
-        //     console.log(file.name)
-        //     let upload = request.post(url)
-        //         .field('upload_preset', preset)
-        //         .field('file', file);
-
-        //     upload.end((err, response) => {
-        //         if (err) {
-        //             console.error(err);
-        //         }
-        //         if (response.body.secure_url !== '') {
-        //             console.log(response.body.secure_url)
-        //             this.props.newCloudinaryUrl(response.body.secure_url)
-        //             // this.props.createImageId(this.props)
-        //         }
-
-        //     })
-
-        // });
-        // console.log(uploaders)
     }
 
 

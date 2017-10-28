@@ -34,7 +34,6 @@ class Logs extends Component {
 
     render() {
         const catSpecLogs = this.props.logList.filter((c, i) => {
-            console.log("c", c)
             return c.cat_id === this.props.catView
         })
 
