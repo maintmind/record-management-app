@@ -27,6 +27,7 @@ class LogDetailView extends Component {
     render() {
         return (
             <div className={this.props.logDetailsView ? "modal_popout_container addLog_show" : "addLog_hide"}>
+            <button onClick={() => this.props.toggleLogDetailView(!this.props.logDetailsView)}> CLOSE </button>
                 LOG DETAIL VIEW
             </div>
         );

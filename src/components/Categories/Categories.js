@@ -99,12 +99,13 @@ class Categories extends Component {
                         <button onClick={() => this.deleteAssetConfirm(this.props.assetView, this.props.user.user_id)} className={this.props.assetView === 0 ? "addCat_hide" : "fa fa-trash addCat_show"}></button>
                     </div>
                     <h1 className={this.props.assetView === 0 ? "addCat_hide" : "addCat_show"}>{assetDesc()}</h1>
-                </div>
-                <button onClick={() => this.toggleAddEditModal('cat', false)} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
-                    ADD CATEGORY
+                    <button onClick={() => this.toggleAddEditModal('cat', false)} className={this.props.assetView === 0 ? "addCat_button addCat_hide" : "addCat_button addCat_show"}>
+                        ADD CATEGORY
                 </button>
-
-                {displayCats}
+                </div>
+                <div className="cat_display">
+                    {displayCats}
+                </div>
 
             </div>
         );

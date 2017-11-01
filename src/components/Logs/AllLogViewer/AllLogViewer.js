@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, catDisp, deleteLog, toggleEditMenu, toggleAllLogsView } from '../../../ducks/reducer';
+import { getAllLogs, toggleModal, catDisp, deleteLog, toggleEditMenu, toggleAllLogsView, updateLogName, updateLogDescription, updateLogComplete, updateLogCost } from '../../../ducks/reducer';
 import './AllLogViewer.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+
+import './AllLogViewer.css';
 
 class AllLogViewer extends Component {
     // componentDidMount() {
@@ -21,9 +23,15 @@ class AllLogViewer extends Component {
         })
     };
 
-    toggleAddEditModal(str, bl) {
+    toggleAddEditModal(str, bl, obj) {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
+        if (obj) {
+            this.props.updateLogName(obj.title)
+            this.props.updateLogDescription(obj.description)
+            this.props.updateLogComplete(obj.date_complete)
+            this.props.updateLogCost(obj.cost)
+        }
     }
 
     render() {
@@ -31,13 +39,30 @@ class AllLogViewer extends Component {
             return c.cat_id === this.props.catView
         })
 
+        const assetDesc = () => {
+            const assets = this.props.assetList
+            for (var i = 0; i < assets.length; i++) {
+                if (assets[i].asset_id === this.props.assetView) {
+                    return assets[i].description
+                }
+            }
+        }
+
+        const catName = () => {
+            const cats = this.props.categoryList
+            for (var i = 0; i < cats.length; i++) {
+                if (cats[i].cat_id === this.props.catView) {
+                    return cats[i].title
+                }
+            }
+        }
+
         const displayLogs = catSpecLogs.map((c, i, arr) => {
             const completionDate = c.date_complete ? (c.date_complete).substring(0, (c.date_complete).indexOf('T')) : null
-            let result;
-            return result = (
+            let result = (
                 <section key={i} className="log_row">
                     <div className="log_buttons">
-                        <button onClick={() => this.toggleAddEditModal('log', true)} className="edit_button fa fa-pencil-square-o" ></button>
+                        <button onClick={() => this.toggleAddEditModal('log', true, c)} className="edit_button fa fa-pencil-square-o" ></button>
                         <button className="fa fa-trash delete_button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)}></button>
                     </div>
                     <div className="log_info">
@@ -49,21 +74,26 @@ class AllLogViewer extends Component {
                     <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a>
                 </section>
             )
-
             return result;
         })
 
         return (
             <div className={this.props.allLogsView ? "all_logs_modal addLog_show" : "addLog_hide"}>
-                <button onClick={() => this.props.toggleAllLogsView(!this.props.allLogsView)}> CLOSE </button>
-                <section className="log_header">
+                <div className="all_log_nav">
+                    <h2>Showing logs for {catName()} in {assetDesc()}</h2>
+                    <button onClick={() => { this.toggleAddEditModal('log', false) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD LOG</button>
+                    <button className="all_log_close" onClick={() => this.props.toggleAllLogsView(!this.props.allLogsView)}>&#10006;</button>
+                </div>
+                <section className="all_log_header">
                     <div className="log_header_title">TITLE</div>
                     <div className="log_desc">DESCRIPTION</div>
                     <div className="log_date">DATE COMPLETE</div>
                     <div className="log_cost">COST</div>
                     <div><small>CLICK IMAGE TO ENLARGE</small></div>
                 </section>
-                {displayLogs}
+                <section className="all_log_view">
+                    {displayLogs}
+                </section>
             </div>
         );
     }
@@ -79,7 +109,11 @@ const outputActions = {
     catDisp,
     deleteLog,
     toggleEditMenu,
-    toggleAllLogsView
+    toggleAllLogsView, 
+    updateLogName, 
+    updateLogDescription, 
+    updateLogComplete, 
+    updateLogCost
 }
 
 export default connect(mapStateToProps, outputActions)(AllLogViewer);
