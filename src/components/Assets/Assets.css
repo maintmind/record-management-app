@@ -1,8 +1,8 @@
 .assets_viewer {
     background-color: #E4E4E4; 
     width: 95%;
-    height: 95%;
-    overflow: scroll;
+    height: 100%;
+    /* overflow: scroll; */
 }
 
 .asset_tabs_container {
@@ -29,6 +29,8 @@
 .add_asset_button {
     width: 75px;
     height: 85%;
+    background: lightgray;
+    border-radius: 5px;
     margin-left: 10px;
 }
 
