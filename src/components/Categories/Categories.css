@@ -1,7 +1,14 @@
 .category_viewer {
     background: #E4E4E4;
     width: 100%;
-    /* height: 80%; */
+    height: 90%;
+    overflow: scroll;
+}
+
+.cat_display {
+    height: 100%;
+    margin-top: 75px;
+    overflow: scroll;
 }
 
 .cat_row {
@@ -25,8 +32,11 @@
 }
 
 .addCat_button {
-    width: 200px;
     height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border-color: #E28413;
+    border-width: 2px;
     margin: 10px;
 }
 
@@ -39,8 +49,12 @@
 }
 
 .asset_info {
+    background-color: #E4E4E4; 
     display: flex;
     align-items: center;
+    width: 95%;
+    height: 10%;
+    position: absolute;
 }
 
 .asset_info h1 {

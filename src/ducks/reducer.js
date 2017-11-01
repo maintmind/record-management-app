@@ -393,7 +393,6 @@ export function deleteCategory(cat_id, user_id) {
 
 //LOGS//
 export function getAllLogs(num) {
-    console.log('the num is', num)
     return {
         type: GET_ALL_LOGS,
         payload: axios.get(`/api/logs/get_all/${num}`).then(response => {
@@ -436,11 +435,9 @@ export function getAllReminders(num) {
 }
 
 export function getRemindersOverdue(num) {
-    console.log("num: ", num)
     return {
         type: GET_REMINDERS_OVERDUE,
         payload: axios.get(`/api/reminders/overdue/${num}`).then(response => {
-            console.log("overdue response: ", response.data)
             return response.data
         })
     }
