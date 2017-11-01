@@ -75,7 +75,9 @@ class Logs extends Component {
                     <div><small>CLICK IMAGE TO ENLARGE</small></div>
                 </section>
                 {displayLogs}
-                <button className={catSpecLogs.length > 5 ? "addLog_show" : "addLog_hide"} onClick={() => { this.props.toggleAllLogsView(!this.props.allLogsView) }}>5 of {catSpecLogs.length} shown. Click here to show all</button>
+                <div className="all_log_button_container">
+                    <button className={catSpecLogs.length > 5 ? "addLog_show" : "addLog_hide"} onClick={() => { this.props.toggleAllLogsView(!this.props.allLogsView) }}>5 of {catSpecLogs.length} shown. Click here to show all</button>
+                </div>
             </div >
         );
     }

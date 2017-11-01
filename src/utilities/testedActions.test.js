@@ -24,6 +24,27 @@ describe("Reducer tests", function () {
 
     // MARISSA 5
 
+    test('updateAssetName("House") should return {type: UPDATE_ASSET_NAME, payload: "House"}', function () {
+        expect(fns.updateAssetName("House")).toEqual({type: "UPDATE_ASSET_NAME", payload: "House"})
+    })
+
+    test('updateAssetDescription("Pinedale Cabin") should return {type: UPDATE_ASSET_DESCRIPTION, payload: "Pinedale Cabin"}', function () {
+        expect(fns.updateAssetDescription("Pinedale Cabin")).toEqual({type: "UPDATE_ASSET_DESCRIPTION", payload: "Pinedale Cabin"})
+    })
+
+    test('UPDATE_CATEGORY_ID: updateCatID(3) should return { type: UPDATE_CATEGORY_ID, payload: 3 }', function () {
+            expect(fns.updateCatID(3)).toEqual({ type: "UPDATE_CATEGORY_ID", payload: 3 })
+    })
+    
+    test('updateCategoryName("Plumbing") should return {type: UPDATE_CATEGORY_NAME, payload: "Plumbing"}', function () {
+        expect(fns.updateCategoryName("Plumbing")).toEqual({type: "UPDATE_CATEGORY_NAME", payload: "Plumbing"})
+    })
+
+    test('updateCategoryDescription("Moen Water Faucet") should return {type: UPDATE_CATEGORY_DESCRIPTION, payload: "Moen Water Faucet"}', function () {
+        expect(fns.updateCategoryDescription("Moen Water Faucet")).toEqual({type: "UPDATE_CATEGORY_DESCRIPTION", payload: "Moen Water Faucet"})
+    })
+        
+
     // SHAWN 5
 
     test('updateLogDescription("Get the oil changed") should return { type: UPDATE_LOG_DESCRIPTION, payload: "Get the oil changed" }', function () {
