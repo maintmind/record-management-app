@@ -1,0 +1,8 @@
+.menu-item{
+    display: flex;
+}
+
+.material-icons{
+    display: flex;
+    justify-content: space-around;
+}

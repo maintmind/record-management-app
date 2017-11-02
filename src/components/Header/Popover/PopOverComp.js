@@ -44,6 +44,10 @@ class PopOverComp extends Component {
 
         const inlineStyle = {justifyContent: 'flex'}
         // const iconStyles = {marginRight: 24}
+        const style = {width: "25vw"}
+
+        const overDueButtons = (<div><FontIcon className="material-icons">edit</FontIcon>
+                        <FontIcon className="material-icons">cancel</FontIcon></div>)
 
         var overdueReminders =
 
@@ -51,30 +55,41 @@ class PopOverComp extends Component {
                 return (
                     <div style={inlineStyle}>
                         <MenuItem key={reminder.remind_id}
-                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status}                   
+                         style={style}
+                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status} 
+                         rightIcon={overDueButtons}                 
                         >
-                            <FontIcon className="material-icons">edit</FontIcon>
-                            <FontIcon className="material-icons">cancel</FontIcon>      
+                                
                         </MenuItem>
+                    </div>
                 )
             })
 
         this.popOverDisplayControl.push(overdueReminders)
+
+        const upcomingButtons = (<div><FontIcon className="material-icons">edit</FontIcon>
+                        <FontIcon className="material-icons">cancel</FontIcon></div>)
 
         var upcomingReminders =
             nextProps.reminderListUpcoming.map((reminder, j) => {
 
 
                 return (
-                        <MenuItem key={reminder.remind_id}
+                    <div>
+                        <MenuItem className="menuitem" key={reminder.remind_id}
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
-                        >
-
-                        <FontIcon className="material-icons">edit</FontIcon>
-                        <FontIcon className="material-icons">cancel</FontIcon>  
-                        
+                         style={style}
+                         rightIcon={upcomingButtons}
+                        >                      
+                       
 
                         </MenuItem>
+                        
+                         {/* <FontIcon className="material-icons">edit</FontIcon>
+                        <FontIcon className="material-icons">cancel</FontIcon> */}
+                        
+                        
+                    </div>
                 )
             })
 
