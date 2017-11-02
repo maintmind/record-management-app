@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-// import FontIcon from 'material-ui/FontIcon';
+import FontIcon from 'material-ui/FontIcon';
 import '../Header.css';
 import { connect } from 'react-redux';
 import { getRemindersOverdue } from '../../../ducks/reducer';
@@ -44,52 +44,52 @@ class PopOverComp extends Component {
 
         const inlineStyle = {justifyContent: 'flex'}
         // const iconStyles = {marginRight: 24}
+        const style = {width: "25vw"}
+
+        const overDueButtons = (<div><FontIcon className="material-icons">edit</FontIcon>
+                        <FontIcon className="material-icons">cancel</FontIcon></div>)
 
         var overdueReminders =
 
         nextProps.reminderListOverdue.map((reminder, i) => {
                 return (
-                        <MenuItem style={inlineStyle} key={reminder.remind_id}
-                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
-                         
-                         rightIcon={<i className="material-icons"
-                            onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
-                         
-                         >cancel</i>}
-                         rightIcon={<i className="material-icons"
-                             onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
-                         
-                         >edit</i>}
-                          >
-                        }
+                    <div style={inlineStyle}>
+                        <MenuItem key={reminder.remind_id}
+                         style={style}
+                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status} 
+                         rightIcon={overDueButtons}                 
+                        >
+                                
                         </MenuItem>
+                    </div>
                 )
             })
 
         this.popOverDisplayControl.push(overdueReminders)
+
+        const upcomingButtons = (<div><FontIcon className="material-icons">edit</FontIcon>
+                        <FontIcon className="material-icons">cancel</FontIcon></div>)
 
         var upcomingReminders =
             nextProps.reminderListUpcoming.map((reminder, j) => {
 
 
                 return (
-                        <MenuItem key={reminder.remind_id}
+                    <div>
+                        <MenuItem className="menuitem" key={reminder.remind_id}
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
-                         /* onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming")} */
-                         rightIcon={<i className="material-icons"
-                                   // onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
-                         
-                         >
-                             
-                             cancel</i>}
-                        rightIcon={<i className="material-icons"
-                            // onClick={() => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue")}
-                         
-                         >edit</i>}
-                         >
-                        
+                         style={style}
+                         rightIcon={upcomingButtons}
+                        >                      
+                       
 
                         </MenuItem>
+                        
+                         {/* <FontIcon className="material-icons">edit</FontIcon>
+                        <FontIcon className="material-icons">cancel</FontIcon> */}
+                        
+                        
+                    </div>
                 )
             })
 
