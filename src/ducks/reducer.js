@@ -33,7 +33,6 @@ let initialState = {
     modalToggler: null,
     cloudinaryUrl: null,
     editMode: false,
-    logDetailsView: false,
     allLogsView: false
 }
 
@@ -83,7 +82,6 @@ const CAT_DISP = "CAT_DISP";
 const NEW_CLOUDINARY_URL = "NEW_CLOUDINARY_URL";
 const GET_USER_INFO = "GET_USER_INFO";
 const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
-const TOGGLE_LOG_DETAIL_VIEW = "TOGGLE_LOG_DETAIL_VIEW";
 const TOGGLE_ALL_LOGS_VIEW = "TOGGLE_ALL_LOGS_VIEW"
 
 // REDUCER 
@@ -188,8 +186,6 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { cloudinaryUrl: action.payload })
         case TOGGLE_EDIT_MENU:
             return Object.assign({}, state, { editMode: action.payload })
-        case TOGGLE_LOG_DETAIL_VIEW:
-            return Object.assign({}, state, { logDetailsView: action.payload })
         case TOGGLE_ALL_LOGS_VIEW:
             return Object.assign({}, state, { allLogsView: action.payload })
 
@@ -528,13 +524,6 @@ export function toggleModal(str) {
 
 export function toggleEditMenu(str) {
     return fns.toggleEditMenu(str)
-}
-
-export function toggleLogDetailView(val) {
-    return {
-        type: TOGGLE_LOG_DETAIL_VIEW,
-        payload: val
-    }
 }
 
 export function toggleAllLogsView(val) {

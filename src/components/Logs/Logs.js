@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, deleteLog, toggleEditMenu, toggleLogDetailView, toggleAllLogsView, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, updateLogId } from '../../ducks/reducer';
+import { getAllLogs, toggleModal, deleteLog, toggleEditMenu, toggleAllLogsView, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, updateLogId } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './Logs.css';
@@ -48,13 +48,13 @@ class Logs extends Component {
                             <button onClick={() => this.toggleAddEditModal('log', true, c)} className="edit_button fa fa-pencil-square-o" ></button>
                             <button className="fa fa-trash delete_button" onClick={() => this.confirmModal(c.log_id, this.props.user.user_id)}></button>
                         </div>
-                        <div className="log_info" onClick={() => { this.props.toggleLogDetailView(!this.props.logDetailsView) }}>
+                        <div className="log_info">
                             <div className="log_title">{c.title}</div>
                             <div className="log_desc"><i>{c.description}</i></div>
                             <div className="log_date">{completionDate}</div>
                             <div className="log_cost">{c.cost}</div>
-                        </div>
                         <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a>
+                        </div>
                     </section>
                 )
             }
@@ -93,7 +93,6 @@ const outputActions = {
     toggleModal,
     deleteLog,
     toggleEditMenu,
-    toggleLogDetailView,
     toggleAllLogsView,
     updateLogName,
     updateLogDescription,
