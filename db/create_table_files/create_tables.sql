@@ -30,7 +30,7 @@ date_submit DATE,
 date_complete DATE,
 title VARCHAR(180),
 description VARCHAR(500),
-img VARCHAR(200),
+img TEXT,
 cost MONEY
 );
 

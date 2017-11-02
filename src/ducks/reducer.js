@@ -179,7 +179,6 @@ export default function dashReducer(state = initialState, action) {
         case CAT_DISP:
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
-            // return Object.assign({}, state, { cloudinaryUrl: [...state.cloudinaryUrl, action.payload] })
             return {...state, cloudinaryUrl: [action.payload, ...state.cloudinaryUrl]}
         case CREATE_IMAGE_ID + "_FULFILLED":
             return Object.assign({}, state, { newImageId: action.payload })
@@ -402,6 +401,7 @@ export function getAllLogs(num) {
 }
 
 export function addLog(obj) {
+    console.log(obj)
     let newObj = Object.assign({}, obj.props, { logCompleteDate: obj.date })
     return {
         type: ADD_LOG,
@@ -427,15 +427,15 @@ export function newCloudinaryUrl(str) {
     }
 }
 
-export function createImageId(obj) {
-    console.log('action creator hit', obj)
-    return {
-        type: CREATE_IMAGE_ID,
-        payload: axios.post(`/api/images/new`, obj).then(response => {
-            return response.data
-        })
-    }
-}
+// export function createImageId(obj) {
+//     console.log('action creator hit', obj)
+//     return {
+//         type: CREATE_IMAGE_ID,
+//         payload: axios.post(`/api/images/new`, obj).then(response => {
+//             return response.data
+//         })
+//     }
+// }
 
 // REMINDERS//
 

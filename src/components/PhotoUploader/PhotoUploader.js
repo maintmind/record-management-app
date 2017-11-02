@@ -3,7 +3,7 @@ import request from 'superagent';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { newCloudinaryUrl, createImageId } from '../../ducks/reducer';
+import { newCloudinaryUrl } from '../../ducks/reducer';
 
 const preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 const url = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
@@ -71,22 +71,20 @@ class PhotoUploader extends React.Component {
                     style={dropzoneStyle}>
                     <div>To upload, click here, or drag an drop and image.</div>
                 </Dropzone>
-                {
+                {/* {
                     this.state.files.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
-                }
+                } */}
                 <div className="imagePreview">
-                    {this.props.cloudinaryUrl.length !== 0 ? <div><b>Image Preview:</b></div> : () => { }}
+                    {this.props.cloudinaryUrl.length !== 0 ? <div><b>Image Preview:</b></div> : null}
                     {this.props.cloudinaryUrl.map((img, i) => {
-                        return <div>
-                            <div><img src={this.props.cloudinaryUrl[i]} alt="uploaded image" /></div>
+                        return <div key={i}>
+                            <div><img className="photouploader-preview" src={this.props.cloudinaryUrl[i]} alt="uploaded image" /></div>
                         </div>
                     })}
                 </div>
             </div>
         )
-
     }
-
 }
 
 function mapStateToProps(state) {
@@ -95,7 +93,6 @@ function mapStateToProps(state) {
 
 const outputActions = {
     newCloudinaryUrl,
-    createImageId
 }
 
 export default connect(mapStateToProps, outputActions)(PhotoUploader);

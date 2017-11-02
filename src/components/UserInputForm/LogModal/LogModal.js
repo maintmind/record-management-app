@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "../UserInputForm.css";
 import "./LogModal.css";
 import { connect } from 'react-redux';
-import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, createImageId, putLogIdOnImg } from '../../../ducks/reducer';
+import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, createImageId } from '../../../ducks/reducer';
 import TextField from 'material-ui/TextField';
 import { orange500 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,7 +21,6 @@ class LogModal extends Component {
     submitLog(obj) {
         this.props.addLog(obj);
         this.props.toggleModal(null);
-        this.props.putLogIdOnImg();
     }
 
     handleDate = (event, date) => {
@@ -58,7 +57,7 @@ class LogModal extends Component {
                     {/* <div>Title:</div> */}
                     <div><TextField onChange={(e) => this.props.updateLogName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
-                     <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText="Cost" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText="Cost" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div><PhotoUploader /></div>
                     <div className="log-form-button"><RaisedButton label="Submit New Log" primary={false} style={style} buttonStyle={style} onClick={() => this.submitLog({ props: this.props, date: this.state.date })} /></div>
                 </div>
@@ -95,7 +94,6 @@ const outputActions = {
     updateLogComplete,
     updateLogCost,
     addLog,
-    createImageId,
 }
 
 export default connect(mapStateToProps, outputActions)(LogModal)
