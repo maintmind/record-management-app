@@ -1,14 +1,15 @@
 .category_viewer {
     background: #E4E4E4;
     width: 100%;
-    height: 90%;
+    height: 100%;
     overflow: scroll;
+    border-radius: 15px;
 }
 
 .cat_display {
     height: 100%;
     margin-top: 75px;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 
 .cat_row {
@@ -56,6 +57,7 @@
     width: 95%;
     height: 10%;
     position: absolute;
+    border-radius: 0px 15px 0px 0px;
 }
 
 .asset_info h1 {
