@@ -67,6 +67,7 @@ const EDIT_CATEGORY = "EDIT_CATEGORY";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
 const GET_ALL_LOGS = "GET_ALL_LOGS";
 const ADD_LOG = "ADD_LOG";
+const EDIT_LOG = "EDIT_LOG";
 const DELETE_LOG = "DELETE_LOG";
 const GET_ALL_REMINDERS = "GET_ALL_REMINDERS";
 const ADD_REMINDER = "ADD_REMINDER";
@@ -103,7 +104,7 @@ export default function dashReducer(state = initialState, action) {
         case UPDATE_CATEGORY_DESCRIPTION:
             return Object.assign({}, state, { categoryDescription: action.payload })
         case UPDATE_LOG_ID:
-            return Object.assign({}, state, { logID: action.payload })
+            return Object.assign({}, state, { log_id: action.payload })
         case UPDATE_LOG_COMPLETE_DATE:
             return Object.assign({}, state, { logCompleteDate: action.payload })
         case UPDATE_LOG_SUBMIT_DATE:
@@ -145,6 +146,8 @@ export default function dashReducer(state = initialState, action) {
         case GET_ALL_LOGS + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case ADD_LOG + "_FULFILLED":
+            return Object.assign({}, state, { logList: action.payload })
+        case EDIT_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case DELETE_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
@@ -233,18 +236,20 @@ export function updateCategoryDescription(categoryDescription) {
     }
 }
 
-export function updateLogID(log_id) {
+export function updateLogId(log_id) {
     return {
         type: UPDATE_LOG_ID,
         payload: log_id
     }
 }
+
 export function updateLogComplete(logCompleteDate) {
     return {
         type: UPDATE_LOG_COMPLETE_DATE,
         payload: logCompleteDate
     }
 }
+
 export function updateLogSubmit(logSubmitDate) {
     return {
         type: UPDATE_LOG_SUBMIT_DATE,
@@ -263,6 +268,7 @@ export function updateLogDescription(logDescription) {
 export function updateLogCost(logCost) {
     return fns.updateLogCost(logCost)
 }
+
 export function updateReminderID(remind_id) {
     return {
         type: UPDATE_REMINDER_ID,
@@ -407,6 +413,15 @@ export function addLog(obj) {
         type: ADD_LOG,
         payload: axios.post(`/api/logs/add`, newObj).then(response => {
             return response.data
+        })
+    }
+}
+
+export function editLog(obj) {
+    return {
+        type: EDIT_LOG,
+        payload: axios.patch(`/api/logs/edit`, obj).then(res => {
+            return res.data
         })
     }
 }

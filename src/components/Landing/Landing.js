@@ -35,11 +35,12 @@ export default class Landing extends Component {
                         <div className="car-container">
                             <div className="slideshow">
                                 <div className="slide-wrapper">
-                                    <div className="slide"><h1 className="slide-number"></h1></div>
-                                    <div className="slide"><h1 className="slide-number"></h1></div>
-                                    <div className="slide"><h1 className="slide-number"></h1></div>
-                                    <div className="slide"><h1 className="slide-number"></h1></div>
-                                    <div className="slide"><h1 className="slide-number"></h1></div>
+                                    <div className="slide"><div className="slide-number"></div></div>
+                                    <div className="slide"><div className="slide-number"></div></div>
+                                    <div className="slide"><div className="slide-number"></div></div>
+                                    <div className="slide"><div className="slide-number"></div></div>
+                                    <div className="slide"><div className="slide-number"></div></div>
+                                    
                                 </div>
                             </div>
                             <div className="about-text">
