@@ -36,6 +36,10 @@ module.exports = {
 
     //CATEGORY
     getAllCategories: (req, res) => {
+        // if (req.user_id === undefined) {
+        //     console.log("getAllCategories hit with no user_id.")
+        //     res.status(500).send("No user ID sent with request.")
+        // }
         const dbInstance = req.app.get('db');
         dbInstance.categories.getAllCategories(req.user.user_id)
             .then(cats => res.status(200).send(cats))
@@ -76,6 +80,7 @@ module.exports = {
     addLog: (req, res) => {
         const dbInstance = req.app.get('db');
         const { assetView, catView, user, logCompleteDate, logName, logDescription, cloudinaryUrl, logCost } = req.body;
+        console.log(cloudinaryUrl)
         dbInstance.logs.addNewLog(assetView, catView, user.user_id, logCompleteDate, logName, logDescription, cloudinaryUrl, logCost)
             .then(logs => res.status(200).send(logs))
             .catch(err => res.status(500).send(console.log(err)))
@@ -94,6 +99,16 @@ module.exports = {
         const dbInstance = req.app.get('db');
         dbInstance.logs.deleteLog(req.params.log_id, req.params.user_id)
             .then(logs => res.status(200).send(logs))
+            .catch(err => res.status(500).send(console.log(err)))
+    },
+
+    //IMAGES
+    saveImage: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { user, assetView, catView, cloudinaryUrl } = req.body; // add log_id
+        console.log(user, assetView, catView, cloudinaryUrl);
+        dbInstance.images.saveImage(user.user_id, assetView, catView, cloudinaryUrl)
+            .then(img_id => res.status(200).send(img_id))
             .catch(err => res.status(500).send(console.log(err)))
     },
 

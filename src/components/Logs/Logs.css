@@ -82,6 +82,9 @@
     width: 200px;
     height: 60px;
     cursor: pointer;
+    max-height: 60px;
+    max-width: 60px;
+    object-fit: contain;
 }
 
 .log_img img {
@@ -123,4 +126,8 @@
 
 .addLog_show {
     visibility: visible;
+}
+
+.img-thumbnails {
+    display:flex;
 }

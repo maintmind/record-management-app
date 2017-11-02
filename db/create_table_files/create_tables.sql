@@ -30,7 +30,7 @@ date_submit DATE,
 date_complete DATE,
 title VARCHAR(180),
 description VARCHAR(500),
-img VARCHAR(200),
+img TEXT,
 cost MONEY
 );
 
@@ -44,4 +44,13 @@ date_created DATE,
 date_due DATE,
 title VARCHAR(180),
 description VARCHAR(500)
+);
+
+CREATE TABLE images (
+img_id SERIAL PRIMARY KEY,
+user_id INTEGER REFERENCES users,
+asset_id INTEGER REFERENCES assets,
+cat_id INTEGER REFERENCES categories,
+log_id INTEGER REFERENCES logs,
+img_url VARCHAR(500)
 );
