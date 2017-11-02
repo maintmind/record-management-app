@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal, toggleEditMenu, getUserInfo  } from '../../ducks/reducer';
+import { getAllAssets, assetRotate, catDisp, updateAssetID, toggleModal, toggleEditMenu, getUserInfo } from '../../ducks/reducer';
 import Categories from '../Categories/Categories';
 import './Assets.css';
 
@@ -25,20 +25,22 @@ class Assets extends Component {
     render() {
         const displayAsset = this.props.assetList.map((c, i) => {
             return (
-                <button key={i} className={this.props.assetView === c.asset_id? "asset_tab disabled" : "asset_tab"} 
-                disabled={this.props.assetView === c.asset_id ? true : false} onClick={() => this.changeAsset(c.asset_id)}>
+                <button key={i} className={this.props.assetView === c.asset_id ? "asset_tab disabled" : "asset_tab"}
+                    disabled={this.props.assetView === c.asset_id ? true : false} onClick={() => this.changeAsset(c.asset_id)}>
                     {c.title}
                 </button>
             )
         })
 
         return (
-            <div className="assets_viewer">
+            <div className="assets_main">
                 <div className="asset_tabs_container">
                     {displayAsset}
                     <button onClick={() => this.toggleAddModal('asset')} className="add_asset_button">ADD ASSET</button>
                 </div>
-                <Categories />
+                <div className="assets_viewer">
+                    <Categories />
+                </div>
             </div>
         );
     }

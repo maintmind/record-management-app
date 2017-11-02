@@ -23,8 +23,17 @@ class UserInputForm extends Component {
     }
 
     render() {
+        const displayModal = () => {
+            if (this.props.modalToggler === null) {
+                return "hide_modal"
+            } else if(this.props.modalToggler === "asset" || this.props.modalToggler === "cat") {
+                return "sm_modal_popout_container show_modal"
+            } else {
+                return "modal_popout_container show_modal"
+            }
+        }
         return (
-            <div className={this.props.modalToggler === null ? "modal_popout_container hide_modal" : "modal_popout_container show_modal"}>
+            <div className={displayModal()}>
                 {this.displayController()}
             </div>
         );

@@ -30,7 +30,6 @@
     height: 60px;
     margin: 5px 10px 5px 10px;
     padding-left: 10px;
-    cursor: pointer;
     display: flex;
     align-items: center;
 }
@@ -52,7 +51,7 @@
 
 .log_info {
     height: 100%;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -74,21 +73,23 @@
 }
 
 .log_cost {
-    width: 175px;
+    width: 150px;
     margin-right: 20px;
 }
 
 .log_img {
-    width: 200px;
-    height: 60px;
     cursor: pointer;
     max-height: 60px;
-    max-width: 60px;
+    max-width: 125px;
     object-fit: contain;
+    margin-right: 10px;
 }
 
-.log_img img {
-    height: 100%;
+.img-thumbnails {
+    width: 550px;
+    display:flex;
+    align-items: center;
+    overflow: scroll;
 }
 
 .close_cat_button {
@@ -97,11 +98,10 @@
 }
 
 .addLog_button {
-    width: 200px;
-    height: 20px;
     margin: 5px 0px 0px 10px;
     height: 30px;
     width: 200px;
+    background: white;
     border-radius: 5px;
     border-color: #E28413;
     border-width: 2px;
@@ -118,6 +118,7 @@
     border-radius: 5px;
     border-color: #E28413;
     border-width: 2px;
+    background: white;
 }
 
 .addLog_hide {
@@ -128,6 +129,16 @@
     visibility: visible;
 }
 
-.img-thumbnails {
-    display:flex;
+@media (min-width: 1000px) {
+    .log_info {
+        margin-left: 25px;
+    }
+
+    .log_desc {
+        width: 500px;
+    }
+
+    .log_date {
+        width: 200px;
+    }
 }
