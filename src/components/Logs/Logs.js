@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLogs, toggleModal, deleteLog, toggleEditMenu, toggleLogDetailView, toggleAllLogsView, updateLogName, updateLogDescription, updateLogComplete, updateLogCost } from '../../ducks/reducer';
+import { getAllLogs, toggleModal, deleteLog, toggleEditMenu, toggleLogDetailView, toggleAllLogsView, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, updateLogId } from '../../ducks/reducer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './Logs.css';
@@ -29,6 +29,7 @@ class Logs extends Component {
             this.props.updateLogDescription(obj.description)
             this.props.updateLogComplete(obj.date_complete)
             this.props.updateLogCost(obj.cost)
+            this.props.updateLogId(obj.log_id)
         }
     }
 
@@ -97,7 +98,8 @@ const outputActions = {
     updateLogName,
     updateLogDescription,
     updateLogComplete,
-    updateLogCost
+    updateLogCost,
+    updateLogId
 }
 
 export default connect(mapStateToProps, outputActions)(Logs);

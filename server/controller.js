@@ -81,6 +81,15 @@ module.exports = {
             .catch(err => res.status(500).send(console.log(err)))
     },
 
+    editLog: (req, res) => {
+        const dbInstance = req.app.get('db');
+        console.log('hitting ctrllr', req.body)
+        const { logCompleteDate, logName, logDescription, log_id, user } = req.body
+        dbInstance.logs.editLog(logCompleteDate, logName, logDescription, log_id, user.user_id)
+            .then(logs => res.status(200).send(logs))
+            .catch(err => res.status(500).send(console.log(err)))
+    },
+
     deleteLog: (req, res) => {
         const dbInstance = req.app.get('db');
         dbInstance.logs.deleteLog(req.params.log_id, req.params.user_id)
