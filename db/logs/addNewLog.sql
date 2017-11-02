@@ -5,4 +5,5 @@ VALUES
 
 SELECT *
 FROM logs
-WHERE user_id = $3;
+WHERE user_id = $3
+ORDER BY date_complete DESC;

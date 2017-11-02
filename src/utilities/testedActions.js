@@ -12,6 +12,11 @@ const TOGGLE_MODAL = "TOGGLE_MODAL";
 const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
 const ASSET_ROTATE = "ASSET_ROTATE";
 const UPDATE_ASSET_ID = "UPDATE_ASSET_ID";
+const UPDATE_ASSET_NAME = "UPDATE_ASSET_NAME";
+const UPDATE_ASSET_DESCRIPTION = "UPDATE_ASSET_DESCRIPTION";
+const UPDATE_CATEGORY_ID = "UPDATE_CATEGORY_ID";
+const UPDATE_CATEGORY_NAME = "UPDATE_CATEGORY_NAME";
+const UPDATE_CATEGORY_DESCRIPTION = "UPDATE_CATEGORY_DESCRIPTION";
 
 
 module.exports = {
@@ -63,14 +68,12 @@ module.exports = {
             payload: logDescription
         }
     },
-
     toggleModal(str) {
         return {
             type: TOGGLE_MODAL,
             payload: str
         }
     },
-
     updateLogCost(logCost) {
         return {
             type: UPDATE_LOG_COST,
@@ -95,5 +98,41 @@ module.exports = {
             payload: asset_id
         }
 
+    },
+
+    updateAssetName(assetName) {
+        return {
+            type: UPDATE_ASSET_NAME,
+            payload: assetName
+        }
+    },
+
+    updateAssetDescription(assetDescription) {
+        return {
+            type: UPDATE_ASSET_DESCRIPTION,
+            payload: assetDescription
+        }
+    },
+
+    updateCatID(cat_id) {
+        return {
+            type: UPDATE_CATEGORY_ID,
+            payload: cat_id
+        }
+    },
+
+    updateCategoryName(categoryName) {
+        return {
+            type: UPDATE_CATEGORY_NAME,
+            payload: categoryName
+        }
+    },
+
+    updateCategoryDescription(categoryDescription) {
+        return {
+            type: UPDATE_CATEGORY_DESCRIPTION,
+            payload: categoryDescription
+        }
     }
+
 }

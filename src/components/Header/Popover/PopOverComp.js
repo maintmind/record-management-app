@@ -36,11 +36,11 @@ class PopOverComp extends Component {
 
     //style for upcoming reminders
     componentWillReceiveProps(nextProps) {
-        this.noRemindersMessage = <MenuItem primaryText="You have no reminders." className="hide" />
+        this.noRemindersMessage = <MenuItem key={"You have no reminders."} primaryText="You have no reminders." className="hide" />
         this.popOverDisplayControl = [];
 
 
-        this.popOverDisplayControl.push(<MenuItem primaryText="Overdue Reminders:" />)
+        this.popOverDisplayControl.push(<MenuItem key={"overdue reminders"} primaryText="Overdue Reminders:" />)
 
         const inlineStyle = {justifyContent: 'flex'}
         // const iconStyles = {marginRight: 24}
@@ -56,7 +56,6 @@ class PopOverComp extends Component {
                             <FontIcon className="material-icons">edit</FontIcon>
                             <FontIcon className="material-icons">cancel</FontIcon>      
                         </MenuItem>
-                    </div>
                 )
             })
 
@@ -67,7 +66,6 @@ class PopOverComp extends Component {
 
 
                 return (
-                    <div>
                         <MenuItem key={reminder.remind_id}
                          primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
                         >
@@ -77,13 +75,11 @@ class PopOverComp extends Component {
                         
 
                         </MenuItem>
-
-                    </div>
                 )
             })
 
         this.popOverDisplayControl.push(<Divider />)
-        this.popOverDisplayControl.push(<MenuItem primaryText="Upcoming:" />)
+        this.popOverDisplayControl.push(<MenuItem key={"overdue reminders"} primaryText="Upcoming:" />)
         this.popOverDisplayControl.push(upcomingReminders)
 
     }

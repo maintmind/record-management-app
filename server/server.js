@@ -108,7 +108,11 @@ app.delete('/api/categories/delete/:cat_id/:user_id', controller.deleteCategory)
 //LOG ENDPOINTS
 app.get('/api/logs/get_all/:cat_id', controller.getAllLogs)
 app.post('/api/logs/add', controller.addLog)
+app.patch('/api/logs/edit', controller.editLog)
 app.delete('/api/logs/delete/:log_id/:user_id', controller.deleteLog)
+
+//IMAGES ENDPOINTS
+app.post('/api/images/new', controller.saveImage)
 
 //REMINDER ENDPOINTS
 app.get('/api/reminders/overdue/:user_id', controller.getRemindersOverdue)
@@ -131,10 +135,10 @@ app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
 // app.get('/api/reminders/get_all/:asset_id', controller.getAllRemindersForAsset)
 
 
-app.get('*', (req, res) => {
-        console.log("None Met");
-        res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
-})
+// app.get('*', (req, res) => {
+//         console.log("None Met");
+//         res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+// })
 
 const port = 3005
 app.listen(port, console.log(`Listening on ${port}`))
