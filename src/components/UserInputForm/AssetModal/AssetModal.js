@@ -47,7 +47,8 @@ class AssetModal extends Component {
                     {/* <div className="title">Title:</div> */}
                     <div><TextField onChange={(e) => this.props.updateAssetName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     {/* <div className="description">Description:</div> */}
-                    <div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText="Description" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    <div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText="Description" multiLine={true} rows={2} rowsMax={4}
+                        underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="asset-form-button"><RaisedButton label="Submit New Asset" primary={false} style={style} buttonStyle={style} onClick={() => this.submitAsset(this.props)} /></div>
                 </div>
             )
@@ -59,7 +60,8 @@ class AssetModal extends Component {
                     {/* <div className="title">Title:</div> */}
                     <div><TextField onChange={(e) => this.props.updateAssetName(e.target.value)} hintText={this.props.assetName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     {/* <div className="description">Description:</div> */}
-                    <div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText={this.props.assetDescription} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
+                    <div><TextField onChange={(e) => this.props.updateAssetDescription(e.target.value)} hintText={this.props.assetDescription} multiLine={true} rows={2} rowsMax={4}
+                        underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div className="asset-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => {this.props.assetName !== '' && this.props.assetDescription !== '' ? this.saveChanges(this.props) : alert('Please make sure all fields are filled out')}} /></div>
                 </div>
             )
