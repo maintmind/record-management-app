@@ -68,14 +68,12 @@ module.exports = {
             payload: logDescription
         }
     },
-
     toggleModal(str) {
         return {
             type: TOGGLE_MODAL,
             payload: str
         }
     },
-
     updateLogCost(logCost) {
         return {
             type: UPDATE_LOG_COST,

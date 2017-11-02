@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "../UserInputForm.css";
 import "./LogModal.css";
 import { connect } from 'react-redux';
-import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, editLog } from '../../../ducks/reducer';
+import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, createImageId, editLog  } from '../../../ducks/reducer';
 import TextField from 'material-ui/TextField';
 import { orange500 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -61,10 +61,6 @@ class LogModal extends Component {
                         underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
                      <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText="Cost" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div><PhotoUploader /></div>
-                    <div className="imagePreview">{this.props.cloudinaryUrl ?
-                        <div><b>Image Preview:</b><br /><img src={this.props.cloudinaryUrl} alt="" /></div>
-                        : "Your upload will display here."}
-                    </div>
                     <div className="log-form-button"><RaisedButton label="Submit New Log" primary={false} style={style} buttonStyle={style} onClick={() => this.submitLog({ props: this.props, date: this.state.date })} /></div>
                 </div>
             )

@@ -22,12 +22,13 @@
 
 .imagePreview {
     padding: 10px;
+    object-fit: contain;
 }
 
 .imagePreview img {
-    /* max-width: 100%; */
-    max-width: auto;
+    max-width: 100%;
     max-height: 150px;
+    object-fit: contain;
 }
 
 .log-form-button {

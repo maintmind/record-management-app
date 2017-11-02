@@ -10,6 +10,14 @@ class Logs extends Component {
         this.props.getAllLogs(this.props.user.user_id)
     }
 
+    imagePreview(imageUrl) {
+        let imageArr;
+        imageUrl[0] === "{" ? imageUrl = imageUrl.substring(1) : null,
+            imageUrl[imageUrl.length - 1] === "}" ? imageUrl = imageUrl.substring(0, imageUrl.length - 1) : null,
+            imageArr = imageUrl.split(",")
+        return imageArr
+    }
+
     confirmModal(log_id, user_id) {
         confirmAlert({
             title: 'Are you sure?',
@@ -25,11 +33,10 @@ class Logs extends Component {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
         if (obj) {
-            this.props.updateLogName(obj.title)
-            this.props.updateLogDescription(obj.description)
-            this.props.updateLogComplete(obj.date_complete)
-            this.props.updateLogCost(obj.cost)
-            this.props.updateLogId(obj.log_id)
+            this.props.updateLogName(obj.title);
+            this.props.updateLogDescription(obj.description);
+            this.props.updateLogComplete(obj.date_complete);
+            this.props.updateLogCost(obj.cost);
         }
     }
 
@@ -53,7 +60,10 @@ class Logs extends Component {
                             <div className="log_desc"><i>{c.description}</i></div>
                             <div className="log_date">{completionDate}</div>
                             <div className="log_cost">{c.cost}</div>
-                        <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a>
+                            <div className="img-thumbnails">
+                                {c.img !== null ? this.imagePreview(c.img).map((img) => <a key={img} href={img} className="log_img" target="blank"><img className="log_img" src={img} alt="no images available" /></a>)
+                                    : null}
+                            </div>
                         </div>
                     </section>
                 )
@@ -73,7 +83,7 @@ class Logs extends Component {
                     <div className="log_desc">DESCRIPTION</div>
                     <div className="log_date">DATE COMPLETE</div>
                     <div className="log_cost">COST</div>
-                    <div><small>CLICK IMAGE TO ENLARGE</small></div>
+                    <div className="img-thumbnails"><small>CLICK IMAGE TO ENLARGE</small></div>
                 </section>
                 {displayLogs}
                 <div className="all_log_button_container">
