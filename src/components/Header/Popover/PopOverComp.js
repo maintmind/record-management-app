@@ -51,9 +51,7 @@ class PopOverComp extends Component {
                 return (
                     <div style={inlineStyle}>
                         <MenuItem key={reminder.remind_id}
-                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
-                         
-                         
+                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status}                   
                         >
                             <FontIcon className="material-icons">edit</FontIcon>
                             <FontIcon className="material-icons">cancel</FontIcon>      
