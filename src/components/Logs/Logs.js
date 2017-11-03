@@ -61,8 +61,8 @@ class Logs extends Component {
                             <div className="log_date">{completionDate}</div>
                             <div className="log_cost">{c.cost}</div>
                             <div className="img-thumbnails">
-                                {c.img !== null ? this.imagePreview(c.img).map((img) => <a key={img} href={img} className="log_img" target="blank"><img className="log_img" src={img} alt="no images available" /></a>)
-                                    : null}</div>
+                                {c.img !== null ? this.imagePreview(c.img).map((img) => <a key={img} href={img} className="log_img" target="blank"><img className="log_img" src={img} alt="no images available" /></a> )
+                                    : "no images available"}</div>
                         </div>
                     </section>
                 )

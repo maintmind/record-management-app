@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './Header.css';
 import PopOverComp from './Popover/PopOverComp';
+import { connect } from 'react-redux';
+import { getUserInfo } from '../../ducks/reducer'
 
-export default class Header extends Component {
-
-    // componentDidMount(){
-    //     axios call that checks to see if user is logged in needed for popover ternary below
-    // }
+class Header extends Component {
 
     render() {
         return (
@@ -23,11 +21,23 @@ export default class Header extends Component {
                     </div>
                 </div>
 
-                <div className="logout-container">
-                    <a href={process.env.REACT_APP_LOGOUT}><button className="logout-button">Logout</button></a>
-                </div>
+                <section className="credentials">
+                    <img src={this.props.user.img} className={this.props.user.img ? this.props.user.img : "hide"} alt="user image" />
+                    <section>
+                        <div>{this.props.user.username}</div>
+                        <a href={process.env.REACT_APP_LOGOUT}><button className="logout-button">Logout</button></a>
+                    </section>
+                </section>
+
+
 
             </div>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return state
+}
+
+export default connect(mapStateToProps, { getUserInfo })(Header);
