@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import request from 'superagent';
+import React from 'react';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
@@ -78,7 +77,7 @@ class PhotoUploader extends React.Component {
                     {this.props.cloudinaryUrl.length !== 0 ? <div><b>Image Preview:</b></div> : null}
                     {this.props.cloudinaryUrl.map((img, i) => {
                         return <div key={i}>
-                            <div><img className="photouploader-preview" src={this.props.cloudinaryUrl[i]} alt="uploaded image" /></div>
+                            <div><img className="photouploader-preview" src={this.props.cloudinaryUrl[i]} alt="uploaded documentation" /></div>
                         </div>
                     })}
                 </div>
