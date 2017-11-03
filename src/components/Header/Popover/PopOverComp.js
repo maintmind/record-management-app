@@ -8,9 +8,7 @@ import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
 import '../Header.css';
 import { connect } from 'react-redux';
-import { getRemindersOverdue } from '../../../ducks/reducer';
-import { getRemindersComingUp } from '../../../ducks/reducer';
-import { setReminderStatusToClosed } from '../../../ducks/reducer';
+import { getRemindersOverdue, getRemindersComingUp, setReminderStatusToClosed } from '../../../ducks/reducer';
 
 
 class PopOverComp extends Component {
@@ -25,28 +23,19 @@ class PopOverComp extends Component {
         this.upcomingStyle = { backgroundColor: "orange", height: "25px", width: "25px" }
         this.upcomingStyleMenu = { backgroundColor: "#fffff", color: "#E38E37", fontWeight: "700" }
         this.overdueStyleMenu = { backgroundColor: "#ffffff", color: "#E33629", fontWeight: "700" }
-
-        this.handleCompleteOverDueReminder = this.handleCompleteOverDueReminder.bind(this);
         
     }
 
+
+
     componentDidMount(props) {
-        // this.props.getRemindersOverdue(this.props.user.user_id);
-        // this.props.getRemindersComingUp(this.props.user.user_id);
+        this.props.getRemindersOverdue(this.props.user.user_id);
+        this.props.getRemindersComingUp(this.props.user.user_id);
 
         // const noOverdueRemindersMessage = <MenuItem primaryText="You have no overdue reminders." className="hide" />
         // const noUpcomingRemindersMessage = <MenuItem primaryText="You have no upcoming reminders." className="hide" />
     }
-
-    handleCompleteOverDueReminder(){
-        console.log("handleCompleteOverDueReminder")
-    }
     
-    handleCompleteUpcomingReminder(){
-        console.log("handleUpcomingReminder")
-    }
-    
-    //style for upcoming reminders
     componentWillReceiveProps(nextProps) {
         this.noRemindersMessage = <MenuItem key={"You have no reminders."} primaryText="You have no reminders." className="hide" />
         this.popOverDisplayControl = [];
@@ -63,9 +52,10 @@ class PopOverComp extends Component {
                     <div style={inlineStyle}>
                         <MenuItem key={reminder.remind_id}
                             primaryText={reminder.title + " - " + reminder.description}
-                            onClick={ () => this.handleCompleteOverDueReminder() }
+                            /* onClick={ () => nextProps.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue") } */
                             leftIcon={<FontIcon className="material-icons">forward</FontIcon>}
                         >
+                        <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id)}>Mark Complete</button>
                         </MenuItem>
                     </div>
                 )
@@ -80,9 +70,10 @@ class PopOverComp extends Component {
                     <div>
                         <MenuItem key={reminder.remind_id}
                             primaryText={reminder.title + " - " + reminder.description}
-                            onClick={()=> this.handleCompleteUpcomingReminder() }
+                            /* onClick={ () => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming") } */
                             leftIcon={<FontIcon className="material-icons">forward</FontIcon>}
                         >
+                        <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id)}>Mark Complete</button>
                         </MenuItem>
                     </div>
                 )
@@ -159,9 +150,9 @@ function mapStateToProps(state) {
 }
 
 let outputActions = {
-    getRemindersOverdue: getRemindersOverdue,
-    getRemindersComingUp: getRemindersComingUp,
-    setReminderStatusToClosed: setReminderStatusToClosed
+    getRemindersOverdue,
+    getRemindersComingUp,
+    setReminderStatusToClosed,
 }
 
 export default connect(mapStateToProps, outputActions)(PopOverComp);

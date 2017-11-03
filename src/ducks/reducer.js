@@ -496,10 +496,12 @@ export function deleteReminder(remind_id, user_id) {
     return fns.deleteReminder(remind_id, user_id)
 }
 
-export function setReminderStatusToClosed(num, type) {
+export function setReminderStatusToClosed(num, user_id) {
+    let scene = { upcoming: [], overdue: [] }
+    console.log("setReminderStatusToClosed", num, user_id)
     return {
         type: SET_REMINDER_STATUS_TO_CLOSED,
-        payload: axios.put(`/api/reminders/close/${num}`).then(response => {
+        payload: axios.put(`/api/reminders/close/${num}/${user_id}`).then(response => {
             // response.data.list = type
             return response.data
         })
