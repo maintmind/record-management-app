@@ -65,7 +65,7 @@ class PhotoUploader extends React.Component {
         };
 
         return (
-            <div className="imagePreview">
+            <div className="imagePreview_main">
                 <Dropzone multiple={true} accept="image/*" onDrop={(file) => this.onImageDrop(file)}
                     style={dropzoneStyle}>
                     <div>To upload, click here, or drag an drop and image.</div>
@@ -73,14 +73,20 @@ class PhotoUploader extends React.Component {
                 {/* {
                     this.state.files.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
                 } */}
-                <div className="imagePreview">
+                <section className="imagePreview">
                     {this.props.cloudinaryUrl.length !== 0 ? <div><b>Image Preview:</b></div> : null}
-                    {this.props.cloudinaryUrl.map((img, i) => {
-                        return <div key={i}>
-                            <div><img className="photouploader-preview" src={this.props.cloudinaryUrl[i]} alt="uploaded documentation" /></div>
-                        </div>
-                    })}
-                </div>
+                    <div className="imagesDisplay">
+                        {this.props.cloudinaryUrl.map((img, i) => {
+                            return (
+                                <div key={i} className="preview-container">
+                                    {/* <a className="photouploader-preview" target="blank" href={this.props.cloudinaryUrl[i]}> */}
+                                        <img className="photouploader-preview" src={this.props.cloudinaryUrl[i]} alt="uploaded documentation" />
+                                    {/* </a> */}
+                                </div>
+                            )
+                        })}
+                    </div>
+                </section>
             </div>
         )
     }
