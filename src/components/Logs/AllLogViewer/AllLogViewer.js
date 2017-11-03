@@ -25,7 +25,7 @@ class AllLogViewer extends Component {
 
     imagePreview(imageUrl) {
         let imageArr;
-        imageUrl[0] === "{" ? imageUrl = imageUrl.substring(1) : null,
+        imageUrl[0] === "{" ? imageUrl = imageUrl.substring(1) : ()=>{},
             imageUrl[imageUrl.length - 1] === "}" ? imageUrl = imageUrl.substring(0, imageUrl.length - 1) : null,
             imageArr = imageUrl.split(",")
         return imageArr
@@ -79,9 +79,9 @@ class AllLogViewer extends Component {
                         <div className="log_date">{completionDate}</div>
                         <div className="log_cost">{c.cost}</div>
                         <div className="img-thumbnails">
-                                {c.img !== null ? this.imagePreview(c.img).map((img) => <a key={img} href={img} className="log_img" target="blank"><img className="log_img" src={img} alt="no images available" /></a>)
-                                    : null}
-                            </div>
+                            {c.img !== null ? this.imagePreview(c.img).map((img) => <a key={img} href={img} className="log_img" target="blank"><img className="log_img" src={img} alt="no images available" /></a>)
+                                : null}
+                        </div>
                     </div>
                     {/* <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a> */}
                 </section>
