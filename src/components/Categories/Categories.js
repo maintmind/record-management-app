@@ -46,7 +46,7 @@ class Categories extends Component {
         })
     };
 
-    toggleAddEditModal(str, bl, title, desc, num) {
+    toggleAddEditModal(str, bl, title, desc, num, img) {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
         this.props.updateAssetName(title)
