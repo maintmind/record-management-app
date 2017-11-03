@@ -15,6 +15,7 @@ let initialState = {
     logName: '',
     logDescription: '',
     logCost: null,
+    logImages: [],
     remind_id: 0,
     reminderStatus: null,
     reminderCreated: null,
@@ -33,7 +34,7 @@ let initialState = {
     modalToggler: null,
     cloudinaryUrl: [],
     editMode: false,
-    allLogsView: false
+    allLogsView: false,
 }
 
 
@@ -84,7 +85,7 @@ const CREATE_IMAGE_ID = "CREATE_IMAGE_ID"
 const GET_USER_INFO = "GET_USER_INFO";
 const TOGGLE_EDIT_MENU = "TOGGLE_EDIT_MENU";
 const TOGGLE_ALL_LOGS_VIEW = "TOGGLE_ALL_LOGS_VIEW"
-
+const UPDATE_LOG_IMAGES = "UPDATE_LOG_IMAGES"
 
 // REDUCER 
 export default function dashReducer(state = initialState, action) {
@@ -152,6 +153,7 @@ export default function dashReducer(state = initialState, action) {
         case ADD_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case EDIT_LOG + "_FULFILLED":
+            console.log("case EDIT_LOG", action.payload)
             return Object.assign({}, state, { logList: action.payload })
         case DELETE_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
@@ -192,17 +194,17 @@ export default function dashReducer(state = initialState, action) {
         case CAT_DISP:
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
-            return {...state, cloudinaryUrl: [action.payload, ...state.cloudinaryUrl]}
+            return {...state, cloudinaryUrl: [action.payload, ...state.cloudinaryUrl], logImages: [...state.logImages, action.payload]}
         case CREATE_IMAGE_ID + "_FULFILLED":
             return Object.assign({}, state, { newImageId: action.payload })
         case TOGGLE_EDIT_MENU:
             return Object.assign({}, state, { editMode: action.payload })
         case TOGGLE_ALL_LOGS_VIEW:
             return Object.assign({}, state, { allLogsView: action.payload })
-
         case GET_USER_INFO + '_FULFILLED':
             return Object.assign({}, state, { user: action.payload })
-
+        case UPDATE_LOG_IMAGES:
+            return Object.assign({}, state, { logImages: action.payload})
         default:
             return state
     }
@@ -244,10 +246,10 @@ export function updateCategoryDescription(categoryDescription) {
     }
 }
 
-export function updateLogId(log_id) {
+export function updateLogImages(imgArr) {
     return {
-        type: UPDATE_LOG_ID,
-        payload: log_id
+        type: UPDATE_LOG_IMAGES,
+        payload: imgArr
     }
 }
 
@@ -425,6 +427,7 @@ export function addLog(obj) {
 }
 
 export function editLog(obj) {
+    console.log("editLog hit at reducer")
     return {
         type: EDIT_LOG,
         payload: axios.patch(`/api/logs/edit`, obj).then(res => {

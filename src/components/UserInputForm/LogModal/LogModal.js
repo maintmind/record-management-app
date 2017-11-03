@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "../UserInputForm.css";
 import "./LogModal.css";
 import { connect } from 'react-redux';
-import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, editLog  } from '../../../ducks/reducer';
+import { toggleModal, updateLogName, updateLogDescription, updateLogComplete, updateLogCost, addLog, createImageId, editLog, updateLogImages  } from '../../../ducks/reducer';
 import TextField from 'material-ui/TextField';
 import { orange500 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -55,7 +55,6 @@ class LogModal extends Component {
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>ADD LOG</h2>
                     <div><DatePicker onChange={this.handleDate} hintText="Date of service" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    {/* <div>Title:</div> */}
                     <div><TextField onChange={(e) => this.props.updateLogName(e.target.value)} hintText="Title" underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText="Description" multiLine={true} rows={2} rowsMax={4}
                         underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
@@ -65,25 +64,25 @@ class LogModal extends Component {
                 </div>
             )
         } else {
+            const images = this.props.logImages.map((img, i) => {
+            return <div className="imagePreview" key={i}><img src={img} alt="log documentation" /></div>
+            })
             const dateComplete= this.props.logCompleteDate ? (this.props.logCompleteDate).substring(0, (this.props.logCompleteDate).indexOf('T')) : null
             return (
                 <div className="modal_container">
                     <button className="close_modal_button" onClick={() => this.props.toggleModal(null)}>&#10006;</button>
                     <h2>EDIT LOG</h2>
-                    {/* <div>Title:</div> */}
                     <div><TextField onChange={(e) => this.props.updateLogName(e.target.value)} hintText={this.props.logName} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    {/* <div className="description">Description:</div> */}
                     <div><TextField onChange={(e) => this.props.updateLogDescription(e.target.value)} hintText={this.props.logDescription} multiLine={true} rows={2} rowsMax={4}
                         underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    {/* <div className="date">Date of Service:</div>  */}
                     <div><DatePicker onChange={this.handleDate} hintText={dateComplete} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
-                    {/* <div className="cost">Cost:</div>  */}
                     <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText={this.props.logCost} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
-                    <div><PhotoUploader /></div>
-                    <div className="imagePreview">{this.props.cloudinaryUrl ?
+                    <div>{images}</div>
+                    {/* <div><PhotoUploader /></div> */}
+                    {/* <div className="imagePreview">{this.props.cloudinaryUrl ?
                         <div><b>Image Preview:</b><br /><img src={this.props.cloudinaryUrl} alt="" /></div>
                         : "Your upload will display here."}
-                    </div>
+                    </div> */}
                     <div className="log-form-button"><RaisedButton label="Save Changes" primary={false} style={style} buttonStyle={style} onClick={() => {this.props.logName !== '' && this.props.logDescription !== ''  && this.props.logCost && this.props.logCompleteDate? this.saveChanges(this.props) : alert('Please make sure all fields are filled out')}} /></div>
                 </div>
             )
