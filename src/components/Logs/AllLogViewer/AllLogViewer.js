@@ -70,8 +70,8 @@ class AllLogViewer extends Component {
                         <div className="log_desc"><i>{c.description}</i></div>
                         <div className="log_date">{completionDate}</div>
                         <div className="log_cost">{c.cost}</div>
+                        <div className="log_img">{c.img ? <a href={c.img} className="log_img" target="blank"><img className="log_img" src={c.img} alt="log images" /></a> : "no image(s)"}</div>
                     </div>
-                    <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a>
                 </section>
             )
             return result;
@@ -109,10 +109,10 @@ const outputActions = {
     catDisp,
     deleteLog,
     toggleEditMenu,
-    toggleAllLogsView, 
-    updateLogName, 
-    updateLogDescription, 
-    updateLogComplete, 
+    toggleAllLogsView,
+    updateLogName,
+    updateLogDescription,
+    updateLogComplete,
     updateLogCost
 }
 

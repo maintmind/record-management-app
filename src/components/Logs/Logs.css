@@ -27,11 +27,12 @@
 
 .log_row {
     background: #E7E7E7;
-    height: 60px;
+    height: 75px;
     margin: 5px 10px 5px 10px;
     padding-left: 10px;
     display: flex;
     align-items: center;
+    object-fit: contain;
 }
 
 .log_buttons {
@@ -87,10 +88,13 @@
 
 .img-thumbnails {
     width: 550px;
-    display:flex;
+    display: flex;
+    height: 100%;
     align-items: center;
-    overflow: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
+
 
 .close_cat_button {
     width: 50px;
@@ -141,4 +145,9 @@
     .log_date {
         width: 200px;
     }
+
+    .img-thumbnails {
+        width: 20vw;
+    }
+    
 }
