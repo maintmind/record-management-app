@@ -40,13 +40,17 @@
     width: 75px;
     height: 85%;
     background: #E0E0E0;
-    /* background: white; */
     border-radius: 5px;
     border-color: #E28413;
     border-width: 2px;
     margin-left: 10px;
     font-weight: bold;
-    /* box-shadow: 0px 0px 2px #000000;  */
+    cursor: pointer;
+}
+
+.add_asset_button:hover {
+    color: white;
+    background-color: #E28413;
 }
 
 button:focus {

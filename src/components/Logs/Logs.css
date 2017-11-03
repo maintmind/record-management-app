@@ -110,6 +110,12 @@
     border-color: #E28413;
     border-width: 2px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.addLog_button:hover {
+    color: white;
+    background-color: #E28413;
 }
 
 .all_log_button_container {
@@ -125,6 +131,12 @@
     border-width: 2px;
     background: white;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.all_log_button_container button:hover {
+    color: white;
+    background-color: #E28413;
 }
 
 .addLog_hide {
