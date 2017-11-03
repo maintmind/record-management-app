@@ -23,6 +23,14 @@ class AllLogViewer extends Component {
         })
     };
 
+    imagePreview(imageUrl) {
+        let imageArr;
+        imageUrl[0] === "{" ? imageUrl = imageUrl.substring(1) : null,
+            imageUrl[imageUrl.length - 1] === "}" ? imageUrl = imageUrl.substring(0, imageUrl.length - 1) : null,
+            imageArr = imageUrl.split(",")
+        return imageArr
+    }
+
     toggleAddEditModal(str, bl, obj) {
         this.props.toggleEditMenu(bl)
         this.props.toggleModal(str)
@@ -70,8 +78,12 @@ class AllLogViewer extends Component {
                         <div className="log_desc"><i>{c.description}</i></div>
                         <div className="log_date">{completionDate}</div>
                         <div className="log_cost">{c.cost}</div>
-                        <div className="log_img">{c.img ? <a href={c.img} className="log_img" target="blank"><img className="log_img" src={c.img} alt="log images" /></a> : "no image(s)"}</div>
+                        <div className="img-thumbnails">
+                                {c.img !== null ? this.imagePreview(c.img).map((img) => <a key={img} href={img} className="log_img" target="blank"><img className="log_img" src={img} alt="no images available" /></a>)
+                                    : null}
+                            </div>
                     </div>
+                    {/* <a href={c.img} className="log_img" target="blank"><img src={c.img} alt="no images available" /></a> */}
                 </section>
             )
             return result;
