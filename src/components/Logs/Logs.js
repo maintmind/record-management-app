@@ -76,8 +76,8 @@ class Logs extends Component {
                 <div>
                     <button onClick={() => { this.toggleAddEditModal('log', false) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD LOG</button>
                     <button onClick={() => { this.toggleAddEditModal('reminder', false) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>ADD REMINDER</button>
-                    {/* <button onClick={() => { this.props.toggleAllLogsView(!this.props.allLogsView) }} className={this.props.catView === 0 ? "addLog_button addLog_hide" : "addLog_button  addLog_show"}>SHOW ALL LOGS</button> */}
                 </div>
+
                 <section className="log_header">
                     <div className="log_header_title">TITLE</div>
                     <div className="log_desc">DESCRIPTION</div>
@@ -85,7 +85,9 @@ class Logs extends Component {
                     <div className="log_cost">COST</div>
                     <div className="img-thumbnails"><small>CLICK IMAGE TO ENLARGE</small></div>
                 </section>
+
                 {displayLogs}
+
                 <div className="all_log_button_container">
                     <button className={catSpecLogs.length > 5 ? "addLog_show" : "addLog_hide"} onClick={() => { this.props.toggleAllLogsView(!this.props.allLogsView) }}>5 of {catSpecLogs.length} shown. Click here to show all</button>
                 </div>

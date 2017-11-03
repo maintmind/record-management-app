@@ -96,12 +96,14 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { assetName: action.payload })
         case UPDATE_ASSET_DESCRIPTION:
             return Object.assign({}, state, { assetDescription: action.payload })
+
         case UPDATE_CATEGORY_ID:
             return Object.assign({}, state, { cat_id: action.payload })
         case UPDATE_CATEGORY_NAME:
             return Object.assign({}, state, { categoryName: action.payload })
         case UPDATE_CATEGORY_DESCRIPTION:
             return Object.assign({}, state, { categoryDescription: action.payload })
+
         case UPDATE_LOG_ID:
             return Object.assign({}, state, { log_id: action.payload })
         case UPDATE_LOG_COMPLETE_DATE:
@@ -114,6 +116,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logDescription: action.payload })
         case UPDATE_LOG_COST:
             return Object.assign({}, state, { logCost: action.payload })
+
         case UPDATE_REMINDER_ID:
             return Object.assign({}, state, { reminderID: action.payload })
         case UPDATE_REMINDER_STATUS:
@@ -126,6 +129,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderName: action.payload })
         case UPDATE_REMINDER_DESCRIPTION:
             return Object.assign({}, state, { reminderDescription: action.payload })
+
         case GET_ALL_ASSETS + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
         case ADD_ASSET + "_FULFILLED":
@@ -134,6 +138,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { assetList: action.payload })
         case DELETE_ASSET + "_FULFILLED":
             return Object.assign({}, state, { assetList: action.payload })
+
         case GET_ALL_CATEGORIES + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
         case ADD_CATEGORY + "_FULFILLED":
@@ -142,6 +147,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { categoryList: action.payload })
         case DELETE_CATEGORY + "_FULFILLED":
             return Object.assign({}, state, { categoryList: action.payload })
+
         case GET_ALL_LOGS + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case ADD_LOG + "_FULFILLED":
@@ -151,10 +157,15 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logList: action.payload })
         case DELETE_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
+
         case GET_ALL_REMINDERS + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
         case ADD_REMINDER + "_FULFILLED":
-            return Object.assign({}, state, { reminderList: action.payload })
+            let updatingReminders = {
+                upcoming: action.payload.upcoming,
+                overdue: action.payload.past
+            }
+            return Object.assign({}, state, { reminderListUpcoming: updatingReminders.upcoming, reminderListOverdue: updatingReminders.overdue })
         case EDIT_REMINDER + "_FULFILLED":
             let newReminders = {
                 upcoming: action.payload.upcoming,
@@ -175,6 +186,7 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { reminderListOverdue: action.payload.overdue, reminderListUpcoming: action.payload.upcoming })
         case SET_REMINDER_STATUS_TO_OPEN + "_FULFILLED":
             return Object.assign({}, state, { reminderList: action.payload })
+            
         case TOGGLE_MODAL:
             return Object.assign({}, state, { modalToggler: action.payload, cloudinaryUrl: [], assetName: '', assetDescription: '', categoryName: '', categoryDescription: '', logCompleteDate: null, logName: '', logDescription: '', logCost: null, reminderDue: null, reminderName: '', reminderDescription: '' })
         case ASSET_ROTATE:
@@ -405,7 +417,6 @@ export function getAllLogs(num) {
 }
 
 export function addLog(obj) {
-    console.log(obj)
     let newObj = Object.assign({}, obj.props, { logCompleteDate: obj.date })
     return {
         type: ADD_LOG,
@@ -440,16 +451,6 @@ export function newCloudinaryUrl(str) {
         payload: str
     }
 }
-
-// export function createImageId(obj) {
-//     console.log('action creator hit', obj)
-//     return {
-//         type: CREATE_IMAGE_ID,
-//         payload: axios.post(`/api/images/new`, obj).then(response => {
-//             return response.data
-//         })
-//     }
-// }
 
 // REMINDERS//
 
@@ -500,12 +501,9 @@ export function deleteReminder(remind_id, user_id) {
 }
 
 export function setReminderStatusToClosed(num, user_id) {
-    let scene = { upcoming: [], overdue: [] }
-    console.log("setReminderStatusToClosed", num, user_id)
     return {
         type: SET_REMINDER_STATUS_TO_CLOSED,
         payload: axios.put(`/api/reminders/close/${num}/${user_id}`).then(response => {
-            // response.data.list = type
             return response.data
         })
     }

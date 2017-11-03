@@ -20,15 +20,18 @@
 }
 
 .imagePreview {
-    padding: 10px;
-    object-fit: contain;
-    display: flex;
+    max-width: 28vw;
 }
 
-.imagePreview img {
-    max-width: 100%;
-    max-height: 150px;
-    object-fit: contain;
+.imagesDisplay {
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+}
+
+.photouploader-preview {
+    max-height: 100px;
+    border: 2px solid white;
 }
 
 .log-form-button {
