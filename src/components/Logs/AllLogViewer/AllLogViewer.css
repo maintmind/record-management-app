@@ -48,4 +48,6 @@
 
 .all_log_view {
     overflow: scroll;
+    overflow-y: auto;
+    width: 100%;
 }

@@ -42,24 +42,26 @@ class PopOverComp extends Component {
 
         this.popOverDisplayControl.push(<MenuItem key={"overdue reminders"} primaryText="Overdue Reminders:" />)
 
-        const inlineStyle = {justifyContent: 'flex'}
+        const inlineStyle = { justifyContent: 'flex' }
         // const iconStyles = {marginRight: 24}
-        const style = {width: "25vw"}
+        const style = { width: "25vw" }
 
-        const overDueButtons = (<div><FontIcon className="material-icons">edit</FontIcon>
-                        <FontIcon className="material-icons">cancel</FontIcon></div>)
+        const overDueButtons = (<div><FontIcon className="material-icons" onClick={console.log("edit")}>edit</FontIcon>
+            <FontIcon className="material-icons" onClick={console.log("cancel")}>cancel</FontIcon></div>)
 
         var overdueReminders =
 
-        nextProps.reminderListOverdue.map((reminder, i) => {
+            nextProps.reminderListOverdue.map((reminder, i) => {
                 return (
                     <div style={inlineStyle}>
                         <MenuItem key={reminder.remind_id}
-                         style={style}
-                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status} 
-                         rightIcon={overDueButtons}                 
+                            style={style}
+                            primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
+                            disableTouchRipple='false'
+                            disableOnHover='true'
+                            rightIcon={overDueButtons}
                         >
-                                
+
                         </MenuItem>
                     </div>
                 )
@@ -67,8 +69,8 @@ class PopOverComp extends Component {
 
         this.popOverDisplayControl.push(overdueReminders)
 
-        const upcomingButtons = (<div><FontIcon className="material-icons">edit</FontIcon>
-                        <FontIcon className="material-icons">cancel</FontIcon></div>)
+        const upcomingButtons = (<div key={'a'}><FontIcon className="material-icons">edit</FontIcon>
+            <FontIcon className="material-icons">cancel</FontIcon></div>)
 
         var upcomingReminders =
             nextProps.reminderListUpcoming.map((reminder, j) => {
@@ -77,18 +79,18 @@ class PopOverComp extends Component {
                 return (
                     <div>
                         <MenuItem className="menuitem" key={reminder.remind_id}
-                         primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
-                         style={style}
-                         rightIcon={upcomingButtons}
-                        >                      
-                       
+                            primaryText={reminder.title + " " + reminder.description + " " + reminder.status}
+                            style={style}
+                            rightIcon={upcomingButtons}
+                        >
+
 
                         </MenuItem>
-                        
-                         {/* <FontIcon className="material-icons">edit</FontIcon>
+
+                        {/* <FontIcon className="material-icons">edit</FontIcon>
                         <FontIcon className="material-icons">cancel</FontIcon> */}
-                        
-                        
+
+
                     </div>
                 )
             })

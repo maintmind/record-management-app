@@ -121,10 +121,10 @@ const outputActions = {
     catDisp,
     deleteLog,
     toggleEditMenu,
-    toggleAllLogsView, 
-    updateLogName, 
-    updateLogDescription, 
-    updateLogComplete, 
+    toggleAllLogsView,
+    updateLogName,
+    updateLogDescription,
+    updateLogComplete,
     updateLogCost
 }
 
