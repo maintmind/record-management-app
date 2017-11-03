@@ -125,21 +125,6 @@ app.delete('/api/reminders/delete/:remind_id/:user_id', controller.deleteReminde
 app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
 
 
-// controller.imageUpload)
-
-// app.post('/api/reminder/add', controller.addReminder)
-// app.get('/api/reminders/overdue', controller.getRemindersOverdue)
-// app.get('/api/reminders/coming-in/:days', controller.getRemindersComingUp)
-// app.get('/api/reminders/get_all/:asset_id', controller.getAllRemindersForAsset)
-// app.get('/api/reminders/get_all/:asset_id', controller.getAllRemindersForAsset)
-// app.get('/api/reminders/get_all/:asset_id', controller.getAllRemindersForAsset)
-
-
-// app.get('*', (req, res) => {
-//         console.log("None Met");
-//         res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
-// })
-
 const port = 3005
 app.listen(port, console.log(`Listening on ${port}`))
 

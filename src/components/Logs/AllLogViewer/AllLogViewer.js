@@ -25,7 +25,7 @@ class AllLogViewer extends Component {
 
     imagePreview(imageUrl) {
         let imageArr;
-        imageUrl[0] === "{" ? imageUrl = imageUrl.substring(1) : ()=>{},
+        imageUrl[0] === "{" ? imageUrl = imageUrl.substring(1) : ()=>{}
             imageUrl[imageUrl.length - 1] === "}" ? imageUrl = imageUrl.substring(0, imageUrl.length - 1) : null,
             imageArr = imageUrl.split(",")
         return imageArr

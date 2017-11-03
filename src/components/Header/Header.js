@@ -22,7 +22,7 @@ class Header extends Component {
                 </div>
 
                 <section className="credentials">
-                    <img src={this.props.user.img} className={this.props.user.img ? this.props.user.img : "hide"} alt="user image" />
+                    <img src={this.props.user.img} className={this.props.user.img ? this.props.user.img : "hide"} alt="user info" />
                     <section>
                         <div>{this.props.user.username}</div>
                         <a href={process.env.REACT_APP_LOGOUT}><button className="logout-button">Logout</button></a>
