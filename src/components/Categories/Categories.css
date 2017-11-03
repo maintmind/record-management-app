@@ -29,7 +29,14 @@
 }
 
 .cat_title {
-    cursor: pointer;    
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cat_title span{
+    cursor: pointer;
+    font-size: 20px; 
+    font-weight: bold; 
 }
 
 .addCat_button {
@@ -40,6 +47,7 @@
     border-color: #E28413;
     border-width: 2px;
     margin: 10px;
+    font-weight: bold;
 }
 
 .addCat_hide {

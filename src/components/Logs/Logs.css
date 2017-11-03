@@ -109,6 +109,7 @@
     border-radius: 5px;
     border-color: #E28413;
     border-width: 2px;
+    font-weight: bold;
 }
 
 .all_log_button_container {
@@ -118,11 +119,12 @@
 
 .all_log_button_container button{
     height: 30px;
-    width: 200px;
+    width: 210px;
     border-radius: 5px;
     border-color: #E28413;
     border-width: 2px;
     background: white;
+    font-weight: bold;
 }
 
 .addLog_hide {
