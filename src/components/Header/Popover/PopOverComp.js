@@ -52,10 +52,10 @@ class PopOverComp extends Component {
                     <div style={inlineStyle}>
                         <MenuItem key={reminder.remind_id}
                             primaryText={reminder.title + " - " + reminder.description}
-                            /* onClick={ () => nextProps.setReminderStatusToClosed(reminder.remind_id, "reminderListOverdue") } */
+                            onClick={ () => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id) }
                             leftIcon={<FontIcon className="material-icons">forward</FontIcon>}
                         >
-                        <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id)}>Mark Complete</button>
+                        {/* <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id)}>Mark Complete</button> */}
                         </MenuItem>
                     </div>
                 )
@@ -70,10 +70,10 @@ class PopOverComp extends Component {
                     <div>
                         <MenuItem key={reminder.remind_id}
                             primaryText={reminder.title + " - " + reminder.description}
-                            /* onClick={ () => this.props.setReminderStatusToClosed(reminder.remind_id, "reminderListUpcoming") } */
+                            onClick={ () => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id) }
                             leftIcon={<FontIcon className="material-icons">forward</FontIcon>}
                         >
-                        <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id)}>Mark Complete</button>
+                        {/* <button onClick={() => nextProps.setReminderStatusToClosed(reminder.remind_id, nextProps.user.user_id)}>Mark Complete</button> */}
                         </MenuItem>
                     </div>
                 )
