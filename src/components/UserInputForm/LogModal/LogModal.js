@@ -78,7 +78,7 @@ class LogModal extends Component {
                     <div><DatePicker onChange={this.handleDate} hintText={dateComplete} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle}/></div>
                     <div><TextField onChange={(e) => this.props.updateLogCost(e.target.value)} hintText={this.props.logCost} underlineStyle={styles.underlineStyle} underlineFocusStyle={styles.underlineStyle} /></div>
                     <div>{images}</div>
-                    <div><PhotoUploader /></div>
+                    {/* <div><PhotoUploader /></div> */}
                     {/* <div className="imagePreview">{this.props.cloudinaryUrl ?
                         <div><b>Image Preview:</b><br /><img src={this.props.cloudinaryUrl} alt="" /></div>
                         : "Your upload will display here."}

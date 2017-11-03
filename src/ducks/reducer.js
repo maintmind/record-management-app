@@ -147,6 +147,7 @@ export default function dashReducer(state = initialState, action) {
         case ADD_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case EDIT_LOG + "_FULFILLED":
+            console.log("case EDIT_LOG", action.payload)
             return Object.assign({}, state, { logList: action.payload })
         case DELETE_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
@@ -181,7 +182,7 @@ export default function dashReducer(state = initialState, action) {
         case CAT_DISP:
             return Object.assign({}, state, { catView: action.payload })
         case NEW_CLOUDINARY_URL:
-            return {...state, cloudinaryUrl: [action.payload, ...state.cloudinaryUrl]}
+            return {...state, cloudinaryUrl: [action.payload, ...state.cloudinaryUrl], logImages: [...state.logImages, action.payload]}
         case CREATE_IMAGE_ID + "_FULFILLED":
             return Object.assign({}, state, { newImageId: action.payload })
         case TOGGLE_EDIT_MENU:
@@ -415,6 +416,7 @@ export function addLog(obj) {
 }
 
 export function editLog(obj) {
+    console.log("editLog hit at reducer")
     return {
         type: EDIT_LOG,
         payload: axios.patch(`/api/logs/edit`, obj).then(res => {
