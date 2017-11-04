@@ -51,6 +51,7 @@ const UPDATE_LOG_SUBMIT_DATE = "UPDATE_LOG_SUBMIT_DATE";
 const UPDATE_LOG_NAME = "UPDATE_LOG_NAME";
 const UPDATE_LOG_DESCRIPTION = "UPDATE_LOG_DESCRIPTION";
 const UPDATE_LOG_COST = "UPDATE_LOG_COST";
+const GET_LOG_ID = "GET_LOG_ID";
 const UPDATE_REMINDER_ID = "UPDATE_REMINDER_ID";
 const UPDATE_REMINDER_STATUS = "UPDATE_REMINDER_STATUS";
 const UPDATE_REMINDER_CREATED = "UPDATE_REMINDER_CREATED";
@@ -116,6 +117,8 @@ export default function dashReducer(state = initialState, action) {
             return Object.assign({}, state, { logDescription: action.payload })
         case UPDATE_LOG_COST:
             return Object.assign({}, state, { logCost: action.payload })
+        case GET_LOG_ID:
+            return Object.assign({}, state, { log_id: action.payload })
 
         case UPDATE_REMINDER_ID:
             return Object.assign({}, state, { reminderID: action.payload })
@@ -153,7 +156,6 @@ export default function dashReducer(state = initialState, action) {
         case ADD_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
         case EDIT_LOG + "_FULFILLED":
-            console.log("case EDIT_LOG", action.payload)
             return Object.assign({}, state, { logList: action.payload })
         case DELETE_LOG + "_FULFILLED":
             return Object.assign({}, state, { logList: action.payload })
@@ -277,6 +279,13 @@ export function updateLogDescription(logDescription) {
 
 export function updateLogCost(logCost) {
     return fns.updateLogCost(logCost)
+}
+
+export function getLogId(id) {
+    return {
+        type: GET_LOG_ID,
+        payload: id
+    }
 }
 
 export function updateReminderID(remind_id) {
@@ -427,7 +436,6 @@ export function addLog(obj) {
 }
 
 export function editLog(obj) {
-    console.log("editLog hit at reducer")
     return {
         type: EDIT_LOG,
         payload: axios.patch(`/api/logs/edit`, obj).then(res => {
