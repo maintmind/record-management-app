@@ -84,9 +84,8 @@ module.exports = {
 
     editLog: (req, res) => {
         const dbInstance = req.app.get('db');
-        console.log('hitting ctrllr', req.body)
         const { logCompleteDate, logName, logDescription, log_id, user, logImages } = req.body
-        dbInstance.logs.editLog(logCompleteDate, logName, logDescription, log_id, user.user_id, logImages)
+        dbInstance.logs.editLog(logCompleteDate, logName, logDescription, logImages, log_id, user.user_id)
             .then(logs => res.status(200).send(logs))
             .catch(err => res.status(500).send(console.log(err)))
     },
