@@ -13,8 +13,8 @@ const app = express();
 const controller = require('./controller');
 
 app.use(bodyParser.json());
-app.use( express.static( `${__dirname}/../public/build` ) );
 app.use(cors());
+app.use( express.static( `${__dirname}/../public/build` ) );
 
 app.use(session({
         secret: process.env.SECRET,
@@ -73,8 +73,8 @@ passport.use(new Auth0Strategy({
       
       //ENDPOINT AUTH CALLBACK
       app.get('/auth/callback', passport.authenticate('auth0', {
-        successRedirect: 'http://localhost:3000/dashboard',
-        failureRedirect: 'http://localhost:3000/'
+        successRedirect: '/dashboard',
+        failureRedirect: '/'
       }));
       
       //ENDPOINT AUTH0 - CHECKING FOR USER
@@ -89,7 +89,7 @@ passport.use(new Auth0Strategy({
       //AUTH ENDPOINT (Logout)
       app.get('/auth/logout', (req, res) => {
         req.logout() //PASSPORT TO TERMINATE LOGIN SESSION
-        return res.redirect(302, 'http://localhost:3000/'); //res.redirect comes from express to redirect user to the given url
+        return res.redirect(302, '/'); //res.redirect comes from express to redirect user to the given url
       })
 
 
@@ -124,6 +124,10 @@ app.put('/api/reminders/open/:remind_id', controller.setReminderStatusToOpen)
 app.delete('/api/reminders/delete/:remind_id/:user_id', controller.deleteReminder)
 app.get('/api/reminders/get_all/:user_id', controller.getAllRemindersForUser)
 
+const path = require('path')
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '..','build','index.html'));
+})
 
 const port = 3005
 app.listen(port, console.log(`Listening on ${port}`))

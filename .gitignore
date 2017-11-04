@@ -2,6 +2,7 @@
 
 # config file
 .env
+.env.prod
 
 # dependencies
 /node_modules

@@ -34,7 +34,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "now --public --dotenv=.env.prod -d"
+  },
+  "now": {
+    "alias": "maintenanceminder"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "server/server.js",
@@ -43,6 +47,6 @@
   },
   "keywords": [],
   "author": "",
-  "proxy": "http://localhost:3005",
+  "proxy": "https://localhost:3005",
   "license": "ISC"
 }
